@@ -347,8 +347,8 @@ const LoginSignUp = () => {
                           </div>
                           <MDBInput wrapperClass='mb-4' placeholder='Password' className='form1' id='pass' name="Password" type={Curr ? 'text' : 'password'} required />
 
-                          <div className="d-flex justify-content-around mx-4 mb-4 form1">
-                            <Link to="/password/forgot">Forgot Password ?</Link>
+                          <div className="d-flex justify-content-around mx4 mb-4 form1">
+                            <Link to="/forgotpassword">Forgot Password ?</Link>
                           </div>
 
                           <MDBBtn className="mb-4 form1" id="loginButton" type="submit">Login</MDBBtn>
@@ -406,8 +406,8 @@ const LoginSignUp = () => {
                               (isEmpty) ? <></> : (isStrong) ? <p style={{ color: "green", letterSpacing: "1.5px", }}>Strong Password</p> : <p style={{ color: "red", letterSpacing: "1.5px" }}>Weak Password</p>
                             }
 
-                            <ul style={{ width: "80%", textAlign: "left", marginLeft: "10%", fontSize: "14px", backgroundColor: "white", border: "1px solid black", borderRadius: "10px" }}>
-                              Password must contain
+                            <ul style={{ width: "80%", textAlign: "left", marginLeft: "10%", fontSize: "14px", backgroundColor: "#FFFEF6",  }}>
+                              <p style={{fontSize:"16px", letterSpacing:"1px"}}>Password must contain</p>
                               <li className={AtleastEight ? "Green" : "Red"}>alteast 8 characters</li>
                               <li className={Atleastdigit ? "Green" : "Red"}>atleast One digit</li>
                               <li className={Atleastspecial ? "Green" : "Red"}>atleast One Special Character(!,@,#,$,%,^,&,*)</li>
@@ -425,11 +425,6 @@ const LoginSignUp = () => {
                             <MDBInput wrapperClass='mb-4' placeholder='Flat Number' name="FlatNo" className='form1' id='flat' type='text' required />
                             <p className="Label">PARKING SLOT</p>
                             <MDBInput wrapperClass='mb-4' placeholder='Parking Slot' name="ParkingSlot" className='form1' id='parking' type='text' required />
-
-                            <div className="d-flex justify-content-around mx-4 mb-4 form1">
-
-                              <a href="!#">Forgot password?</a>
-                            </div>
 
                             <MDBBtn className="mb-4 form1" id="RegisterButton" type="submit">Register</MDBBtn>
 

@@ -1,8 +1,12 @@
 import React from 'react';
 import './Dropdown.css';
 import Accordion from 'react-bootstrap/Accordion';
+import {useGlobalContext} from '/src/context/StateContext';
+import { useState } from 'react';
 function Dropdown() {
-
+  const {User} = useGlobalContext();
+  const [isAdmin, setIsAdmin] = useState(JSON.parse(User).Role === 'admin'); 
+  
   return (
     <>
       <div className="sidenav">
@@ -17,19 +21,23 @@ function Dropdown() {
               <a href='/HelpDesk'>Help Desk</a>
             </Accordion.Body>
           </Accordion.Item>
-          <Accordion.Item eventKey="0">
-            <Accordion.Header><p className='DropDownHeader'>Management</p></Accordion.Header>
-            <Accordion.Body className='ExpandDropDown'>
-              <a href='/Finance'>Finance & Account</a>
-              <a href='/FM'>FM</a>
-              <a href='/Cultural'>Cultural Section</a>
+          {
+            isAdmin ?
+            <Accordion.Item eventKey="0">
+              <Accordion.Header><p className='DropDownHeader'>Management</p></Accordion.Header>
+              <Accordion.Body className='ExpandDropDown'>
+                <a href='/Finance'>Finance & Account</a>
+                <a href='/FM'>FM</a>
+                <a href='/Cultural'>Cultural Section</a>
 
-              <a href='/AllComplaints'>All Complaints</a>
-              <a href='/LegalUpdate'>Legal Update</a>
-              <a href='/Purchase'>Purchase & Audit Section</a>
-              <a href='/KeyContacts'>Key Contacts & Email ids</a>
-            </Accordion.Body>
-          </Accordion.Item>
+                <a href='/AllComplaints'>All Complaints</a>
+                <a href='/LegalUpdate'>Legal Update</a>
+                <a href='/Purchase'>Purchase & Audit Section</a>
+                <a href='/KeyContacts'>Key Contacts & Email ids</a>
+              </Accordion.Body>
+            </Accordion.Item>
+            : <></>
+          }
           <Accordion.Item eventKey="1">
             <Accordion.Header><p className='DropDownHeader'>Repository</p></Accordion.Header>
             <Accordion.Body className='ExpandDropDown'>

@@ -1,7 +1,10 @@
 const User = require("../models/userModel");
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
-const UserApiFeatures = require("../utils/apifeatures");
+const sendToken = require("../utils/jwtToken");
+const sendEmail = require("../utils/sendEmail");
+
+const cloudinary = require("cloudinary");
 
 // Create User
 exports.createUser = catchAsyncErrors(async(req,res,next)=> {
@@ -26,7 +29,7 @@ exports.createUser = catchAsyncErrors(async(req,res,next)=> {
             ParkingSlot: ParkingSlot,
             Role: Role
         });
-
+        //sendToken(user, 201, res);
         res.status(201).json({
             success: true,
             user 
@@ -41,6 +44,7 @@ exports.loginUser = catchAsyncErrors(async(req,res,next) => {
     if(!user && Object.keys(user).length){
         return next(new ErrorHandler("User does not exists",404));
     }
+   // sendToken(user, 201, res);
     res.status(200).json({
         success: true,
         user

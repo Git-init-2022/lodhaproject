@@ -4,15 +4,16 @@ import Loader from "../layout/Loader/Loader";
 import MetaData from "../layout/MetaData";
 import {useGlobalContext} from "/src/context/StateContext";
 import NavBar from "/src/components/NavBar/NavBar";
+import axios from "axios";
 
 const ForgotPassword = () => {
 
   const {loading, setLoading} = useGlobalContext();
 
   const forgot = async(email,flatnum)=>{
-    const {data}= await axios.get("http://localhost:4000/api/v1/forgotpassword");
+    const {data}= await axios.get("http://localhost:4000/api/v1/forgotpassword",{params: {FlatNo: flatnum, Email: email}});
     if(data.success === true){
-
+      
     }
     else{
         
@@ -22,6 +23,7 @@ const ForgotPassword = () => {
     const email = e.target.Email.value;
     const flatnum = e.target.FlatNo.value;
     forgot(email,flatnum);
+
   };
 
   
@@ -36,7 +38,7 @@ const ForgotPassword = () => {
           <MetaData title="Forgot Password" />
           <div className="forgotPasswordContainer">
             <div className="forgotPasswordBox">
-              <div style={{display:"flex", justifyContent:"center"}}>
+              <div style={{display:"flex",  marginTop: "20px", justifyContent:"center"}}>
               <img src="/src/assests/forgotPassword.png" height="25px" width="25px" style={{marginTop:"5px", marginRight:"10px"}}></img>
               <h2 className="forgotPasswordHeading">Forgot Password</h2>
               </div>

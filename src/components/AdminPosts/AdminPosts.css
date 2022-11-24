@@ -88,7 +88,8 @@
 }
 
 .ComplaintsButton:hover {
-    background-color: goldenrod !important;
+    background-color: black;
+    color: gold;
 }
 
 .DescriptionTitle {

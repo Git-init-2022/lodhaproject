@@ -2,6 +2,7 @@ import React from 'react'
 import './Posts.css'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { Popconfirm } from 'antd';
 import {
   MDBBtn,
   MDBCard,
@@ -80,7 +81,13 @@ function Posts({ props }) {
                 <div contentEditable style={{ width: "100%" }} id={props._id}>{props.Description}</div>
               </div>
               <div style={{ display: "flex", justifyContent: "center", marginTop: "50px" }}>
-                <button className="btn btn-success ComplaintsButton" type="submit" onClick={(e) => UpdateDescription(e)}>Edit Complaint</button>
+                <Popconfirm
+                  title="Clicking ok button will edit the complaint details "
+                  onConfirm={(e) => UpdateDescription(e)}
+                >
+
+                  <button className="btn btn-success ComplaintsButton" type="submit">Edit Complaint</button>
+                </Popconfirm>
               </div>
             </form>
           </Card.Text>

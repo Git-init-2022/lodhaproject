@@ -106,6 +106,7 @@ export default function Seperate() {
   const [origData, setOrigData] = useState([]);
   const [searchIndex, setSearchIndex] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isvalid, setIsvalid] = useState(false);
 
   const refreshPage = () => {
     window.location.reload();
@@ -121,11 +122,11 @@ export default function Seperate() {
             let timeStamp = Date.parse(user[key]);
             var date1 = new Date(timeStamp);
             var date2 = new Date();
-            
+
             var Difference_In_Time = date2.getTime() - date1.getTime();
             var days = Difference_In_Time / (1000 * 3600 * 24);
             days = (Math.ceil(days)).toString();
-            user[key] = days + ((days > 1)?" days " : " day ");
+            user[key] = days + ((days > 1) ? " days " : " day ");
             allValues.push(days + " ");
           }
           else {
@@ -200,11 +201,15 @@ export default function Seperate() {
   }
 
   const handleDelete = (key) => {
-  
+
     deleteComplaint(key);
     const newData = dataSource.filter(item => item.FlatNo !== key.FlatNo)
-  
+
     setDataSource(newData)
+  }
+
+  const confirm = () => {
+    setIsvalid(true);
   }
 
   const defaultColumns = [
@@ -217,13 +222,13 @@ export default function Seperate() {
     {
       title: "Issue",
       dataIndex: "Issue",
-      key: "Issue", 
+      key: "Issue",
       editable: false
     },
     {
       title: "Days Since Posted",
       dataIndex: "Time",
-      key: "Time", 
+      key: "Time",
       editable: false
     },
     {
@@ -232,7 +237,7 @@ export default function Seperate() {
       key: "Status",
       editable: true
     },
-    
+
   ]
 
   const updateComplaint = async (row) => {
@@ -244,7 +249,7 @@ export default function Seperate() {
   const handleSave = row => {
     console.log("row", JSON.stringify(row));
     updateComplaint(row);
-    
+
   }
 
   const components = {
@@ -277,16 +282,22 @@ export default function Seperate() {
 
         <div style={{ marginLeft: "5px", height: "3px", width: "200px", backgroundColor: "gold" }}></div>
         <Accordion >
-          <Accordion.Item eventKey="0" id="IssueAccord" style={{ marginTop: "50px", width: "90%", border: "2px solid #d3d3d3", boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",  }}>
+          <Accordion.Item eventKey="0" id="IssueAccord" style={{ marginTop: "50px", width: "90%", border: "2px solid #d3d3d3", boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px", }}>
             <Accordion.Header>
               <p className="IssueTitle">Add New Complaint Type</p>
             </Accordion.Header>
             <Accordion.Body>
               <div>
-                <form onSubmit={issueSubmit} className="ComplaintForm">
+                <form onSubmit={
+                  isvalid  && issueSubmit
+                } className="ComplaintForm">
                   <div style={{ display: "flex" }}>
                     <input placeholder="Complaint Type" type="text" name="issue" className="IssueInput" />
-                    <button type="submit" className="IssueButton">Add</button>
+                    <Popconfirm
+                    title = 'Click "ok" button to confirm'
+                    onConfirm={confirm}>
+                      <button type="submit" className="IssueButton">Add</button>
+                    </Popconfirm>
                   </div>
                 </form>
               </div>
@@ -308,14 +319,14 @@ export default function Seperate() {
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
-        <div className="Note" style={{marginTop: "50px"}}>
+        <div className="Note" style={{ marginTop: "50px" }}>
           <p className="NoteTitle">NOTE</p>
-          <ul> 
+          <ul>
             <li className="NoteList">
               Status Field can only be edited.
             </li>
             <li className="NoteList">
-               Please Enter the value to be Edited in the Input and press enter button to be edited.
+              Please Enter the value to be Edited in the Input and press enter button to be edited.
             </li>
             <li className="NoteList">
               Please Press Delete button to delete the Complaint details
@@ -330,9 +341,9 @@ export default function Seperate() {
           style={{ width: "90%", marginTop: "50px", border: "1px solid black", borderRadius: "5px" }}
         />
         <div className="AdminPostsDiv">
-        {
-           filteredData.map(item => <AdminPosts props={item} />)
-        }
+          {
+            filteredData.map(item => <AdminPosts props={item} />)
+          }
         </div>
       </div>
       <div style={{ height: "100px", color: "white" }}>

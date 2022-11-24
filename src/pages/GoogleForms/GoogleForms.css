@@ -5,7 +5,7 @@
     font-weight: bold;
     margin: 8px;
     font-size: 25px;
-    color: #675a0e;
+    color: #92801c;
     letter-spacing: 2px;
 }
 
@@ -24,7 +24,7 @@
     width: 80%;
     height: auto;
     /*background-color: #edf6f7;*/
-    background-color: #eae7d1;
+    background-color: whitesmoke;
     border-radius: 10px;
 
     align-items: center;
@@ -39,17 +39,19 @@
     justify-content: center;
     height: 80px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    background-color: #E6E6E6;
-    color: #000000;
-    border: 1px solid gold;
+    background-color: rgb(234, 231, 212) !important;
+    color: #000 !important;
+    border: 1px solid black;
     margin-top: 20px;
     margin-bottom: 10px;
+    transition: 0.5s;
 }
 
 .modalButton:hover {
-    color: white;
+    /* color: white;
     background-color: #41403f !important;
-    border-color: gold !important;
+    border-color: gold !important; */
+    transform: scale(1.05);
 }
 
 .FormHeading {

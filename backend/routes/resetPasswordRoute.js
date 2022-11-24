@@ -8,7 +8,7 @@ router.use(function(req, res, next) {
   });
 
 
-router.route("/forgotpassword").post(forgotPassword);
+router.route("/forgotpassword").get(forgotPassword);
 router.route('/updatepassword').get(updatePassword);
  
 module.exports = router

@@ -14,7 +14,7 @@ function Dashboard() {
     const [IsForms, setIsForms] = useState(true);
     const [IsMeeting, setIsMeeting] = useState(false);
     const [IsNotification, setIsNotification] = useState(false);
-    const [IsComplaints, setIsComplaints] = useState(false); 
+    const [IsComplaints, setIsComplaints] = useState(false);
     const [IsDocuments, setIsDocuments] = useState(false);
     const changeMenu = (e, tab) => {
         if (tab == "Forms") {
@@ -37,52 +37,79 @@ function Dashboard() {
             setIsMeeting(false);
             setIsComplaints(false);
             setIsDocuments(false);
-        } 
-        if(tab == "Complaints"){
-            setIsComplaints(true); 
-            setIsForms(false); 
-            setIsMeeting(false); 
+        }
+        if (tab == "Complaints") {
+            setIsComplaints(true);
+            setIsForms(false);
+            setIsMeeting(false);
             setIsNotification(false);
             setIsDocuments(false);
         }
-        if(tab == "Documents"){
-            setIsComplaints(false); 
-            setIsForms(false); 
-            setIsMeeting(false); 
+        if (tab == "Documents") {
+            setIsComplaints(false);
+            setIsForms(false);
+            setIsMeeting(false);
             setIsNotification(false);
             setIsDocuments(true);
         }
     };
 
-      
+
     return (
         <>
-        <LoginNavBar/>
+            <LoginNavBar />
             <div>
-                <div style={{display:"flex"}}>
-                <img src="/src/assests/dashboard.png" style={{height:"35px", width:"35px", marginTop:"105px", marginLeft:"50px", marginBottom:"0px"}}></img>
-                <p id="userDashboardTitle">USER DASHBOARD</p>
+                <div style={{ display: "flex" }}>
+                    <img src="/src/assests/dashboard.png" style={{ height: "35px", width: "35px", marginTop: "105px", marginLeft: "50px", marginBottom: "0px" }}></img>
+                    <p id="userDashboardTitle">USER DASHBOARD</p>
                 </div>
                 <div style={{ marginLeft: "55px", height: "3px", width: "275px", backgroundColor: "gold" }}></div>
-                <div className="FacilityNavBar" style={{ backgroundColor: "rgb(36, 35, 35)" }}>
+                <div className="d-flex mb-3 FacilityNavBar">
 
                     <Nav variant="pills" defaultActiveKey="/home">
-                        <Nav.Item>
-                            <Nav.Link className="FacilityLink" eventKey="/Home" onClick={(e) => changeMenu(e, "Forms")}>Forms</Nav.Link>
+
+                        <Nav.Item className="navbarLink">
+                            <Nav.Link className="FacilityLink" eventKey="/Home" onClick={(e) => changeMenu(e, "Forms")}>
+                                <div style={{ display: "flex", alignItems: "center", flexDirection: "column", textAlign: "center" }}>
+                                    <img src="/src/assests/form.png" height="50px" width="50px"></img>
+                                    <span>Forms</span>
+                                </div>
+                            </Nav.Link>
                         </Nav.Item>
 
-                        <Nav.Item>
-                            <Nav.Link className="FacilityLink" eventKey="/meet" onClick={(e) => changeMenu(e, "Meetings")}>Meeting</Nav.Link>
+                        <Nav.Item className="navbarLink">
+                            <Nav.Link className="FacilityLink" eventKey="/meet" onClick={(e) => changeMenu(e, "Meetings")}>
+                                <div style={{ display: "flex", alignItems: "center", flexDirection: "column", textAlign: "center" }}>
+                                    <img src="/src/assests/meeting1.png" height="50px" width="50px"></img>
+                                    <span>Meeting</span>
+                                </div>
+                            </Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link className="FacilityLink" eventKey="/notify" onClick={(e) => changeMenu(e, "Notifications")}>Notifications</Nav.Link>
-                            
+
+                            <Nav.Link className="FacilityLink" eventKey="/notify" onClick={(e) => changeMenu(e, "Notifications")}>
+                                <div style={{ display: "flex", alignItems: "center", flexDirection: "column", textAlign: "center" }}>
+                                    <img src="/src/assests/notifications.png" height="50px" width="50px"></img>
+                                    Notifications
+                                </div>
+                            </Nav.Link>
+
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link className="FacilityLink" eventKey="/complaints" onClick={(e) => changeMenu(e, "Complaints")}>Complaints</Nav.Link>
+                            <Nav.Link className="FacilityLink" eventKey="/complaints" onClick={(e) => changeMenu(e, "Complaints")}>
+                                <div style={{ display: "flex", alignItems: "center", flexDirection: "column", textAlign: "center" }}>
+                                    <img src="/src/assests/complaint1.png" height="50px" width="50px"></img>
+                                    Complaints
+                                </div>
+                            </Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link className="FacilityLink" eventKey="/docs" onClick={(e) => changeMenu(e, "Documents")}>Important Documents</Nav.Link>
+                            <Nav.Link className="FacilityLink" eventKey="/docs" onClick={(e) => changeMenu(e, "Documents")}>
+                                <div style={{ display: "flex", alignItems: "center", flexDirection: "column", textAlign: "center" }}>
+                                    <img src="/src/assests/documents.png" height="50px" width="50px"></img>
+                                    
+                                     Documents
+                                </div></Nav.Link>
                         </Nav.Item>
                     </Nav>
                 </div>

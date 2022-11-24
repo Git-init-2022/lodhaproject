@@ -1,17 +1,24 @@
 .FacilityNavBar{
     margin-top: 30px;
      width: 80%;
-     background-color: white;
-     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-     border-radius: 10px;
-     margin-left: 10%;
-     
+     /* background-color: rgb(244, 226, 124) !important;
+     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+     box-shadow:none ;
+     display: flex;
+     flex-direction: row;
+     justify-content: center;
+     border-bottom: 1px solid black;
+     border-radius: 0px;    
+     margin: 0 auto;
  }
  
  .FacilityLink{
    margin: 5px !important;
-   color: whitesmoke !important;
+   color: black !important ;
    font-size: 16px;
+   flex-grow: 1;
+            flex-basis: 0;
+            min-width: 0;
  }
  .FacilityLink:first-letter{
      font-size: 22px;
@@ -33,8 +40,17 @@
  }
  
  .FacilityNavBar .active{
-     background-color: gold !important;
+     background-color: rgb(241, 221, 109) !important;
      color: black !important;
  }
  
- 
+ .FacilityLink:hover{
+    background-color: rgb(241, 221, 109);
+    color: black !important;
+ }
+
+ .navbarLink{
+  display: flex;
+
+  justify-content: center;
+ }

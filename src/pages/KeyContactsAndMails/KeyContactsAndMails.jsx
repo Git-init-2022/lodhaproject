@@ -226,7 +226,7 @@ const KeyContactsAndMails = () => {
       render: (_, record) =>
         dataSource.length >= 0 ? (
           <Popconfirm
-            title="Sure to delete?"
+            title="Click 'ok' button to confirm delete operation"
             onConfirm={() => handleDelete(record.FlatNo)}
           >
             <button className="btn btn-danger">Delete</button>

@@ -69,7 +69,7 @@ function GoogleForms() {
     return (
         <>
             <LoginNavBar />
-            <div className="FormItems" style={{ marginTop: "50px" }}>
+            <div className="FormItems" style={{ marginTop: "50px" , marginBottom: "100px"}}>
                 <p className='FormHeader' >GOOGLE FORMS</p>
                 {
                     isAdmin ? <p style={{ textAlign: "center", fontSize: "18px", letterSpacing: "1px", }}>Note - To Edit details click on "More" button</p> : <></>
@@ -93,84 +93,88 @@ function GoogleForms() {
                         </>
                     ))
                 }
-
-                <Modal
-                    show={modalShow}
-                    onHide={handleHide}
-                    size="lg"
-                    aria-labelledby="contained-modal-title-vcenter"
-                    centered
-                >
-                    <form
-                        onSubmit={UpdateForm}>
-                        <Modal.Header closeButton>
-
-                            <Modal.Title id="contained-modal-title-vcenter">
-
-                                {isAdmin ?
-                                    <span id="title" style={{ fontSize: "20px", letterSpacing: "1px",  fontWeight: "normal" }} contentEditable>
-                                        {titleVar}
-                                    </span> :
-                                    <span id="titleOfForm" style={{ fontSize: "20px", letterSpacing: "1px", textDecorationLine: "underline", textUnderlineOffset: "10px", fontWeight: "normal" }}>
-                                        {titleVar}
-                                    </span>
-                                }
-                            </Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <div>
-                                <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textUnderlineOffset: "5px", marginTop: "10px" }}>Description </label>
-                                {
-                                    isAdmin ?
-                                        <div id="Description" style={{ fontSize: "16px" }} contentEditable>
-                                            {DescVar}
-                                        </div>
-                                        :
-                                        <div id="DescriptionOfForm" style={{ fontSize: "16px" }} >
-                                            {DescVar}
-                                        </div>
-                                }
-                                <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textUnderlineOffset: "5px", marginTop: "20px" }}>Link </label>
-
-                                {
-                                    isAdmin ?
-                                        <div style={{ width: "100%" }} className="linkDiv" id="linkDiv" >
-                                            <a id="link" href={LinkVar} target="_blank" style={{ textDecorationLine: "underline", fontSize: "16px" }} contentEditable >{LinkVar}</a>
-                                        </div>
-                                        :
-                                        <div>
-                                        <a id="linkOfForm" href={LinkVar} target="_blank" style={{ textDecorationLine: "underline", fontSize: "16px" }} >Click to open Link</a>
-                                        </div>
-
-                                }
-
-                            </div>
-                        </Modal.Body>
-                        <Modal.Footer >
-                            {
-                                isAdmin ?
-                                    <div >
-                                        <div style={{ textAlign: "left" }}>
-                                            <ul style={{ textAlign: "left" }}>
-                                                <li>Click on the fields to edit Details</li>
-                                                <li>To Edit Form details click on "Edit Form" button</li>
-                                                <li>To Delete Form details click on "Delete Form" button</li>
-                                            </ul>
-                                        </div>
-
-                                        <div style={{ display: "flex", justifyContent: "center", }}>
-                                            <button className="btn btn-primary " type="submit" onClick={(e) => UpdateForm(e, idvalue)}>Edit Form</button>
-                                            <button className="btn btn-danger" type="submit" style={{ marginLeft: "50px" }} onClick={(e) => DeleteForm(e, idvalue)}>Delete Form</button>
-                                        </div>
-                                    </div>
-                                    :
-                                    <></>
-                            }
-                        </Modal.Footer>
-                    </form>
-                </Modal>
+            
+            <div style={{ height: "100px", backgroundColor: "white" }}>
 
             </div>
+
+            <Modal
+                show={modalShow}
+                onHide={handleHide}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <form
+                    onSubmit={UpdateForm}>
+                    <Modal.Header closeButton>
+
+                        <Modal.Title id="contained-modal-title-vcenter">
+
+                            {isAdmin ?
+                                <span id="title" style={{ fontSize: "20px", letterSpacing: "1px", fontWeight: "normal" }} contentEditable>
+                                    {titleVar}
+                                </span> :
+                                <span id="titleOfForm" style={{ fontSize: "20px", letterSpacing: "1px", textDecorationLine: "underline", textUnderlineOffset: "10px", fontWeight: "normal" }}>
+                                    {titleVar}
+                                </span>
+                            }
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <div>
+                            <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textUnderlineOffset: "5px", marginTop: "10px" }}>Description </label>
+                            {
+                                isAdmin ?
+                                    <div id="Description" style={{ fontSize: "16px" }} contentEditable>
+                                        {DescVar}
+                                    </div>
+                                    :
+                                    <div id="DescriptionOfForm" style={{ fontSize: "16px" }} >
+                                        {DescVar}
+                                    </div>
+                            }
+                            <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textUnderlineOffset: "5px", marginTop: "20px" }}>Link </label>
+
+                            {
+                                isAdmin ?
+                                    <div style={{ width: "100%" }} className="linkDiv" id="linkDiv" >
+                                        <a id="link" href={LinkVar} target="_blank" style={{ textDecorationLine: "underline", fontSize: "16px" }} contentEditable >{LinkVar}</a>
+                                    </div>
+                                    :
+                                    <div>
+                                        <a id="linkOfForm" href={LinkVar} target="_blank" style={{ textDecorationLine: "underline", fontSize: "16px" }} >Click to open Link</a>
+                                    </div>
+
+                            }
+
+                        </div>
+                    </Modal.Body>
+                    <Modal.Footer >
+                        {
+                            isAdmin ?
+                                <div >
+                                    <div style={{ textAlign: "left" }}>
+                                        <ul style={{ textAlign: "left" }}>
+                                            <li>Click on the fields to edit Details</li>
+                                            <li>To Edit Form details click on "Edit Form" button</li>
+                                            <li>To Delete Form details click on "Delete Form" button</li>
+                                        </ul>
+                                    </div>
+
+                                    <div style={{ display: "flex", justifyContent: "center", }}>
+                                        <button className="btn btn-primary " type="submit" onClick={(e) => UpdateForm(e, idvalue)}>Edit Form</button>
+                                        <button className="btn btn-danger" type="submit" style={{ marginLeft: "50px" }} onClick={(e) => DeleteForm(e, idvalue)}>Delete Form</button>
+                                    </div>
+                                </div>
+                                :
+                                <></>
+                        }
+                    </Modal.Footer>
+                </form>
+            </Modal>
+
+        </div>
         </>
     );
 }

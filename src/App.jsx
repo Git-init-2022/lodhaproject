@@ -26,6 +26,7 @@ import AllComplaints from './pages/AllComplaints/AllComplaints';
 import CreateForm from './pages/CreateForms/CreateForm';
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
 import Seperate from './pages/seperate/seperate';
+import UpdatePassword from './pages/UpdatePassword/UpdatePassword';
 
 
 export default function App() {
@@ -42,6 +43,7 @@ export default function App() {
                     <Route path='/' element={JSON.parse(localStorage.getItem("isAuthenticated")) ? <LoggedHome/>: <Home />} />
                     <Route path='/login' element={<LoginSignUp />} />
                     <Route path='/forgotpassword' element={<ForgotPassword />} />
+                    <Route  path='/updatepassword/:token' element={<UpdatePassword />} />
                     <Route path='/Seperate' element={<Seperate />} />
                     <Route path="/Home"
                         element={<PrivateRoute redirectTo="/login" component={<LoggedHome />}
