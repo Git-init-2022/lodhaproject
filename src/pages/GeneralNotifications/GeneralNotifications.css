@@ -24,7 +24,7 @@
     width: 80%;
     height: auto;
     /*background-color: #edf6f7;*/
-    background-color: #eae7d1;
+    background-color: whitesmoke;
     border-radius: 10px;
 
     align-items: center;
@@ -39,17 +39,19 @@
     justify-content: center;
     height: 80px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    background-color: #E6E6E6;
+    background-color: #eae7d1;
     color: #000000;
     border: 1px solid gold;
     margin-top: 20px;
     margin-bottom: 10px;
+    transition: 0.5s;
 }
 
 .modalButton:hover {
-    color: white;
-    background-color: #41403f !important;
-    border-color: gold !important;
+    color: white !important;
+        background-color: #3f3f3e !important;
+        transform: scale(1.05);
+        border: 1px solid #3f3f3e !important;
 }
 
 .NotifyHeading {

@@ -23,16 +23,17 @@
   width: 80%;
   height: auto;
   /*background-color: #edf6f7;*/
-  background-color: #eae7d1;
+  background-color: whitesmoke;
   border-radius: 10px;
   justify-content: center;
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
+
 .NotifyBar {
   padding: 20px !important;
-  background-color: #E6E6E6 !important;
+  background-color: #eae7d1;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
   color: black !important;
   border-color: gold !important;
@@ -49,12 +50,14 @@
   font-size: 15px;
   border-radius: 10px;
   letter-spacing: 1px;
+  transition: 0.5s;
 }
 
 .NotifyBar:hover {
-  color: white !important;
-  background-color: #41403f !important;
-  border-color: gold !important;
+    color: white !important;
+    background-color: #3f3f3e !important;
+    transform: scale(1.05);
+    border: 1px solid #3f3f3e !important;
 }
 
 .ModalNotify {

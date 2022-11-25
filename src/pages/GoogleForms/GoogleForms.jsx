@@ -70,7 +70,7 @@ function GoogleForms() {
         <>
             <LoginNavBar />
             <div className="FormItems" style={{ marginTop: "50px" , marginBottom: "100px"}}>
-                <p className='FormHeader' >GOOGLE FORMS</p>
+                <p className='FormHeader' >SURVEY FORMS</p>
                 {
                     isAdmin ? <p style={{ textAlign: "center", fontSize: "18px", letterSpacing: "1px", }}>Note - To Edit details click on "More" button</p> : <></>
                 }
@@ -84,9 +84,10 @@ function GoogleForms() {
                                         <p style={{ textDecorationLine: "underline", textUnderlineOffset: "10px" }}>SURVEY TITLE</p>
                                         <p style={{ textTransform: "capitalize" }}>{item.Title}</p>
                                     </span>
-                                    <span className="FormView">
+                                    <span style={{ padding: "3px", borderRadius: "5px", marginTop: "20px", paddingLeft: "10%"}}>MORE INFO</span>
+                                    {/* <span className="FormView">
                                         <button className="Viewbutton" style={{ padding: "3px", borderRadius: "5px", marginTop: "20px" }}>More &rarr;</button>
-                                    </span>
+                                    </span> */}
                                 </div>
                             </Button>
                             <hr style={{ width: "94%", marginLeft: "3%" }}></hr>
