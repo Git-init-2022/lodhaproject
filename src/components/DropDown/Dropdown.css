@@ -14,7 +14,7 @@
   background-color: #FFFFFF;
   overflow: hidden;
   padding-top: 20px;
-  box-shadow: 2px 2px 12px #adadab;
+  box-shadow: 2px 2px 12px #cacac8;
 }
 
 /* Style the sidenav links and the dropdown button */
@@ -33,11 +33,11 @@
   outline: none;
   margin-left: 10px; 
   margin-top: 15px;
-  border-bottom: 1px solid rgb(236, 228, 186) ;
+  /* border-bottom: 1px solid rgb(236, 228, 186) ; */
+  border-bottom: 1px solid #c6c6c6;
   text-transform: uppercase;
   font-weight: bold;
   letter-spacing: 1.2px;
-  
 }
 
 /* On mouse-over */
@@ -51,7 +51,7 @@
   font-size: 16px;
 }
 .ExpandDropDown{
-  background-color: rgb(236, 228, 186) !important;
+  background-color: #c6c6c6!important;
 }
 
 .accordion-button{
@@ -77,10 +77,15 @@
   font-size: 17px;
 }
 
-.accordion-button:not(.collapsed){
+/* .accordion-button:not(.collapsed){
   background-color: rgb(100, 93, 52) !important;
   color: white;
-}
+} */
+
+.accordion-button:not(.collapsed){
+  background-color: #212529 !important;
+  color: white;
+} 
 
 .accordion-button.collapsed::after{
 
@@ -93,7 +98,7 @@
 
 .accordion-button:not(.collapsed)::after{
 
-  background: url("/src/assests/goldDropDown.png");
+  background: url("/src/assests/silverDropDown.png");
   background-size:     cover;                     
   background-repeat:   no-repeat;
   background-position: center center;  

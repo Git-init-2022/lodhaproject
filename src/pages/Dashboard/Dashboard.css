@@ -13,7 +13,7 @@
      
  }
  
- .FacilityLink{
+ .FacilityLink, .FacilityLink1{
    margin: 5px !important;
    color: black !important ;
    font-size: 16px;
@@ -21,7 +21,7 @@
             flex-basis: 0;
             min-width: 0;
  }
- .FacilityLink:first-letter{
+ .FacilityLink:first-letter, .FacilityLink1:first-letter{
      font-size: 22px;
  }
  
@@ -41,12 +41,12 @@
  }
  
  .FacilityNavBar .active{
-     background-color: rgb(255, 247, 174) !important;
+     background-color: rgb(209, 197, 130) !important;
      color: black !important;
  }
  
- .FacilityLink:hover{
-    background-color: rgb(255, 247, 174);
+ .FacilityLink:hover, .FacilityLink1:hover{
+    background-color: rgb(185, 183, 176);
     color: black !important;
  }
 
@@ -55,3 +55,4 @@
 
   justify-content: center;
  }
+

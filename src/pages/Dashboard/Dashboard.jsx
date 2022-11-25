@@ -16,6 +16,7 @@ function Dashboard() {
     const [IsNotification, setIsNotification] = useState(false);
     const [IsComplaints, setIsComplaints] = useState(false);
     const [IsDocuments, setIsDocuments] = useState(false);
+    const [IsAnnoucements, setIsAnnoucements] = useState(false);
     const changeMenu = (e, tab) => {
         if (tab == "Forms") {
             setIsForms(true);
@@ -23,6 +24,7 @@ function Dashboard() {
             setIsNotification(false);
             setIsComplaints(false);
             setIsDocuments(false);
+            setIsAnnoucements(false);
         }
         if (tab == "Meetings") {
             setIsMeeting(true);
@@ -30,6 +32,7 @@ function Dashboard() {
             setIsNotification(false);
             setIsComplaints(false);
             setIsDocuments(false);
+            setIsAnnoucements(false);
         }
         if (tab == "Notifications") {
             setIsNotification(true);
@@ -37,6 +40,7 @@ function Dashboard() {
             setIsMeeting(false);
             setIsComplaints(false);
             setIsDocuments(false);
+            setIsAnnoucements(false);
         }
         if (tab == "Complaints") {
             setIsComplaints(true);
@@ -44,6 +48,7 @@ function Dashboard() {
             setIsMeeting(false);
             setIsNotification(false);
             setIsDocuments(false);
+            setIsAnnoucements(false);
         }
         if (tab == "Documents") {
             setIsComplaints(false);
@@ -51,6 +56,15 @@ function Dashboard() {
             setIsMeeting(false);
             setIsNotification(false);
             setIsDocuments(true);
+            setIsAnnoucements(false);
+        }
+        if (tab == "Announcements") {
+            setIsComplaints(false);
+            setIsForms(false);
+            setIsMeeting(false);
+            setIsNotification(false);
+            setIsDocuments(false);
+            setIsAnnoucements(true);
         }
     };
 
@@ -72,7 +86,7 @@ function Dashboard() {
                             <Nav.Link className="FacilityLink" eventKey="/Home" onClick={(e) => changeMenu(e, "Forms")}>
                                 <div style={{ display: "flex", alignItems: "center", flexDirection: "column", textAlign: "center" }}>
                                     <img src="/src/assests/form.png" height="50px" width="50px"></img>
-                                    <span>Forms</span>
+                                    <pre style={{ fontFamily : "Montserrat"}}>      Forms       </pre>
                                 </div>
                             </Nav.Link>
                         </Nav.Item>
@@ -81,7 +95,7 @@ function Dashboard() {
                             <Nav.Link className="FacilityLink" eventKey="/meet" onClick={(e) => changeMenu(e, "Meetings")}>
                                 <div style={{ display: "flex", alignItems: "center", flexDirection: "column", textAlign: "center" }}>
                                     <img src="/src/assests/meeting1.png" height="50px" width="50px"></img>
-                                    <span>Meeting</span>
+                                    <pre style={{ fontFamily : "Montserrat"}}>   Meetings     </pre>
                                 </div>
                             </Nav.Link>
                         </Nav.Item>
@@ -90,7 +104,7 @@ function Dashboard() {
                             <Nav.Link className="FacilityLink" eventKey="/notify" onClick={(e) => changeMenu(e, "Notifications")}>
                                 <div style={{ display: "flex", alignItems: "center", flexDirection: "column", textAlign: "center" }}>
                                     <img src="/src/assests/notifications.png" height="50px" width="50px"></img>
-                                    Notifications
+                                    <pre style={{ fontFamily : "Montserrat"}}> Notifications</pre>
                                 </div>
                             </Nav.Link>
 
@@ -99,7 +113,7 @@ function Dashboard() {
                             <Nav.Link className="FacilityLink" eventKey="/complaints" onClick={(e) => changeMenu(e, "Complaints")}>
                                 <div style={{ display: "flex", alignItems: "center", flexDirection: "column", textAlign: "center" }}>
                                     <img src="/src/assests/complaint1.png" height="50px" width="50px"></img>
-                                    Complaints
+                                    <pre style={{ fontFamily : "Montserrat"}}>  Complaints  </pre>
                                 </div>
                             </Nav.Link>
                         </Nav.Item>
@@ -107,9 +121,17 @@ function Dashboard() {
                             <Nav.Link className="FacilityLink" eventKey="/docs" onClick={(e) => changeMenu(e, "Documents")}>
                                 <div style={{ display: "flex", alignItems: "center", flexDirection: "column", textAlign: "center" }}>
                                     <img src="/src/assests/documents.png" height="50px" width="50px"></img>
-
-                                    Documents
+                                     <pre style={{ fontFamily : "Montserrat"}}>   Documents   </pre>
                                 </div></Nav.Link>
+                        </Nav.Item>
+
+                        <Nav.Item className="navbarLink">
+                            <Nav.Link className="FacilityLink" eventKey="/Home" onClick={(e) => changeMenu(e, "Annoucements")}>
+                                <div style={{ display: "flex", alignItems: "center", flexDirection: "column", textAlign: "center" }}>
+                                    <img src="/src/assests/announcement.png" height="50px" width="50px"></img>
+                                    <pre style={{ fontFamily : "Montserrat"}}>Annoucements</pre>
+                                </div>
+                            </Nav.Link>
                         </Nav.Item>
                     </Nav>
                 </div>

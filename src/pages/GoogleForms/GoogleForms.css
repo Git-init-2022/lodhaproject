@@ -5,7 +5,7 @@
     font-weight: bold;
     margin: 8px;
     font-size: 25px;
-    color: #92801c;
+    color: #675a0e;
     letter-spacing: 2px;
 }
 
@@ -21,7 +21,7 @@
     right: 0;
 
     margin-top: 0;
-    width: 80%;
+    width: 60%;
     height: auto;
     /*background-color: #edf6f7;*/
     background-color: whitesmoke;
@@ -34,7 +34,7 @@
 
 .modalButton {
     margin-left: 5%;
-    width: 90% !important;
+    width: 60% !important;
     text-align: center;
     justify-content: center;
     height: 80px;
@@ -48,10 +48,10 @@
 }
 
 .modalButton:hover {
-    /* color: white;
-    background-color: #41403f !important;
-    border-color: gold !important; */
+    color: white !important;
+    background-color: #3f3f3e !important;
     transform: scale(1.05);
+    border: 1px solid #3f3f3e !important;
 }
 
 .FormHeading {
@@ -64,10 +64,10 @@
 .FormView {
     justify-content: center;
     text-align: center;
-    width: 25%;
+    width: 20%;
 }
 
-.Viewbutton:hover {
+/* .Viewbutton:hover {
     background-color: rgb(233, 222, 156);
     color: black !important;
 }
@@ -75,8 +75,18 @@
 .Viewbutton {
     border: 1px solid black;
     color: black !important;
+} */
+
+.Viewbutton:hover {
+    background-color: #3f3f3e !important;
+    color: white !important;
 }
 
+.Viewbutton {
+    border: 0px solid black;
+    color: black !important;
+    background-color: rgb(234, 231, 212);
+}
 
 #title,
 #Description {
