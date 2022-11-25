@@ -8,7 +8,34 @@ import {useGlobalContext} from "/src/context/StateContext";
 function Profile() {
     
     const { User, setUser } = useGlobalContext();
-    const user = JSON.parse(User);
+    useEffect(()=>{
+        const fetchUsers = async() => {
+            if(User !== null){
+                console.log(User);
+            console.log("Flat Number: ",JSON.parse(User).FlatNo);
+          const { data } = await axios.get("http://localhost:4000/api/v1/singleUser",{params:{FlatNo: JSON.parse(User).FlatNo}});
+          const user = data.user1;
+          const user1 = {
+            OwnerName: user[0].OwnerName,
+            RegisteredName: user[0].RegisteredName,
+            FlatNo: user[0].FlatNo,
+            Block: user[0].Block,
+            ParkingSlot: user[0].ParkingSlot,
+            Mobile: user[0].Mobile,
+            Dues: user[0].Dues,
+            Email: user[0].Email,
+            Role: user[0].Role
+          }
+          setUser(JSON.stringify(user1));
+          localStorage.setItem("User", User);
+          console.log("data: ", user1);
+          console.log("User :", User);
+        }
+    }
+      if(User!==null){
+        fetchUsers();
+      }
+    },[])
     const update = async(e)=>{
         const FlatNo = e.target.FlatNo.value;
         const ParkingSlot = e.target.ParkingSlot.value;
@@ -56,41 +83,41 @@ function Profile() {
                         <div className="ProfileInput" style={{marginTop:"40px"}}>
                             <p className="EditTitle">NAME</p>
                            
-                            <input placeholder={user.OwnerName} name="OwnerName" className="EditInput"></input>
+                            <input placeholder={JSON.parse(User).OwnerName} name="OwnerName" className="EditInput"></input>
                              
                         </div>
                         <div className="ProfileInput">
                             <p className="EditTitle">EMAIL ADDRESS</p>
-                            <input placeholder={user.Email} name="Email" className="EditInput"></input>
+                            <input placeholder={JSON.parse(User).Email} name="Email" className="EditInput"></input>
                              
                         </div>
                         <div className="ProfileInput">
                             <p className="EditTitle">MOBILE NUMBER</p>
                             
-                            <input placeholder={user.Mobile} name="Mobile" className="EditInput"></input>
+                            <input placeholder={JSON.parse(User).Mobile} name="Mobile" className="EditInput"></input>
                              
                         </div>
                         <div className="ProfileInput">
                             <p className="EditTitle">BLOCK</p>
                             
-                            <input placeholder={user.Block} name="Block" className="EditInput"></input>
+                            <input placeholder={JSON.parse(User).Block} name="Block" className="EditInput"></input>
                              
                         </div>
                         <div className="ProfileInput">
                             <p className="EditTitle">FLAT NUMBER</p>
-                            <input placeholder={user.FlatNo} name="FlatNo" className="EditInput"></input>
+                            <input placeholder={JSON.parse(User).FlatNo} name="FlatNo" className="EditInput"></input>
                              
                         </div>
                         
                         <div className="ProfileInput" >
                             <p className="EditTitle">PROPERTY REGISTERED NAME</p>
-                            <input placeholder={user.RegisteredName} name="RegisteredName" className="EditInput"></input>
+                            <input placeholder={JSON.parse(User).RegisteredName} name="RegisteredName" className="EditInput"></input>
                              
                         </div>
 
                         <div className="ProfileInput" >
                             <p className="EditTitle">PARKING SLOT</p>
-                            <input placeholder={user.ParkingSlot} name="ParkingSlot" className="EditInput"></input>
+                            <input placeholder={JSON.parse(User).ParkingSlot} name="ParkingSlot" className="EditInput"></input>
                              
                         </div>
                         <div style={{display:"flex", justifyContent:"center"}}>

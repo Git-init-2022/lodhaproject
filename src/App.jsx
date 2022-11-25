@@ -27,15 +27,14 @@ import CreateForm from './pages/CreateForms/CreateForm';
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
 import Seperate from './pages/seperate/seperate';
 import UpdatePassword from './pages/UpdatePassword/UpdatePassword';
-
+import axios from "axios";
+import StaffManagement from './pages/StaffManagement/StaffManagement';
 
 export default function App() {
 
     const { isAuthenticated, setIsAuthenticated } = useGlobalContext();
-    useEffect(() => {
-        setIsAuthenticated(JSON.parse(localStorage.getItem("isAuthenticated")));
-
-    }, [isAuthenticated, JSON.parse(localStorage.getItem("isAuthenticated"))])
+    const {User, setUser} = useGlobalContext();
+    
     return (
         <>
             <Router>
@@ -47,6 +46,9 @@ export default function App() {
                     <Route path='/Seperate' element={<Seperate />} />
                     <Route path="/Home"
                         element={<PrivateRoute redirectTo="/login" component={<LoggedHome />}
+                            isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} role={true} />} />
+                    <Route path="/StaffManagement"
+                        element={<PrivateRoute redirectTo="/login" component={<StaffManagement />}
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} role={true} />} />
                     <Route path="/UserProfile"
                         element={<PrivateRoute redirectTo="/login" component={<Profile />}

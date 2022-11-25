@@ -58,12 +58,12 @@ function Dashboard() {
     return (
         <>
             <LoginNavBar />
+
             <div>
-                <div style={{ display: "flex" }}>
-                    <img src="/src/assests/dashboard.png" style={{ height: "35px", width: "35px", marginTop: "105px", marginLeft: "50px", marginBottom: "0px" }}></img>
+                <div style={{ display: "flex", marginTop: "100px", justifyContent:"center", }}>
+                <img src="/src/assests/dashboard.png" style={{ height: "40px", width: "40px", marginBottom: "0px", }}></img>
                     <p id="userDashboardTitle">USER DASHBOARD</p>
-                </div>
-                <div style={{ marginLeft: "55px", height: "3px", width: "275px", backgroundColor: "gold" }}></div>
+                    </div>
                 <div className="d-flex mb-3 FacilityNavBar">
 
                     <Nav variant="pills" defaultActiveKey="/home">
@@ -107,8 +107,8 @@ function Dashboard() {
                             <Nav.Link className="FacilityLink" eventKey="/docs" onClick={(e) => changeMenu(e, "Documents")}>
                                 <div style={{ display: "flex", alignItems: "center", flexDirection: "column", textAlign: "center" }}>
                                     <img src="/src/assests/documents.png" height="50px" width="50px"></img>
-                                    
-                                     Documents
+
+                                    Documents
                                 </div></Nav.Link>
                         </Nav.Item>
                     </Nav>

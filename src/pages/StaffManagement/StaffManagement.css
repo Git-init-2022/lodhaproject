@@ -1,0 +1,58 @@
+.editable-cell {
+    position: relative;
+  }
+  
+  .editable-cell-value-wrap {
+    padding: 5px 12px;
+    cursor: pointer;
+  }
+  
+  .editable-row:hover .editable-cell-value-wrap {
+    padding: 4px 11px;
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+  }
+  
+  [data-theme='dark'] .editable-row:hover .editable-cell-value-wrap {
+    border: 1px solid #434343;
+  }
+
+  .Note{
+    background-color: whitesmoke;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+    border: 1px solid black;
+    width: 90%;
+  }
+
+  .NoteTitle{
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 1px;
+    margin-left: 20px;
+    margin-top: 20px;
+    text-decoration-line: underline;
+    text-decoration-color: gold;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 10px;
+    
+  }
+
+  #title{
+   
+    font-size: 25px;
+    font-weight: bolder;
+    margin: 0px;
+    letter-spacing: 2px;
+}
+
+#title::first-letter{
+    font-weight: normal;
+    font-size: 33px;
+}
+
+.NoteList{
+    font-size: 16px;
+    letter-spacing: 0.5px;
+}

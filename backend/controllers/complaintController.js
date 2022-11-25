@@ -2,6 +2,8 @@ const {Complaint} = require("../models/complaintModel");
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const UserApiFeatures = require("../utils/apifeatures");
+const sendEmail = require("../utils/sendEmail");
+const User = require("../models/userModel");
 
 
 
@@ -42,6 +44,20 @@ exports.updateComplaint = catchAsyncErrors(async(req,res,next)=> {
     if(!complaint1){
         return next(new ErrorHandler("complaint not found",404));
     }
+    if(complaint1.Status !== Number(req.query.complaint.Status)){
+        const getUser = await User.find({FlatNo: complaint1.FlatNo});
+        if(!getUser){
+            return;
+        }
+        sendEmail({
+            email: getUser[0].Email,
+            subject: "Complaint Accepted",
+            message: "<h3 style='color: green;'>Your Complaint is Done!</h3>"
+        })
+    }
+    else if(complaint1.Description !== req.query.complaint.Description){
+
+    }
     complaint1.Status = req.query.complaint.Status;
     complaint1.Description = req.query.complaint.Description;
     complaint1.save();
@@ -69,6 +85,7 @@ exports.deleteComplaint = catchAsyncErrors(async(req,res,next) => {
     if(!complaint1) {
         return next(new ErrorHandler("complaint not found",404));
     }
+    
     await complaint1.remove();
     res.status(200).json({
         success: true,

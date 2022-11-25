@@ -1,5 +1,5 @@
 .FacilityNavBar{
-    margin-top: 30px;
+    margin-top: 100px !important;
      width: 80%;
      /* background-color: rgb(244, 226, 124) !important;
      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
@@ -10,6 +10,7 @@
      border-bottom: 1px solid black;
      border-radius: 0px;    
      margin: 0 auto;
+     
  }
  
  .FacilityLink{
@@ -25,8 +26,8 @@
  }
  
  #userDashboardTitle{
-     margin-top: 100px !important;
-     font-size: 25px;
+
+     font-size: 35px;
      font-weight: bolder;
      margin: 0px;
      letter-spacing: 2px;
@@ -34,18 +35,18 @@
  }
  
  #userDashboardTitle:first-letter{
-     font-weight: bold;
-     font-size: 33px;
+     font-weight: bolder;
+     font-size: 35px;
      
  }
  
  .FacilityNavBar .active{
-     background-color: rgb(241, 221, 109) !important;
+     background-color: rgb(255, 247, 174) !important;
      color: black !important;
  }
  
  .FacilityLink:hover{
-    background-color: rgb(241, 221, 109);
+    background-color: rgb(255, 247, 174);
     color: black !important;
  }
 

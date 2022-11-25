@@ -1,4 +1,22 @@
-.key-contact-btn{
+.editable-cell {
+    position: relative;
+  }
+  
+  .editable-cell-value-wrap {
+    padding: 5px 12px;
+    cursor: pointer;
+  }
+  
+  .editable-row:hover .editable-cell-value-wrap {
+    padding: 4px 11px;
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+  }
+  
+  [data-theme='dark'] .editable-row:hover .editable-cell-value-wrap {
+    border: 1px solid #434343;
+  }
+  .key-contact-btn{
     border: none !important;
 }
 
@@ -50,15 +68,15 @@
 .IssueTitle{
     text-transform: uppercase;
     font-size: 20px;
-    font-weight: bolder !important;
-    color: goldenrod!important;
-    text-decoration-line:underline ;
-    text-decoration-color: goldenrod;
+    font-weight: bold;
+    color: goldenrod;
+    /*text-decoration-line:underline ;
+    text-decoration-color: gold;
     text-decoration-style: solid;
     text-underline-offset: 10px;
-    text-decoration-thickness: 2px;
+    text-decoration-thickness: 2px;*/
     padding: 10px;
-    letter-spacing: 2px !important;
+    letter-spacing: 1px;
 }
 
 .IssueTitle:first-letter{
@@ -94,7 +112,7 @@
 .ToastIssue{
    width: max-content;
    background-color: gold !important;
-   color: rgb(0, 0, 0) !important;
+   color: black !important;
    font-weight: bold;
    font-size: 12px;
    letter-spacing: 2px;
@@ -102,4 +120,6 @@
    margin-left: 10px;
    margin-top: 10px;
    border: 2px solid gold;
+   
 }
+

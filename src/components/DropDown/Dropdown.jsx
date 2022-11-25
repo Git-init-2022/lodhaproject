@@ -5,7 +5,7 @@ import {useGlobalContext} from '/src/context/StateContext';
 import { useState } from 'react';
 function Dropdown() {
   const {User} = useGlobalContext();
-  const [isAdmin, setIsAdmin] = useState(JSON.parse(User).Role === 'admin'); 
+  const [isAdmin, setIsAdmin] = useState(User!==null && JSON.parse(User).Role === 'admin'); 
   
   return (
     <>
@@ -22,7 +22,7 @@ function Dropdown() {
             </Accordion.Body>
           </Accordion.Item>
           {
-            isAdmin ?
+           isAdmin ?
             <Accordion.Item eventKey="0">
               <Accordion.Header><p className='DropDownHeader'>Management</p></Accordion.Header>
               <Accordion.Body className='ExpandDropDown'>
@@ -34,6 +34,7 @@ function Dropdown() {
                 <a href='/LegalUpdate'>Legal Update</a>
                 <a href='/Purchase'>Purchase & Audit Section</a>
                 <a href='/KeyContacts'>Key Contacts & Email ids</a>
+                <a href='/StaffManagement'> Staff Management</a>
               </Accordion.Body>
             </Accordion.Item>
             : <></>

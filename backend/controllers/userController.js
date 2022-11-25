@@ -5,19 +5,21 @@ const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 
 const cloudinary = require("cloudinary");
+const { idText } = require("typescript");
+const { Complaint } = require("../models/complaintModel");
 
 // Create User
-exports.createUser = catchAsyncErrors(async(req,res,next)=> {
+exports.createUser = catchAsyncErrors(async (req, res, next) => {
     const { FlatNo } = req.body;
-    const user1 = await User.find({FlatNo: FlatNo});
-    if(user1 && Object.keys(user1).length){
+    const user1 = await User.find({ FlatNo: FlatNo });
+    if (user1 && Object.keys(user1).length) {
         res.status(201).json({
-            success:false,
+            success: false,
             message: "User Already Exists"
         })
     }
-    else{
-        const {Password, OwnerName,RegisteredName,Block, Mobile,ParkingSlot,Email,Role } = req.body;
+    else {
+        const { Password, OwnerName, RegisteredName, Block, Mobile, ParkingSlot, Email, Role } = req.body;
         const user = await User.create({
             FlatNo: FlatNo,
             Email: Email,
@@ -32,19 +34,20 @@ exports.createUser = catchAsyncErrors(async(req,res,next)=> {
         //sendToken(user, 201, res);
         res.status(201).json({
             success: true,
-            user 
+            user
         });
     }
 });
 
 // login User
-exports.loginUser = catchAsyncErrors(async(req,res,next) => {
-    const {FlatNo, Password} = req.body;
-    const user = await User.find({FlatNo: FlatNo, Password: Password})
-    if(!user && Object.keys(user).length){
-        return next(new ErrorHandler("User does not exists",404));
+exports.loginUser = catchAsyncErrors(async (req, res, next) => {
+    const { FlatNo, Password } = req.body;
+    const user = await User.find({ FlatNo: FlatNo, Password: Password })
+    if (!user && Object.keys(user).length) {
+        return next(new ErrorHandler("User does not exists", 404));
     }
-   // sendToken(user, 201, res);
+    console.log(req);
+    // sendToken(user, 201, res);
     res.status(200).json({
         success: true,
         user
@@ -53,12 +56,12 @@ exports.loginUser = catchAsyncErrors(async(req,res,next) => {
 
 
 // Get Single User
-exports.getUser = catchAsyncErrors(async(req,res,next) => {
+exports.getUser = catchAsyncErrors(async (req, res, next) => {
     const FlatNo = req.query.FlatNo;
-    
-    const user1 = await User.find({FlatNo: FlatNo})
-    if(user1.length === 0){
-        return next(new ErrorHandler("User does not exists",404));
+
+    const user1 = await User.find({ FlatNo: FlatNo })
+    if (user1.length === 0) {
+        return next(new ErrorHandler("User does not exists", 404));
     }
     res.status(200).json({
         success: true,
@@ -67,50 +70,91 @@ exports.getUser = catchAsyncErrors(async(req,res,next) => {
 });
 
 // Get All users
-exports.getAllusers = catchAsyncErrors(async(req,res) => {
-    
-        const data = await User.find()
-        const users = data.map((ele)=>{
-            
-            return (
-                {
-                    FlatNo: ele.FlatNo,
-                    OwnerName: ele.OwnerName,
-                    RegisteredName: ele.RegisteredName,
-                    ParkingSlot: ele.ParkingSlot,
-                    Block: ele.Block,
-                    Mobile: ele.Mobile,
-                    Email: ele.Email,
-                    Dues: ele.Dues
-                }
-            );
-        })
-        res.status(200).json({
-            success: true,
-            users
-        });
-    
+exports.getAllusers = catchAsyncErrors(async (req, res) => {
+
+    const data = await User.find()
+    const users = data.map((ele) => {
+
+        return (
+            {
+                FlatNo: ele.FlatNo,
+                OwnerName: ele.OwnerName,
+                RegisteredName: ele.RegisteredName,
+                ParkingSlot: ele.ParkingSlot,
+                Block: ele.Block,
+                Mobile: ele.Mobile,
+                Email: ele.Email,
+                Dues: ele.Dues,
+                Role: ele.Role
+            }
+        );
+    })
+    res.status(200).json({
+        success: true,
+        users
+    });
+
 })
 
 // Update User
-exports.updateUser = catchAsyncErrors(async(req,res,next)=> {
-    let user1 = await User.find({FlatNo: req.query.user.FlatNo});
-    if(!user1){
-        return next(new ErrorHandler("User not found",404));
+exports.updateUser = catchAsyncErrors(async (req, res, next) => {
+    let user1 = await User.find({ FlatNo: req.query.user.FlatNo });
+    if (!user1) {
+        return next(new ErrorHandler("User not found", 404));
     }
-   
+    let message = "";
+    console.log(user1[0].Dues, req.query.user.Dues);
+    if (user1[0].Email !== req.query.user.Email) {
+        sendEmail({
+            email: req.query.user.Email,
+            message: `Email has been changed\n Previous Email: ${user1[0].Email} \n\n Current Email: ${req.query.user.Email}\n\n`,
+            subject: "Your Email has been Changed"
+        })
+    }
+    else {
+        if (user1[0].Dues !== Number(req.query.user.Dues)) {
+            message += `Dues has been changed\n Previous Dues: ${user1[0].Dues} \n\n Current Dues: ${req.query.user.Dues}\n\n`;
+        }
+        if (user1[0].FlatNo !== req.query.user.FlatNo) {
+            message += `Flat Number has been changed\n Previous Flat Number: ${user1[0].FlatNo} \n\n Current Flat Number: ${req.query.user.FlatNo}\n\n`;
+        }
+        if (user1[0].Mobile !== req.query.user.Mobile) {
+            message += `Mobile Number has been changed\n Previous Mobile Number: ${user1[0].Mobile} \n\n Current Mobile Number: ${req.query.user.Mobile}\n\n`;
+        } 
+        if (user1[0].ParkingSlot !== req.query.user.ParkingSlot) {
+            message += `Parking Slot has been changed\n Previous Parking Slot: ${user1[0].ParkingSlot} \n\n Current Parking Slot: ${req.query.user.ParkingSlot}\n\n`;
+        } if (user1[0].OwnerName !== req.query.user.OwnerName) {
+            message += `Owner Name has been changed\n Previous Owner Name: ${user1[0].OwnerName} \n\n Current Owner Name: ${req.query.user.OwnerName}\n\n`;
+        }
+        if (user1[0].RegisteredName !== req.query.user.RegisteredName) {
+            message += `Property Register Name has been changed\n Previous Property Register Name: ${user1[0].RegisteredName} \n\n Current Property Register Name: ${req.query.user.RegisteredName}\n\n`;
+        }
+        if (user1[0].Block !== req.query.user.Block) {
+            message += `Block Name has been changed\n Previous Block Name: ${user1[0].Block} \n\n Current Block Name: ${req.query.user.Block}\n\n`;
+        }
+        if (user1[0].Role !== req.query.user.Role) {
+            message += `Your Role has been changed\n Previous Role: ${user1[0].Role} \n\n Current Role: ${req.query.user.Role}\n\n`;
+        }
+        sendEmail({
+            email: user1[0].Email,
+            message: message,
+            subject: "Your Email has been Changed"
+        })
+    }
     user1[0].FlatNo = req.query.user.FlatNo;
-    user1[0].Email = req.query.user.Email; 
-    user1[0].Mobile = req.query.user.Mobile; 
-    user1[0].Block = req.query.user.Block; 
+    user1[0].Email = req.query.user.Email;
+    user1[0].Mobile = req.query.user.Mobile;
+    user1[0].Block = req.query.user.Block;
     user1[0].Dues = req.query.user.Dues;
-    user1[0].ParkingSlot = req.query.user.ParkingSlot; 
-    user1[0].OwnerName = req.query.user.OwnerName; 
+    user1[0].ParkingSlot = req.query.user.ParkingSlot;
+    user1[0].OwnerName = req.query.user.OwnerName;
     user1[0].RegisteredName = req.query.user.RegisteredName;
-    
+    user1[0].Role = req.query.user.Role;
+
     user1[0].save();
-    user1 = await User.find({FlatNo: req.query.user.FlatNo});
-    
+
+    user1 = await User.find({ FlatNo: req.query.user.FlatNo });
+
     res.status(200).json({
         success: true,
         message: "SuccessFully updated"
@@ -119,11 +163,21 @@ exports.updateUser = catchAsyncErrors(async(req,res,next)=> {
 
 // Delete User
 
-exports.deleteUser = catchAsyncErrors(async(req,res,next) => {
-    const user1 = await User.find({FlatNo: req.query.FlatNo});
-    if(!user1) {
-        return next(new ErrorHandler("User not found",404));
+exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
+    const user1 = await User.find({ FlatNo: req.query.FlatNo });
+    if (!user1) {
+        return next(new ErrorHandler("User not found", 404));
     }
+    const complaintsByUser = await Complaint.find({FlatNo: req.query.FlatNo});
+    
+    for(let complaints of complaintsByUser){
+        complaints.remove();
+    }
+    sendEmail({
+        email: user1[0].Email,
+        message: "Your Profile data is deleted from Lodha Meridian Community",
+        subject: "User Profile Deletion"
+    })
     await user1[0].remove();
     res.status(200).json({
         success: true,
