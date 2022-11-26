@@ -76,7 +76,7 @@ export default function App() {
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} role={true} />} />
                     <Route path="/KeyContacts"
                         element={<PrivateRoute redirectTo="/login" component={<KeyContactsAndMails />}
-                            isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} role={true} />} />
+                            isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} role={JSON.parse(localStorage.getItem("User")) !== null && JSON.parse(localStorage.getItem("User")).Role === "admin"} />} />
                     <Route path="/Finance"
                         element={<PrivateRoute redirectTo="/login" component={<FinanceAndAccount />}
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} role={true} />} />
