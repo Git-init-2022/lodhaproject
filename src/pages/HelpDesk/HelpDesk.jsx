@@ -49,10 +49,10 @@ function HelpDesk() {
         <>
             <LoginNavBar />
             <div >
-
-                <p id="title2">POST A COMPLAINT</p>
-
-                <div style={{ marginLeft: "55px", height: "3px", width: "200px", backgroundColor: "gold" }}></div>
+                <div style={{ display: "flex", justifyContent:"center", marginBottom: "-20px"}}>
+                    <img src="/src/assests/complaint.png" style={{ height: "50px", width: "50px", marginTop : "95px", marginRight: "5px"}}></img>
+                    <p id="title2">POST A COMPLAINT</p>
+                </div>
                 {
                     DuplicateComplaint > 0 ? DuplicateComplaint===2? <Alert message="Error" type="error" description="Complaint Already Exists! Please try again" showIcon closable style={{ marginBottom: "20px",marginTop:"20px", width:"60%",letterSpacing:"2px", boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px", marginLeft:"20%" }} />
                     :

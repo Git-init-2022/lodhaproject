@@ -285,10 +285,12 @@ function AllComplaints() {
     <>
       <LoginNavBar />
       <div className="KeyContactDiv">
-        <p id="title10"> ALL COMPLAINTS</p>
+        <div style={{ display: "flex", marginTop: "100px", justifyContent:"center", }}>
+            <img src="/src/assests/complaint.png" style={{ height: "50px", width: "50px", marginTop : "-3px", marginBottom: "50px", marginRight: "5px"}}></img>
+            <p id="title10">ALL COMPLAINTS</p>
+        </div>
 
-        <div style={{ marginLeft: "5px", height: "3px", width: "200px", backgroundColor: "gold" }}></div>
-        <Accordion >
+          <Accordion >
           <Accordion.Item eventKey="0" id="IssueAccord" style={{ marginTop: "50px", width: "90%", border: "2px solid #d3d3d3", boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px", }}>
             <Accordion.Header>
               <p className="IssueTitle">Add New Complaint Type</p>

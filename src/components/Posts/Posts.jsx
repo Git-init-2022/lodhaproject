@@ -58,7 +58,7 @@ function Posts({ props }) {
             </div>
             <div>
               {props.Status ? <div>
-                <img src="/src/assests/greenCircle.png" height="20px" width="20px"></img>
+                <img src="/src/assests/done.png" height="20px" width="20px"></img>
                 <span style={{ color: "green", fontWeight: "bold", fontSize: "18px", letterSpacing: "2px" }}>Done</span>
               </div>
                 :

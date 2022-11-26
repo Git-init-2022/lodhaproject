@@ -258,15 +258,11 @@ const StaffManagement = () => {
     <>
       <LoginNavBar />
       <div className="KeyContactDiv">
-        <p id="title" style={{border:"none"}}>STAFF MANAGEMENT</p>
-        <div
-          style={{
-            marginLeft: "5px",
-            height: "3px",
-            width: "300px",
-            backgroundColor: "gold"
-          }}
-        ></div>
+        <div style={{ display: "flex", justifyContent:"center", marginTop: "90px"}}>
+            <img src="/src/assests/staff.png" style={{ height: "50px", width: "50px", marginTop : "15px", marginBottom: "50px"}}></img>
+            <p id="title">STAFF MANAGEMENT</p>
+        </div>
+
         <div className="Note">
           <p className="NoteTitle">NOTE</p>
           <ul> 

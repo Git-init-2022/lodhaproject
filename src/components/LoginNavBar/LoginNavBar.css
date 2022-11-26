@@ -9,7 +9,7 @@
 #LoginDropdown {
   margin-left: 60px;
   border-radius: 2px;
-  color: white;
+  color: #c6b65d;
   font-weight: bold;
   padding: 3px;
   text-decoration: none;
@@ -37,10 +37,10 @@
 
 #Menu:hover,
 #LoginDropdown:hover {
-  color: #c6b65d !important;
+  color: #c6c6c6 !important;
   font-weight: bold !important;
   transform: scale(1.05);
-  border-bottom: 1px solid #c6b65d;
+  border-bottom: 1px solid #c6c6c6;
 }
 
 .ProfileDiv:hover,
