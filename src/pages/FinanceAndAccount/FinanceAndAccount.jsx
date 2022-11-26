@@ -251,15 +251,11 @@ const FinanceAndAccount = () => {
     <>
       <LoginNavBar />
       <div className="KeyContactDiv">
-        <p id="title">FINANCE AND ACCOUNT</p>
-        <div
-          style={{
-            marginLeft: "5px",
-            height: "3px",
-            width: "300px",
-            backgroundColor: "gold"
-          }}
-        ></div>
+        <div style={{ display: "flex", justifyContent:"center", }}>
+            <img src="/src/assests/finance.png" style={{ height: "50px", width: "50px", marginTop : "20px", marginBottom: "50px"}}></img>
+            <p id="title">FINANCE AND ACCOUNT MANAGEMENT</p>
+        </div>
+        
         <div className="Note">
           <p className="NoteTitle">NOTE</p>
           <ul> 

@@ -47,11 +47,11 @@ function Meeting() {
   return (
     <>
       <LoginNavBar />
-      <div style={{ display: "flex" }}>
-        <img src="/src/assests/meeting.png" style={{ height: "35px", width: "35px", marginTop: "105px", marginLeft: "50px", marginBottom: "0px" }}></img>
-        <p id="userDashboardTitle">SET UP MEETING</p>
+      <div style={{ display: "flex", justifyContent:"center", marginTop: "80px"}}>
+            <img src="/src/assests/meeting.png" style={{ height: "50px", width: "50px", marginTop : "19px", marginBottom: "-20px", marginRight: "-8px"}}></img>
+            <p id="title">SET-UP A MEETING</p>
       </div>
-      <div style={{ marginLeft: "55px", height: "3px", width: "275px", backgroundColor: "gold" }}></div>
+      {/* <p id="title">FINANCE AND MANAGEMENT</p> */}
       {
         DuplicateMeeting > 0 ? DuplicateMeeting === 2 ? <Alert message="Error" type="error" description="Meeting Details Already Exists! Please try again" showIcon closable style={{ marginBottom: "20px", marginTop: "20px", width: "60%", letterSpacing: "2px", boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px", marginLeft: "20%" }} />
           :
@@ -65,10 +65,10 @@ function Meeting() {
               onSubmit={CreateMeetingSubmit}
               className="w-100 rounded p-4 border MeetingSection"
             >
-              <p id="MeetingFormTitle">MEETING DETAILS</p>
-              <div style={{ marginLeft: "0px", height: "2px", width: "98%", backgroundColor: "black" }}></div>
+              {/* <p id="MeetingFormTitle">MEETING DETAILS</p>
+              <div style={{ marginLeft: "0px", height: "2px", width: "98%", backgroundColor: "black" }}></div> */}
               <label class="d-block mb-4">
-                <span class="d-block mb-2 labels" style={{ marginTop: "40px" }}>Meeting Title</span>
+                <span class="d-block mb-2 labels" style={{ marginTop: "5px" }}>Meeting Title</span>
                 <input
                   name="Title"
                   type="text"

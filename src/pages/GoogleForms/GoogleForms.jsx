@@ -72,7 +72,8 @@ function GoogleForms() {
             <div className="FormItems" style={{ marginTop: "50px" , marginBottom: "100px"}}>
                 <p className='FormHeader' >SURVEY FORMS</p>
                 {
-                    isAdmin ? <p style={{ textAlign: "center", fontSize: "18px", letterSpacing: "1px", }}>Note - To Edit details click on "More" button</p> : <></>
+                    isAdmin ? <p style={{ textAlign: "center", fontSize: "18px", letterSpacing: "1px", }}>Note - To Edit details click on MORE INFO</p> : 
+                              <p style={{ textAlign: "center", fontSize: "18px", letterSpacing: "1px", }}>Note - To View details click on MORE INFO</p>
                 }
                 <hr style={{ height: "1", backgroundColor: "black", width: "94%", marginLeft: "3%" }}></hr>
                 {

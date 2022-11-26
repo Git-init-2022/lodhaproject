@@ -39,10 +39,11 @@ function CreateForm() {
         <>
             <LoginNavBar />
             <div>
+                <div style={{ display: "flex", justifyContent:"center", }}>
+                    <img src="/src/assests/survey.png" style={{ height: "50px", width: "50px", marginTop : "100px", marginBottom: "0px", marginRight: "10px"}}></img>
+                    <p id="title4">CREATE SURVEY FORMS</p>
+                </div>
 
-                <p id="title2">CREATE  GOOGLE-FORMS</p>
-
-                <div style={{ marginLeft: "55px", height: "3px", width: "250px", backgroundColor: "gold" }}></div>
                 {
                     duplicateForm > 0 ? duplicateForm === 2 ? <Alert message="Error" type="error" description="Form Details Already Exists! Please try again" showIcon closable style={{ marginBottom: "20px", marginTop: "20px", width: "60%", letterSpacing: "2px", boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px", marginLeft: "20%" }} />
                         :

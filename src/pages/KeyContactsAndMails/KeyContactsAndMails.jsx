@@ -292,15 +292,11 @@ const KeyContactsAndMails = () => {
     <>
       <LoginNavBar />
       <div className="KeyContactDiv">
-        <p id="title">KEY CONTACTS AND MAILS</p>
-        <div
-          style={{
-            marginLeft: "5px",
-            height: "3px",
-            width: "300px",
-            backgroundColor: "gold"
-          }}
-        ></div>
+        <div style={{ display: "flex", justifyContent:"center", }}>
+            <img src="/src/assests/contact.png" style={{ height: "50px", width: "50px", marginTop : "20px", marginBottom: "30px", marginRight: "-10px"}}></img>
+            <p id="title">KEY CONTACTS AND MAILS</p>
+        </div>
+        
         <div className="Note">
           <p className="NoteTitle">NOTE</p>
           <ul> 
