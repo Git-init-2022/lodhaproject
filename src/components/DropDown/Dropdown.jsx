@@ -5,7 +5,7 @@ import {useGlobalContext} from '/src/context/StateContext';
 import { useState } from 'react';
 function Dropdown() {
   const {User} = useGlobalContext();
-  const [isAdmin, setIsAdmin] = useState(User!==null && JSON.parse(User).Role === 'admin'); 
+  const [isAdmin, setIsAdmin] = useState(User===null ? false : JSON.parse(User).Role !== 'user' ? true: false); 
   
   return (
     <>
@@ -26,15 +26,14 @@ function Dropdown() {
             <Accordion.Item eventKey="0">
               <Accordion.Header><p className='DropDownHeader'>Management</p></Accordion.Header>
               <Accordion.Body className='ExpandDropDown'>
-                <a href='/Finance'>Finance & Account</a>
-                <a href='/FM'>FM</a>
+                {(JSON.parse(User).Role === 'admin' || JSON.parse(User).Role === 'am') ? <a href='/Finance'>Finance & Account</a> : <></>}
+                {(JSON.parse(User).Role === 'admin' || JSON.parse(User).Role === 'fm') ? <a href='/FM'>FM</a> : <></>}
                 <a href='/Cultural'>Cultural Section</a>
-
                 <a href='/AllComplaints'>All Complaints</a>
                 <a href='/LegalUpdate'>Legal Update</a>
                 <a href='/Purchase'>Purchase & Audit Section</a>
                 <a href='/KeyContacts'>Key Contacts & Email ids</a>
-                <a href='/StaffManagement'> Staff Management</a>
+                {JSON.parse(User).Role === 'admin'? <a href='/StaffManagement'> Staff Management</a> : <></>}
               </Accordion.Body>
             </Accordion.Item>
             : <></>

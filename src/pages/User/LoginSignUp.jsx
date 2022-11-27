@@ -288,11 +288,11 @@ const LoginSignUp = () => {
     }
   }
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/UserProfile");
-    }
-  }, [isAuthenticated]);
+  // useEffect(() => {
+  //   if (isAuthenticated) {
+  //     navigate("/UserProfile");
+  //   }
+  // }, []);
   return (
     <Fragment>
       {loading ? (

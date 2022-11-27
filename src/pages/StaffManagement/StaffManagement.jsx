@@ -5,310 +5,419 @@ import { Form, Input, Popconfirm, Table } from "antd"
 import axios from "axios"
 import LoginNavBar from "/src/components/LoginNavBar/LoginNavBar"
 import "antd/dist/antd.css"
-const { Search } = Input
-
-const EditableContext = React.createContext(null)
-
-const EditableRow = ({ index, ...props }) => {
-  const [form] = Form.useForm()
-  return (
-    <Form form={form} component={false}>
-      <EditableContext.Provider value={form}>
-        <tr {...props} />
-      </EditableContext.Provider>
-    </Form>
-  )
-}
-
-const EditableCell = ({
-  title,
-  editable,
-  children,
-  dataIndex,
-  record,
-  handleSave,
-  ...restProps
-}) => {
-  const [editing, setEditing] = useState(false)
-  const inputRef = useRef(null)
-  const form = useContext(EditableContext)
-
-  useEffect(() => {
-    if (editing) {
-      inputRef.current.focus()
-    }
-  }, [editing])
-
-  const toggleEdit = () => {
-    setEditing(!editing)
-    form.setFieldsValue({ [dataIndex]: record[dataIndex] })
-  }
-
-  const save = async () => {
-    try {
-      const values = await form.validateFields()
-
-      toggleEdit()
-      handleSave({ ...record, ...values })
-    } catch (errInfo) {
-      console.log("Save failed:", errInfo)
-    }
-  }
-
-  let childNode = children
-
-  if (editable) {
-    childNode = editing ? (
-      <Form.Item
-        style={{ margin: 0 }}
-        name={dataIndex}
-        rules={[
-          {
-            required: true,
-            message: `${title} is required.`
-          }
-        ]}
-      >
-        <Input ref={inputRef} onPressEnter={save} onBlur={save} />
-      </Form.Item>
-    ) : (
-      <div
-        className="editable-cell-value-wrap"
-        style={{ paddingRight: 24 }}
-        onClick={toggleEdit}
-      >
-        {children}
-      </div>
-    )
-  }
-
-  return <td {...restProps}>{childNode}</td>
-}
-
-
-
-
-
-
-
-/*******************************************Component************************************************ */
-
-
-
-
-
-
+const { Search } = Input;
+import { useGlobalContext } from '/src/context/StateContext';
+import Card from "antd/lib/card/Card"
+import Meta from "antd/lib/card/Meta"
 
 const StaffManagement = () => {
+  const [Admins, setAdmins] = useState([]);
+  const [Facility, setFacility] = useState([]);
+  const [Account, setAccount] = useState([]);
+  const [Support, setSupport] = useState([]);
+  const [users, setUsers] = useState([]);
+  const { User } = useGlobalContext();
+  const roles = ['admin', 'user', 'am', 'fm'];
+  const fetchUsers = async () => {
+    const { data } = await axios.get("http://localhost:4000/api/v1/users");
+    setUsers(data.users);
+  }
 
-  const [dataSource, setDataSource] = useState([])
-  const [searchVal, setSearchVal] = useState("")
-  const [filteredData, setFilteredData] = useState([]);
-  const [origData, setOrigData] = useState([]);
-  const [searchIndex, setSearchIndex] = useState([]);
-  const [loading, setLoading] = useState(true);
-  
-  const refreshPage = () =>
-  {
+  const refreshPage = () => {
     window.location.reload();
   }
+
   useEffect(() => {
-    setLoading(true);
-    const crawl = (user, allValues) => {
-      if (!allValues) allValues = [];
-      for (var key in user) {
-        if (typeof user[key] === "object") crawl(user[key], allValues);
-        else allValues.push(user[key] + " ");
+    fetchUsers();
+    const admins = []
+    const support = []
+    const facility = []
+    const finance = []
+    for (let user of users) {
+      if (user.Role === 'admin') {
+        admins.push(user);
       }
-      return allValues;
-    };
-    const fetchData = async() => {
-      const users = await fetchUsers();
-      setOrigData(users);
-      setFilteredData(users);
-      const searchInd = users.map(user => {
-        const allValues = crawl(user);
-        return { allValues: allValues.toString() };
-      });
-      setSearchIndex(searchInd);
-      if (users) setLoading(false);
-    };
-    fetchData();
-  }, []);
+      else if (user.Role === 'fm') {
+        facility.push(user);
+      }
+      else if (user.Role === 'am') {
+        finance.push(user);
+      }
+      else if (user.Role === 'itsupport') {
+        support.push(user);
+      }
+    }
+    setAdmins(admins);
+    setAccount(finance);
+    setFacility(facility);
+    setSupport(support);
 
-  useEffect(() => {
-    if (searchVal) {
-      const reqData = searchIndex.map((user, index) => {
-        if (user.allValues.toLowerCase().indexOf(searchVal.toLowerCase()) >= 0)
-          return origData[index];
-        return null;
-      });
-      setFilteredData(
-        reqData.filter(user => {
-          if (user) return true;
-          return false;
-        })
-      );
-    } else setFilteredData(origData);
-  }, [searchVal, origData, searchIndex]);
+  }, [users.length]);
 
-  const fetchUsers = async () => {
-    const { data } = await axios.get("http://localhost:4000/api/v1/users")
-    const users = data.users
-    return users
-  }
-  
-  const deleteUser = async(key)=> {
-    const {data} = await axios.get("http://localhost:4000/api/v1/userdelete", {params: {FlatNo: key}});
-    console.log(data.message);
+  const Delete = async (FlatNo) => {
+    const { data } = await axios.get("http://localhost:4000/api/v1/userdelete", { params: { FlatNo: FlatNo } });
     refreshPage();
   }
 
-  const handleDelete = key => {
-    console.log("key", key)
-    deleteUser(key);
-    const newData = dataSource.filter(item => item.FlatNo !== key)
-    setDataSource(newData)
-  }
+  const Edit = async (user) => {
 
-  const defaultColumns = [
-    {
-      title: "Flat Number",
-      dataIndex: "FlatNo",
-      key: "FlatNo"
-    },
-    {
-      title: "Owner Name",
-      dataIndex: "OwnerName",
-      key: "OwnerName"
-    },
-    {
-      title: "Email",
-      dataIndex: "Email",
-      key: "Email"
-    },
-    {
-      title: "Mobile Number",
-      dataIndex: "Mobile",
-      key: "Mobile"
-    },
-    {
-        title: "Role",
-        dataIndex: "Role",
-        key: "Role",
-        render: () =>(
-         <select>
-            <option>admin</option>
-            <option>user</option>
-            <option>facility manager</option>
-         </select>
-        ) 
-        
-    },
-    {
-      title: "operation",
-      dataIndex: "operation",
-      render: (_, record) =>
-        dataSource.length >= 0 ? (
-          <Popconfirm
-            title="Click 'ok' button to confirm delete operation"
-            onConfirm={() => handleSave(record)}
-          >
-            <button className="btn btn-primary">Edit</button>
-          </Popconfirm>
-        ) : null
-    }
-  ]
-
-  const updateUser = async(row)=> {
-    const {data} = await axios.get("http://localhost:4000/api/v1/userupdate", {params: {user: row}});
-    console.log(data.user);
+    const { data } = await axios.get("http://localhost:4000/api/v1/userupdate", { params: { user: user } });
     refreshPage();
   }
 
-  const handleSave = row => {
-    console.log("row",JSON.stringify(row));
-    updateUser(row);
+  const HandleEdit = (item) => {
+    const Role = document.getElementById("StaffRole").value;
+    const FinalValues = {
+      FlatNo: item.FlatNo,
+      Email: item.Email,
+      Mobile: item.Mobile,
+      Block: item.Block,
+      Dues: item.Dues,
+      ParkingSlot: item.ParkingSlot,
+      OwnerName: item.OwnerName,
+      RegisteredName: item.RegisteredName,
+      Role: Role
+    }
+    Edit(FinalValues);
   }
 
-  const components = {
-    body: {
-      row: EditableRow,
-      cell: EditableCell
-    }
+  const HandleDelete = (item) => {
+    Delete(item.FlatNo);
   }
-
-  const columns = defaultColumns.map(col => {
-    if (!col.editable) {
-      return col
-    }
-    return {
-      ...col,
-      onCell: record => ({
-        record,
-        editable: col.editable,
-        dataIndex: col.dataIndex,
-        title: col.title,
-        handleSave
-      })
-    }
-  })
-
   return (
     <>
       <LoginNavBar />
-      <div className="KeyContactDiv">
-        <p id="title" style={{border:"none"}}>STAFF MANAGEMENT</p>
-        <div
-          style={{
-            marginLeft: "5px",
-            height: "3px",
-            width: "300px",
-            backgroundColor: "gold"
-          }}
-        ></div>
-        <div className="Note">
-          <p className="NoteTitle">NOTE</p>
-          <ul> 
-            <li className="NoteList">
-               Please Enter the value to be Edited in the Input and press enter button to be edited.
-            </li>
-            <li className="NoteList">
-              Please Press Delete button to delete the user details
-            </li>
-          </ul>
+      <div>
+        <div style={{ display: "flex", marginTop: "100px", justifyContent: "center", }}>
+          <img src="/src/assests/staff.png" style={{ height: "55px", width: "50px", marginBottom: "0px", }}></img>
+          <p id="userDashboardTitle">STAFF MANAGEMENT</p>
+        </div>
+        <div>
+          <div className="StaffTitleDiv">
+            <div className="sideLines" ></div>
+            <p id="userDashboardTitle" style={{ marginLeft: "5px", marginRight: "5px", color: "rgb(148, 133, 48)" }}>ADMINS</p>
+            <div className="sideLines"></div>
+          </div>
+          <div className="displayUsers">
+            {
+              Admins.length ?
+                Admins.map((i) => {
+                  return (
+                    <form>
+                      <div className="DisplayCard">
+                        <div>
+                          <img src="/src/assests/admin.png" width="200px" height="200px" style={{ margin: "25px" }}></img>
+
+                        </div>
+                        <div style={{ width: "100%", marginTop: "5px" }}>
+                          <label className="StaffLabel">name</label>
+                          <span className="StaffValue">{i.OwnerName}</span>
+                          <br></br>
+                          <label className="StaffLabel">role</label>
+                          <select defaultValue={i.Role} name="Role" id="StaffRole">
+                            <option value={i.Role}>
+                              {i.Role}
+                            </option>
+                            {
+                              roles.map((item) => {
+
+                                return (
+                                  item !== i.Role ?
+                                    <option value={item}>{item}</option>
+                                    :
+                                    <></>
+                                );
+
+                              })
+                            }
+                          </select>
+                          <br></br>
+                          <label className="StaffLabel">flat Number</label>
+                          <span className="StaffValue" id="flatno">{i.FlatNo}</span>
+                          <br></br>
+                          <label className="StaffLabel">mobile Number</label>
+                          <span className="StaffValue">{i.Mobile}</span>
+                          <br></br>
+                          <label className="StaffLabel">email</label>
+                          <span className="StaffValue">{i.Email}</span>
+                          <br></br>
+
+                          <div className="staffButton">
+                            <Popconfirm
+                              title="Click ok to Edit User Details"
+                              onConfirm={() => HandleEdit(i)}>
+                              <button className="btn btn-primary editButton" type="submit" style={{ width: "45%" }}>
+                                <img src="/src/assests/Edit.png" height="20px" width="20px"></img>
+                                <span style={{ marginLeft: "10px" }}>Edit Staff</span></button>
+                            </Popconfirm>
+                            <Popconfirm
+                              title="Click ok to Confirm Deletion of user"
+                              onConfirm={() => HandleDelete(i)}>
+                              <button className="btn btn-danger DeleteButton" style={{ width: "45%", marginLeft: "10px" }}>
+                                <img src="/src/assests/Delete.png" height="20px" width="20px"></img>
+                                <span style={{ marginLeft: "10px" }}>Delete Staff</span> </button>
+                            </Popconfirm>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  );
+                }
+                )
+
+                :
+                <p>No Admins to Display !</p>
+            }
+          </div>
         </div>
 
-        <Search
-          onChange={e => setSearchVal(e.target.value)}
-          placeholder="Enter Flat No"
-          enterButton
-          size="large"
-          style={{
-            width: "90%",
-            marginTop: "20px",
-            border: "1px solid black",
-            borderRadius: "5px"
-          }}
-        />
+        <div>
+          <div className="StaffTitleDiv">
+            <div className="sideLines" style={{ width: "36%" }} ></div>
+            <p id="userDashboardTitle" style={{ marginLeft: "2px", marginright: "2px", color: "rgb(148, 133, 48)" }}>FACILITY MANAGEMENT</p>
+            <div className="sideLines" style={{ width: "35%" }}></div>
 
-        <Table
-          components={components}
-          rowClassName={() => 'editable-row'}
-          bordered
-          rowKey="name"
-          dataSource={filteredData}
-          columns={columns}
-          loading={loading}
-          pagination={false}
-          style={{
-            marginTop: "20px",
-          }}
-        />
+          </div>
+          <div className="displayUsers">
+            {
+              Facility.length ?
+                Facility.map((i) => {
+                  return (
+                    <form>
+                      <div className="DisplayCard">
+                        <div>
+                          <img src="/src/assests/admin.png" width="200px" height="200px" style={{ margin: "25px" }}></img>
+
+                        </div>
+                        <div style={{ width: "100%", marginTop: "5px" }}>
+                          <label className="StaffLabel">name</label>
+                          <span className="StaffValue">{i.OwnerName}</span>
+                          <br></br>
+                          <label className="StaffLabel">role</label>
+                          <select defaultValue={i.Role} name="Role" id="StaffRole">
+                            <option value={i.Role}>
+                              {i.Role}
+                            </option>
+                            {
+                              roles.map((item) => {
+
+                                return (
+                                  item !== i.Role ?
+                                    <option value={item}>{item}</option>
+                                    :
+                                    <></>
+                                );
+
+                              })
+                            }
+                          </select>
+                          <br></br>
+                          <label className="StaffLabel">flat Number</label>
+                          <span className="StaffValue" id="flatno">{i.FlatNo}</span>
+                          <br></br>
+                          <label className="StaffLabel">mobile Number</label>
+                          <span className="StaffValue">{i.Mobile}</span>
+                          <br></br>
+                          <label className="StaffLabel">email</label>
+                          <span className="StaffValue">{i.Email}</span>
+                          <br></br>
+
+                          <div className="staffButton">
+                            <Popconfirm
+                              title="Click ok to Edit User Details"
+                              onConfirm={() => HandleEdit(i)}>
+                              <button className="btn btn-primary editButton" type="submit" style={{ width: "45%" }}>
+                                <img src="/src/assests/Edit.png" height="20px" width="20px"></img>
+                                <span style={{ marginLeft: "10px" }}>Edit Staff</span></button>
+                            </Popconfirm>
+                            <Popconfirm
+                              title="Click ok to Confirm Deletion of user"
+                              onConfirm={() => HandleDelete(i)}>
+                              <button className="btn btn-danger DeleteButton" style={{ width: "45%", marginLeft: "10px" }}>
+                                <img src="/src/assests/Delete.png" height="20px" width="20px"></img>
+                                <span style={{ marginLeft: "10px" }}>Delete Staff</span> </button>
+                            </Popconfirm>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  );
+                }
+                )
+
+                :
+                <p>No Facility Managers to Display !</p>
+            }
+          </div>
+        </div>
+
+        <div>
+          <div className="StaffTitleDiv">
+            <div className="sideLines" style={{ width: "37%" }} ></div>
+            <p id="userDashboardTitle" style={{ marginLeft: "2px", marginright: "2px", color: "rgb(148, 133, 48)" }}>FINANCE &amp; ACCOUNT</p>
+            <div className="sideLines" style={{ width: "37%" }}></div>
+
+          </div>
+          <div className="displayUsers">
+            {
+              Account.length ?
+                Account.map((i) => {
+                  return (
+                    <form>
+                      <div className="DisplayCard">
+                        <div>
+                          <img src="/src/assests/admin.png" width="200px" height="200px" style={{ margin: "25px" }}></img>
+
+                        </div>
+                        <div style={{ width: "100%", marginTop: "5px" }}>
+                          <label className="StaffLabel">name</label>
+                          <span className="StaffValue">{i.OwnerName}</span>
+                          <br></br>
+                          <label className="StaffLabel">role</label>
+                          <select defaultValue={i.Role} name="Role" id="StaffRole">
+                            <option value={i.Role}>
+                              {i.Role}
+                            </option>
+                            {
+                              roles.map((item) => {
+
+                                return (
+                                  item !== i.Role ?
+                                    <option value={item}>{item}</option>
+                                    :
+                                    <></>
+                                );
+
+                              })
+                            }
+                          </select>
+                          <br></br>
+                          <label className="StaffLabel">flat Number</label>
+                          <span className="StaffValue" id="flatno">{i.FlatNo}</span>
+                          <br></br>
+                          <label className="StaffLabel">mobile Number</label>
+                          <span className="StaffValue">{i.Mobile}</span>
+                          <br></br>
+                          <label className="StaffLabel">email</label>
+                          <span className="StaffValue">{i.Email}</span>
+                          <br></br>
+
+                          <div className="staffButton">
+                            <Popconfirm
+                              title="Click ok to Edit User Details"
+                              onConfirm={() => HandleEdit(i)}>
+                              <button className="btn btn-primary editButton" type="submit" style={{ width: "45%" }}>
+                                <img src="/src/assests/Edit.png" height="20px" width="20px"></img>
+                                <span style={{ marginLeft: "10px" }}>Edit Staff</span></button>
+                            </Popconfirm>
+                            <Popconfirm
+                              title="Click ok to Confirm Deletion of user"
+                              onConfirm={() => HandleDelete(i)}>
+                              <button className="btn btn-danger DeleteButton" style={{ width: "45%", marginLeft: "10px" }}>
+                                <img src="/src/assests/Delete.png" height="20px" width="20px"></img>
+                                <span style={{ marginLeft: "10px" }}>Delete Staff</span> </button>
+                            </Popconfirm>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  );
+                }
+                )
+
+                :
+                <p>No Account Managers to Display !</p>
+            }
+          </div>
+        </div>
+
+        <div>
+          <div className="StaffTitleDiv">
+            <div className="sideLines" style={{ width: "43%" }} ></div>
+            <p id="userDashboardTitle" style={{ marginLeft: "2px", marginright: "2px", color: "rgb(148, 133, 48)" }}>IT SUPPORT</p>
+            <div className="sideLines" style={{ width: "43%" }}></div>
+
+          </div>
+          <div className="displayUsers">
+            {
+              Support.length ?
+                Support.map((i) => {
+                  return (
+                    <form>
+                      <div className="DisplayCard">
+                        <div>
+                          <img src="/src/assests/admin.png" width="200px" height="200px" style={{ margin: "25px" }}></img>
+
+                        </div>
+                        <div style={{ width: "100%", marginTop: "5px" }}>
+                          <label className="StaffLabel">name</label>
+                          <span className="StaffValue">{i.OwnerName}</span>
+                          <br></br>
+                          <label className="StaffLabel">role</label>
+                          <select defaultValue={i.Role} name="Role" id="StaffRole">
+                            <option value={i.Role}>
+                              {i.Role}
+                            </option>
+                            {
+                              roles.map((item) => {
+
+                                return (
+                                  item !== i.Role ?
+                                    <option value={item}>{item}</option>
+                                    :
+                                    <></>
+                                );
+
+                              })
+                            }
+                          </select>
+                          <br></br>
+                          <label className="StaffLabel">flat Number</label>
+                          <span className="StaffValue" id="flatno">{i.FlatNo}</span>
+                          <br></br>
+                          <label className="StaffLabel">mobile Number</label>
+                          <span className="StaffValue">{i.Mobile}</span>
+                          <br></br>
+                          <label className="StaffLabel">email</label>
+                          <span className="StaffValue">{i.Email}</span>
+                          <br></br>
+
+                          <div className="staffButton">
+                            <Popconfirm
+                              title="Click ok to Edit User Details"
+                              onConfirm={() => HandleEdit(i)}>
+                              <button className="btn btn-primary editButton" type="submit" style={{ width: "45%" }}>
+                                <img src="/src/assests/Edit.png" height="20px" width="20px"></img>
+                                <span style={{ marginLeft: "10px" }}>Edit Staff</span></button>
+                            </Popconfirm>
+                            <Popconfirm
+                              title="Click ok to Confirm Deletion of user"
+                              onConfirm={() => HandleDelete(i)}>
+                              <button className="btn btn-danger DeleteButton" style={{ width: "45%", marginLeft: "10px" }}>
+                                <img src="/src/assests/Delete.png" height="20px" width="20px"></img>
+                                <span style={{ marginLeft: "10px" }}>Delete Staff</span> </button>
+                            </Popconfirm>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+
+                  );
+                }
+                )
+
+                :
+                <p>No IT support users to Display !</p>
+            }
+          </div>
+        </div>
       </div>
-      <div style={{ height: "100px", color: "white" }}></div>
+      <div style={{ height: "100px" }}>
+
+      </div>
+
     </>
-  )
+  );
 }
 
 export default StaffManagement;

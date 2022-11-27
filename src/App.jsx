@@ -32,7 +32,7 @@ import StaffManagement from './pages/StaffManagement/StaffManagement';
 
 export default function App() {
 
-    const { isAuthenticated, setIsAuthenticated } = useGlobalContext();
+    //const { isAuthenticated, setIsAuthenticated } = useGlobalContext();
     const {User, setUser} = useGlobalContext();
     
     return (

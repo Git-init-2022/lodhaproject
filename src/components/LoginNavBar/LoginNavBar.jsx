@@ -10,7 +10,7 @@ import {useGlobalContext} from '/src/context/StateContext'
 
 function LoginNavBar() {
     const [Menu, setMenu] = useState(false);
-    const { setIsAuthenticated , setUser, setLoading, isAuthenticated }= useGlobalContext();
+    const { setIsAuthenticated , setUser, setLoading, isAuthenticated, User }= useGlobalContext();
 
      const changes = () => {
         localStorage.setItem("isAuthenticated",false);
@@ -37,7 +37,7 @@ function LoginNavBar() {
                             <Nav.Link id="Menu" href='/UserDashboard'>Dashboard</Nav.Link>
                             <NavDropdown
                                 id="LoginDropdown"
-                                title="Account"
+                                title={JSON.parse(User).OwnerName}
                                 menuVariant="dark"
                             >
                                 <div className="ProfileDiv" style={{display:"flex"}}>
