@@ -112,7 +112,6 @@ const LoginSignUp = () => {
       setIsMobileEmpty(true);
       setInvalidCredentials(false);
       navigate('/login');
-
     }
   }
 

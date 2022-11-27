@@ -8,34 +8,34 @@ import {useGlobalContext} from "/src/context/StateContext";
 function Profile() {
     
     const { User, setUser } = useGlobalContext();
-    useEffect(()=>{
-        const fetchUsers = async() => {
-            if(User !== null){
-                console.log(User);
-            console.log("Flat Number: ",JSON.parse(User).FlatNo);
-          const { data } = await axios.get("http://localhost:4000/api/v1/singleUser",{params:{FlatNo: JSON.parse(User).FlatNo}});
-          const user = data.user1;
-          const user1 = {
-            OwnerName: user[0].OwnerName,
-            RegisteredName: user[0].RegisteredName,
-            FlatNo: user[0].FlatNo,
-            Block: user[0].Block,
-            ParkingSlot: user[0].ParkingSlot,
-            Mobile: user[0].Mobile,
-            Dues: user[0].Dues,
-            Email: user[0].Email,
-            Role: user[0].Role
-          }
-          setUser(JSON.stringify(user1));
-          localStorage.setItem("User", User);
-          console.log("data: ", user1);
-          console.log("User :", User);
-        }
-    }
-      if(User!==null){
-        fetchUsers();
-      }
-    },[])
+    // useEffect(()=>{
+    //     const fetchUsers = async() => {
+    //         if(User !== null){
+    //             console.log(User);
+    //         console.log("Flat Number: ",JSON.parse(User).FlatNo);
+    //       const { data } = await axios.get("http://localhost:4000/api/v1/singleUser",{params:{FlatNo: JSON.parse(User).FlatNo}});
+    //       const user = data.user1;
+    //       const user1 = {
+    //         OwnerName: user[0].OwnerName,
+    //         RegisteredName: user[0].RegisteredName,
+    //         FlatNo: user[0].FlatNo,
+    //         Block: user[0].Block,
+    //         ParkingSlot: user[0].ParkingSlot,
+    //         Mobile: user[0].Mobile,
+    //         Dues: user[0].Dues,
+    //         Email: user[0].Email,
+    //         Role: user[0].Role
+    //       }
+    //       setUser(JSON.stringify(user1));
+    //       localStorage.setItem("User", User);
+    //       console.log("data: ", user1);
+    //       console.log("User :", User);
+    //     }
+    // }
+    //   if(User!==null){
+    //     fetchUsers();
+    //   }
+    // },[])
     const update = async(e)=>{
         const FlatNo = e.target.FlatNo.value;
         const ParkingSlot = e.target.ParkingSlot.value;

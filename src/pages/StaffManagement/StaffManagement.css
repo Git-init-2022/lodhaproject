@@ -1,58 +1,104 @@
-.editable-cell {
-    position: relative;
-  }
-  
-  .editable-cell-value-wrap {
-    padding: 5px 12px;
-    cursor: pointer;
-  }
-  
-  .editable-row:hover .editable-cell-value-wrap {
-    padding: 4px 11px;
-    border: 1px solid #d9d9d9;
-    border-radius: 2px;
-  }
-  
-  [data-theme='dark'] .editable-row:hover .editable-cell-value-wrap {
-    border: 1px solid #434343;
-  }
-
-  .Note{
-    background-color: whitesmoke;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    border-radius: 5px;
-    margin-top: 20px;
-    border: 1px solid black;
-    width: 90%;
-  }
-
-  .NoteTitle{
-    font-weight: bold;
-    font-size: 20px;
-    letter-spacing: 1px;
-    margin-left: 20px;
-    margin-top: 20px;
-    text-decoration-line: underline;
-    text-decoration-color: gold;
-    text-decoration-thickness: 2px;
-    text-underline-offset: 10px;
-    
-  }
-
-  #title{
-    font-size: 25px;
-    font-weight: bolder;
-    letter-spacing: 2px;
-    text-align: center;
-    margin-bottom: 50px;
+.sideLines {
+  width: 47%;
+  background-color: rgb(121, 120, 117);
+  color: rgb(148, 133, 48);
+  height: 2px;
+  overflow: hidden;
+  margin-top: 24px;
 }
 
-#title::first-letter{
-    font-weight: bolder;
-    font-size: 33px;
+.StaffTitleDiv{
+  display: flex;
+  height: 50px;
+  justify-content: center;
+  margin-top:100px;
+   width: 100%;
+            
 }
 
-.NoteList{
-    font-size: 16px;
-    letter-spacing: 0.5px;
+.displayUsers{
+  display: grid; 
+  grid-template-columns: auto auto;
+}
+
+.DisplayCard{
+  display: flex;
+ width: 80%;
+  border-radius:10px;
+  background-color:whitesmoke;
+  margin-top:50px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  margin-left: 20px;
+  /* margin-left: 10%; */
+  border: 1px solid white;
+}
+
+.DisplayCard:hover{
+  border: 1px solid black;
+}
+
+.StaffLabel{
+  font-size: 18px;
+  text-transform: capitalize;
+  /* font-weight: bold; */
+  text-decoration-line: underline;
+  text-underline-offset: 10px;
+  text-decoration-color: black;
+  text-decoration-thickness: 2px;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  color:rgb(94, 82, 16);
+  margin-top: 10px;
+}
+
+.StaffValue{
+  margin-left: 20px;
+  font-size: 15px;
+  color:black;
+}
+
+.staffButton{
+  margin-top: 50px;
+  margin-bottom: 30px;
+  
+}
+
+.DeleteButton{
+  color: black !important;
+  background-color: whitesmoke !important;
+  border: 3px solid black;
+}
+
+.editButton{
+  color: black !important;
+  background-color: whitesmoke !important;
+  border: 3px solid black;
+
+}
+
+
+.editButton:hover{
+  color: white !important;
+  background-color: rgb(144, 133, 83) !important;
+  border: 2px solid black !important;
+  transform: scale(1.05);
+  
+}
+
+.DeleteButton:hover{
+  color: white !important;
+  background-color: rgb(203, 59, 59) !important;
+  border: 2px solid black !important;
+  transform: scale(1.05);
+  transition: 0.5s;
+}
+
+#StaffRole{
+  height: 50px;
+  margin-left: 30px;
+  margin-top: 10px;
+  padding: 5px;
+  width: 50%;
+  background-color: whitesmoke;
+  border: 2px solid black;
 }
