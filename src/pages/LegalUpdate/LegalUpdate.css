@@ -29,16 +29,15 @@
     background-color:ghostwhite;
   }
   
-  #title5{
-    margin-top: 100px !important;
+#title2{
     font-size: 25px;
     font-weight: bolder;
-    margin-bottom: 0;
     letter-spacing: 2px;
-    margin-left: 50px !important;
+    text-align: center;
+    margin-bottom: 25px;
 }
 
-#title5:first-letter{
-    font-weight: normal;
+#title2:first-letter{
+    font-weight: bolder;
     font-size: 33px;
 }

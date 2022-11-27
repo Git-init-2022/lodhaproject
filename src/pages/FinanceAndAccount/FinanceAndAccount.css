@@ -21,7 +21,7 @@
     background-color: whitesmoke;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 5px;
-    margin-top: 20px;
+    margin-top: 50px;
     border: 1px solid black;
     width: 90%;
   }
@@ -36,19 +36,18 @@
     text-decoration-color: gold;
     text-decoration-thickness: 2px;
     text-underline-offset: 10px;
-    
   }
 
-  #title{
-   
+#title{
     font-size: 25px;
     font-weight: bolder;
-    margin: 0px;
     letter-spacing: 2px;
+    text-align: center;
+    margin-bottom: 50px;
 }
 
 #title::first-letter{
-    font-weight: normal;
+    font-weight: bolder;
     font-size: 33px;
 }
 

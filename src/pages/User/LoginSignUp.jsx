@@ -112,7 +112,6 @@ const LoginSignUp = () => {
       setIsMobileEmpty(true);
       setInvalidCredentials(false);
       navigate('/login');
-
     }
   }
 
@@ -288,11 +287,6 @@ const LoginSignUp = () => {
     }
   }
 
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     navigate("/UserProfile");
-  //   }
-  // }, []);
   return (
     <Fragment>
       {loading ? (

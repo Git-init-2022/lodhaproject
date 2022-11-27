@@ -28,15 +28,14 @@
   }
   
 #title4{
-    margin-top: 100px !important;
+    margin-top: 100px;
     font-size: 25px;
     font-weight: bolder;
     margin: 0px;
     letter-spacing: 2px;
-    margin-left: 50px !important;
 }
 
 #title4:first-letter{
-    font-weight: normal;
+    font-weight: bolder;
     font-size: 33px;
 }

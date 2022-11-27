@@ -45,7 +45,7 @@ function Dropdown() {
               <a href='/ProcessDocs'>Process & Policy Documents </a>
               <a href='/Communication'>Key Communication</a>
               <a href='/PreviousYearsData'>Previous Years Data</a>
-              <a href='/KeyContracts'>Key Contracts</a>
+              <a href='/KeyContacts'>Key Contacts</a>
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="2">
@@ -62,14 +62,15 @@ function Dropdown() {
           <Accordion.Item eventKey="4">
             <Accordion.Header ><p className='DropDownHeader'>Key Links</p></Accordion.Header>
             <Accordion.Body className='ExpandDropDown'>
-              <a href="/Meeting">Set-Up Zoom Meeting</a>
-              <a href='/Notifications'>Upcoming Zoom Meetings</a>
+              { isAdmin? <a href="/Meeting">Set-Up a Meeting</a> : <></>}
+              { isAdmin? <a href="/CreateForm">Create Survey Forms</a> : <></>}
+              { isAdmin? <a href='/Cultural'>Cultural Activities</a> : <></>}
+              {/* <a href='/Notifications'>Upcoming Zoom Meetings</a> */}
               <a href='/MyGate'>My Gate</a>
-              <a href="/CreateForm">Create Forms</a>
-              <a href='/Forms'>Google Forms</a>
-              <a href='/Vendors'>Vendors Directory & Negotiated Rates</a>
+              {/* <a href='/Forms'>Google Forms</a> */}
               <a href='/Emergency'>Emergency Services</a>
-              <a href='/Translation'>Google Translation</a>
+              <a href='/Vendors'>Vendors Directory & Negotiated Rates</a>
+              {/* <a href='/Translation'>Google Translation</a> */}
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>

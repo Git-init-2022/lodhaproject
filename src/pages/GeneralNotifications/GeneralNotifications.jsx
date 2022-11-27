@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useGlobalContext } from '/src/context/StateContext';
 
 
 function GeneralNotifications() {
@@ -11,10 +12,14 @@ function GeneralNotifications() {
     const [generalNotifications, setGeneralNotifications] = useState([]);
     const [titleVar, setTitleVar] = useState('');
     const [DescVar, setDescVar] = useState('');
+    const { User } = useGlobalContext();
+    const [isAdmin, setisAdmin] = useState(JSON.parse(User).Role === 'admin');
     const fetchNotifications = async () => {
         const { data } = await axios.get("http://localhost:4000/api/v1/AllNotifications");
         setGeneralNotifications(data.notifications);
     }
+
+    
     useEffect(() => {
         fetchNotifications();
         console.log(generalNotifications);
@@ -33,6 +38,7 @@ function GeneralNotifications() {
         <>
             <div className="NotifyItems" style={{ marginTop: "50px" }}>
                 <p className='NotifyHeader' >GENERAL NOTIFICATIONS</p>
+                <p style={{ textAlign: "center", fontSize: "18px", letterSpacing: "1px", }}>Note - To View details click on MORE INFO</p>
                 <hr style={{ height: "1", backgroundColor: "black", width: "94%", marginLeft: "3%" }}></hr>
                 {
 
@@ -47,9 +53,10 @@ function GeneralNotifications() {
                                                 <p>{item.Title}</p>
                                             </div>
                                         </span>
-                                        <span className="NotifyView">
+                                        <span style={{ padding: "3px", borderRadius: "5px", marginTop: "20px", paddingLeft: "10%"}}>MORE INFO</span>
+                                        {/* <span className="NotifyView">
                                             <button className="Viewbutton" style={{ padding: "3px", borderRadius: "5px", marginTop:"20px" }}>More &rarr;</button>
-                                        </span>
+                                        </span> */}
                                     </div>
                                 </Button>
                                 <hr style={{ width: "94%", marginLeft: "3%" }}></hr>

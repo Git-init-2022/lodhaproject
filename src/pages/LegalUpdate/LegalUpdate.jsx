@@ -36,10 +36,11 @@ function LegalUpdate() {
         <>
             <LoginNavBar />
             <div>
+                <div style={{ display: "flex", justifyContent:"center", }}>
+                    <img src="/src/assests/legal.png" style={{ height: "50px", width: "50px", marginTop : "100px", marginBottom: "25px", marginRight: "10px"}}></img>
+                    <p id="title2">LEGAL UPDATE</p>
+                </div>
 
-                <p id="title2">LEGAL UPDATE</p>
-
-                <div style={{ marginLeft: "55px", height: "3px", width: "200px", backgroundColor: "gold" }}></div>
                 {
                     DuplicateLegalUpdate > 0 ? DuplicateLegalUpdate===2? <Alert message="Error" type="error" description="Legal Update Details Already Exists! Please try again" showIcon closable style={{ marginBottom: "20px",marginTop:"20px", width:"60%",letterSpacing:"2px", boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px", marginLeft:"20%" }} />
                     :

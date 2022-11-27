@@ -124,7 +124,7 @@ function AdminPosts({ props, selectedOption }) {
                                 </div>
 
                                 <div>
-                                    {props.Status ? <div><img src="/src/assests/greenCircle.png" height="20px" width="20px"></img><span style={{ color: "green", fontWeight: "bold", fontSize: "16px", letterSpacing: "2px" }}>Done</span></div> : <select name="Status" id='Status' className='statusOptions'>
+                                    {props.Status ? <div><img src="/src/assests/done.png" height="20px" width="20px"></img><span style={{ color: "green", fontWeight: "bold", fontSize: "16px", letterSpacing: "2px" }}>Done</span></div> : <select name="Status" id='Status' className='statusOptions'>
                                         <option value="0">
                                             Pending
                                         </option>
