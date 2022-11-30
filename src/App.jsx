@@ -29,27 +29,28 @@ import Seperate from './pages/seperate/seperate';
 import UpdatePassword from './pages/UpdatePassword/UpdatePassword';
 import axios from "axios";
 import StaffManagement from './pages/StaffManagement/StaffManagement';
+import UserNotification from './pages/UserNotification/UserNotification';
 
 export default function App() {
 
     //const { isAuthenticated, setIsAuthenticated } = useGlobalContext();
-    const {User, setUser} = useGlobalContext();
-    
+    const { User, setUser } = useGlobalContext();
+
     return (
         <>
             <Router>
                 <Routes>
-                    <Route path='/' element={JSON.parse(localStorage.getItem("isAuthenticated")) ? <LoggedHome/>: <Home />} />
+                    <Route path='/' element={JSON.parse(localStorage.getItem("isAuthenticated")) ? <LoggedHome /> : <Home />} />
                     <Route path='/login' element={<LoginSignUp />} />
                     <Route path='/forgotpassword' element={<ForgotPassword />} />
-                    <Route  path='/updatepassword/:token' element={<UpdatePassword />} />
+                    <Route path='/updatepassword/:token' element={<UpdatePassword />} />
                     <Route path='/Seperate' element={<Seperate />} />
                     <Route path="/Home"
                         element={<PrivateRoute redirectTo="/login" component={<LoggedHome />}
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} role={true} />} />
                     <Route path="/StaffManagement"
                         element={<PrivateRoute redirectTo="/login" component={<StaffManagement />}
-                            isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} role={true} />} />
+                            isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} role={JSON.parse(localStorage.getItem("User")) !== null && JSON.parse(localStorage.getItem("User")).Role === "admin"} />} />
                     <Route path="/UserProfile"
                         element={<PrivateRoute redirectTo="/login" component={<Profile />}
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} role={true} />} />
@@ -79,10 +80,10 @@ export default function App() {
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} role={JSON.parse(localStorage.getItem("User")) !== null && JSON.parse(localStorage.getItem("User")).Role === "admin"} />} />
                     <Route path="/Finance"
                         element={<PrivateRoute redirectTo="/login" component={<FinanceAndAccount />}
-                            isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} role={true} />} />
+                            isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} role={JSON.parse(localStorage.getItem("User")) !== null && (JSON.parse(localStorage.getItem("User")).Role === "admin" || JSON.parse(localStorage.getItem("User")).Role === "am")} />} />
                     <Route path="/FM"
                         element={<PrivateRoute redirectTo="/login" component={<FacilityManagement />}
-                            isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} role={true} />} />
+                            isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} role={JSON.parse(localStorage.getItem("User")) !== null && (JSON.parse(localStorage.getItem("User")).Role === "admin" || JSON.parse(localStorage.getItem("User")).Role === "fm")} />} />
                     <Route path="/HelpDesk"
                         element={<PrivateRoute redirectTo="/login" component={<HelpDesk />}
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} role={true} />} />
@@ -98,9 +99,12 @@ export default function App() {
                     <Route path="/GeneralNotifications"
                         element={<PrivateRoute redirectTo="/login" component={<Dashboard />}
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} role={true} />} />
+                    <Route path="/userNotifications"
+                        element={<PrivateRoute redirectTo="/login" component={<UserNotification />}
+                            isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} role={true} />} />
                     <Route path="/CreateForm"
                         element={<PrivateRoute redirectTo="/login" component={<CreateForm />}
-                            isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} role={true} />} />
+                            isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} role={JSON.parse(localStorage.getItem("User")) !== null && JSON.parse(localStorage.getItem("User")).Role === "admin"} />} />
                 </Routes>
             </Router>
         </>

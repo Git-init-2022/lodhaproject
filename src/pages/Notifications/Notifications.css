@@ -17,8 +17,7 @@
 .MeetingItems {
   position: absolute;
   margin: auto;
-  right: 0;
-  left: 0;
+  margin-left: 20px;
 
   width: 60%;
   height: auto;
@@ -54,10 +53,10 @@
 }
 
 .NotifyBar:hover {
-    color: white !important;
-    background-color: #3f3f3e !important;
-    transform: scale(1.05);
-    border: 1px solid #3f3f3e !important;
+  color: white !important;
+  background-color: #3f3f3e !important;
+  transform: scale(1.05);
+  border: 1px solid #3f3f3e !important;
 }
 
 .ModalNotify {
@@ -108,15 +107,15 @@
   border: 1px solid black !important;
 }
 
-#linkOfMeeting, 
+#linkOfMeeting,
 #hostOfMeeting,
-#linkOfMeeting{
+#linkOfMeeting {
   padding: 10px;
   border-radius: 5px;
   margin-left: 10px;
 }
 
-.linkDiv{
+.linkDiv {
   border: 1px solid black;
   padding: 10px;
   border-radius: 5px;
@@ -124,7 +123,7 @@
   margin-top: 10px;
 }
 
-#host{
+#host {
   border: 1px solid black;
   padding: 10px;
   border-radius: 5px;
@@ -132,6 +131,18 @@
   margin-top: 10px;
 }
 
-.inputEditable{
-  width: 90% ;
+.inputEditable {
+  width: 90%;
+}
+
+.TabSwitch {
+  letter-spacing: 1px;
+  font-size: 18px;
+}
+
+
+
+.Active {
+  border-bottom: 5px solid #675a0e;
+  background-color: rgb(220, 219, 216);
 }

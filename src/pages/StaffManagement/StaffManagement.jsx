@@ -9,6 +9,10 @@ const { Search } = Input;
 import { useGlobalContext } from '/src/context/StateContext';
 import Card from "antd/lib/card/Card"
 import Meta from "antd/lib/card/Meta"
+import Modal from 'react-bootstrap/Modal';
+import { SemanticClassificationFormat } from "typescript"
+
+
 
 const StaffManagement = () => {
   const [Admins, setAdmins] = useState([]);
@@ -16,8 +20,12 @@ const StaffManagement = () => {
   const [Account, setAccount] = useState([]);
   const [Support, setSupport] = useState([]);
   const [users, setUsers] = useState([]);
+  const [modalShow, setModalShow] = useState(false);
+  const [role, setRole] = useState('');
+  const [flatno, setFlatno] = useState('');
   const { User } = useGlobalContext();
-  const roles = ['admin', 'user', 'am', 'fm'];
+  const [visible, setVisible] = useState(false);
+  const roles = ['admin', 'user', 'am', 'fm', 'itsupport'];
   const fetchUsers = async () => {
     const { data } = await axios.get("http://localhost:4000/api/v1/users");
     setUsers(data.users);
@@ -58,15 +66,35 @@ const StaffManagement = () => {
     const { data } = await axios.get("http://localhost:4000/api/v1/userdelete", { params: { FlatNo: FlatNo } });
     refreshPage();
   }
-
+  const createNotification = async (user, subject, message) => {
+    const { data } = await axios.post("http://localhost:4000/api/v1/postNotification", { FlatNo: user.FlatNo, NotificationTitle: subject, NotificationDesc:message});
+  }
   const Edit = async (user) => {
 
     const { data } = await axios.get("http://localhost:4000/api/v1/userupdate", { params: { user: user } });
+    createNotification(user, data.subject, data.message);
     refreshPage();
   }
 
+  const scrollUp = () => {
+    var doc = document.documentElement;
+    var top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
+
+    if (top > 0) {
+      window.scrollTo(0, 0);
+
+    }
+  }
+
+  document.addEventListener("scroll", () => {
+    if (window.pageYOffset > 500)
+      setVisible(true);
+    else setVisible(false);
+  })
+
   const HandleEdit = (item) => {
-    const Role = document.getElementById("StaffRole").value;
+    const Role = document.getElementById(item.FlatNo).value;
+    // console.log(Role);
     const FinalValues = {
       FlatNo: item.FlatNo,
       Email: item.Email,
@@ -81,6 +109,44 @@ const StaffManagement = () => {
     Edit(FinalValues);
   }
 
+  const fetchUser = (FlatNo) => {
+    for (let user of users) {
+      if (user.FlatNo === FlatNo) {
+        return user;
+      }
+    }
+    return null;
+  }
+
+  const getStaff = (e) => {
+    const FlatNo = document.getElementById("FlatNo").value;
+    const user = fetchUser(FlatNo);
+    if (user !== null) {
+      const form = document.getElementsByClassName("submitForm").item(0).classList.remove("hide");
+      const Name = document.getElementById("OwnerName");
+      Name.value = user.OwnerName;
+      const RegisteredName = document.getElementById("RegisteredName");
+      RegisteredName.value = user.RegisteredName;
+      const Mobile = document.getElementById("Mobile");
+      Mobile.value = user.Mobile;
+
+      const Email = document.getElementById("Email");
+      Email.value = user.Email;
+      setRole(user.Role);
+      setFlatno(user.FlatNo);
+    }
+  }
+
+  const addStaff = () => {
+    const user = fetchUser(flatno);
+    const Role = document.getElementById("UserRole").value;
+
+    if (user !== null) {
+      user.Role = Role;
+      Edit(user);
+    }
+  }
+
   const HandleDelete = (item) => {
     Delete(item.FlatNo);
   }
@@ -92,6 +158,82 @@ const StaffManagement = () => {
           <img src="/src/assests/staff.png" style={{ height: "55px", width: "50px", marginBottom: "0px", }}></img>
           <p id="userDashboardTitle">STAFF MANAGEMENT</p>
         </div>
+        <div className="AddStaffDiv">
+          <span className="AddStaffNote">Want to add Staff?</span>
+          <button className="btn btn-primary addStaff" onClick={() => setModalShow(true)} style={{ padding: "10px", marginLeft: "15px" }}>Click Here</button>
+        </div>
+
+        <Modal
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+          size="lg"
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+        >
+          <Modal.Header closeButton>
+          </Modal.Header>
+          <Modal.Body>
+
+            <p style={{ fontSize: "18px" }}>Get User Details</p>
+            <div style={{ display: "flex" }}>
+              <input placeholder="Enter Flat Number" name="FlatNo" id="FlatNo" className="staffInput" required></input>
+              <button className="btn btn-primary" style={{ marginLeft: "20px" }} onClick={() => getStaff()}>Submit</button>
+            </div>
+
+            <form className="submitForm hide" >
+              <span style={{ fontSize: "18px" }}>Name</span>
+              <br></br>
+              <input id="OwnerName" className="staffInput" disabled></input><br></br>
+              <span style={{ fontSize: "18px" }}>Property Registered Name</span>
+              <br></br>
+              <input id="RegisteredName" className="staffInput" disabled></input>
+              <br></br>
+              <span style={{ fontSize: "18px" }}>Email</span>
+              <br></br>
+              <input id="Email" className="staffInput" disabled></input>
+              <br></br>
+              <span style={{ fontSize: "18px" }}>Mobile</span>
+              <br></br>
+              <input id="Mobile" className="staffInput" disabled></input>
+              <br></br>
+              <span style={{ fontSize: "18px" }}>Role</span>
+              <br></br>
+              <select defaultValue={role} name="Role" id="UserRole" className="staffInput">
+                <option value={role}>
+                  {role}
+                </option>
+                {
+                  roles.map((item) => {
+
+                    return (
+                      item !== role ?
+                        <option value={item}>{item}</option>
+                        :
+                        <></>
+                    );
+
+                  })
+                }
+              </select>
+
+              <div >
+                <div style={{ textAlign: "left" }}>
+                  <ul style={{ textAlign: "left" }}>
+                    <li>Enter the Flat number to get the details of new staff member</li>
+                    <li>To Add Staff click on "Add Staff" button</li>
+                  </ul>
+                </div>
+                <Popconfirm title="Click ok to Add new staff member" onConfirm={() => addStaff()}>
+                  <button className="btn btn-primary" >Add Staff</button>
+                </Popconfirm>
+              </div>
+            </form>
+
+          </Modal.Body>
+          <Modal.Footer>
+
+          </Modal.Footer>
+        </Modal>
         <div>
           <div className="StaffTitleDiv">
             <div className="sideLines" ></div>
@@ -114,7 +256,7 @@ const StaffManagement = () => {
                           <span className="StaffValue">{i.OwnerName}</span>
                           <br></br>
                           <label className="StaffLabel">role</label>
-                          <select defaultValue={i.Role} name="Role" id="StaffRole">
+                          <select defaultValue={i.Role} name="Role" className="StaffRole" id={i.FlatNo}>
                             <option value={i.Role}>
                               {i.Role}
                             </option>
@@ -146,7 +288,7 @@ const StaffManagement = () => {
                             <Popconfirm
                               title="Click ok to Edit User Details"
                               onConfirm={() => HandleEdit(i)}>
-                              <button className="btn btn-primary editButton" type="submit" style={{ width: "45%" }}>
+                              <button className="btn btn-primary editButton" style={{ width: "45%" }}>
                                 <img src="/src/assests/Edit.png" height="20px" width="20px"></img>
                                 <span style={{ marginLeft: "10px" }}>Edit Staff</span></button>
                             </Popconfirm>
@@ -194,7 +336,7 @@ const StaffManagement = () => {
                           <span className="StaffValue">{i.OwnerName}</span>
                           <br></br>
                           <label className="StaffLabel">role</label>
-                          <select defaultValue={i.Role} name="Role" id="StaffRole">
+                          <select defaultValue={i.Role} name="Role" className="StaffRole" id={i.FlatNo}>
                             <option value={i.Role}>
                               {i.Role}
                             </option>
@@ -253,9 +395,9 @@ const StaffManagement = () => {
 
         <div>
           <div className="StaffTitleDiv">
-            <div className="sideLines" style={{ width: "37%" }} ></div>
-            <p id="userDashboardTitle" style={{ marginLeft: "2px", marginright: "2px", color: "rgb(148, 133, 48)" }}>FINANCE &amp; ACCOUNT</p>
-            <div className="sideLines" style={{ width: "37%" }}></div>
+            <div className="sideLines" style={{ width: "35%" }} ></div>
+            <p id="userDashboardTitle" style={{ marginLeft: "2px", marginright: "2px", color: "rgb(148, 133, 48)", minWidth: "401px !important" }}>FINANCE &amp; ACCOUNT</p>
+            <div className="sideLines" style={{ width: "35%" }}></div>
 
           </div>
           <div className="displayUsers">
@@ -274,7 +416,7 @@ const StaffManagement = () => {
                           <span className="StaffValue">{i.OwnerName}</span>
                           <br></br>
                           <label className="StaffLabel">role</label>
-                          <select defaultValue={i.Role} name="Role" id="StaffRole">
+                          <select defaultValue={i.Role} name="Role" className="StaffRole" id={i.FlatNo}>
                             <option value={i.Role}>
                               {i.Role}
                             </option>
@@ -354,7 +496,7 @@ const StaffManagement = () => {
                           <span className="StaffValue">{i.OwnerName}</span>
                           <br></br>
                           <label className="StaffLabel">role</label>
-                          <select defaultValue={i.Role} name="Role" id="StaffRole">
+                          <select defaultValue={i.Role} name="Role" className="StaffRole" id={i.FlatNo}>
                             <option value={i.Role}>
                               {i.Role}
                             </option>
@@ -413,9 +555,9 @@ const StaffManagement = () => {
         </div>
       </div>
       <div style={{ height: "100px" }}>
-
       </div>
 
+      {visible ? <a className="move-top" onClick={scrollUp}>Scroll to Top &uarr;</a> : <></>}
     </>
   );
 }

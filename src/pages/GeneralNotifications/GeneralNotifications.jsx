@@ -36,7 +36,7 @@ function GeneralNotifications() {
     }
     return (
         <>
-            <div className="NotifyItems" style={{ marginTop: "50px" }}>
+            <div className="NotifyItems">
                 <p className='NotifyHeader' >GENERAL NOTIFICATIONS</p>
                 <p style={{ textAlign: "center", fontSize: "18px", letterSpacing: "1px", }}>Note - To View details click on MORE INFO</p>
                 <hr style={{ height: "1", backgroundColor: "black", width: "94%", marginLeft: "3%" }}></hr>

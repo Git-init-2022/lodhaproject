@@ -27,8 +27,8 @@ function Complaints() {
       <LoginNavBar />
       <div className="middle" style={{ marginTop: "0px" }}>
         <p id="title3">COMPLAINTS</p>
-        <div style={{ marginLeft: "5px", height: "3px", width: "130px", backgroundColor: "gold" }}></div>
-        <div className="Note" style={{ marginTop: "50px", marginLeft:"20px" }}>
+        {/* <div style={{ marginLeft: "5px", height: "3px", width: "130px", backgroundColor: "gold" }}></div> */}
+        <div className="Note" style={{ marginTop: "10px", marginLeft:"20px" }}>
           <p className="NoteTitle">NOTE</p>
           <ul>
             <li className="NoteList">

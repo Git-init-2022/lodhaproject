@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import './Notifications.css';
 import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
 import Button from 'react-bootstrap/Button';
+import Nav from 'react-bootstrap/Nav';
 import Modal from 'react-bootstrap/Modal';
 import axios from "axios";
+import { Radio, Space, Tabs } from 'antd';
 import { useGlobalContext } from '/src/context/StateContext';
 
 
@@ -17,7 +19,7 @@ function Notifications() {
   const [DateVar, setDateVar] = useState('');
   const [TimeVar, setTimeVar] = useState('');
   const [idvalue, setidvalue] = useState('');
-
+  const [upcoming, setUpcoming] = useState(true);
   const { User } = useGlobalContext();
   const [isAdmin, setisAdmin] = useState(JSON.parse(User).Role === 'admin');
   const fetchMeetings = async () => {
@@ -48,7 +50,7 @@ function Notifications() {
     setidvalue(_id);
   }
   const getFormattedTime = (DateOfMeeting) => {
-    
+
     let timeStamp = Date.parse(DateOfMeeting);
     var date = new Date(timeStamp);
     var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -60,8 +62,8 @@ function Notifications() {
   }
 
   const getFormattedTime1 = (DateOfMeeting) => {
-    
-  
+
+
     let timeStamp = Date.parse(DateOfMeeting);
     var date = new Date(timeStamp);
 
@@ -71,8 +73,8 @@ function Notifications() {
 
     if (month < 10) month = "0" + month;
     if (day < 10) day = "0" + day;
-    var today = year + "-" + month + "-" + day ; 
-   
+    var today = year + "-" + month + "-" + day;
+
     return today;
   }
 
@@ -92,8 +94,8 @@ function Notifications() {
     DeleteMeetingFromDb(_id);
   }
 
-  const UpdateMeetingInDb = async (Link, Title, Description,Date, Time, Host, _id) => {
-    const { data } = await axios.get("http://localhost:4000/api/v1/updatemeeting", { params: { _id: _id, Title: Title, Description: Description, Link: Link, Date: Date,Time: Time, Host: Host } });
+  const UpdateMeetingInDb = async (Link, Title, Description, Date, Time, Host, _id) => {
+    const { data } = await axios.get("http://localhost:4000/api/v1/updatemeeting", { params: { _id: _id, Title: Title, Description: Description, Link: Link, Date: Date, Time: Time, Host: Host } });
     refreshPage();
   }
 
@@ -105,8 +107,25 @@ function Notifications() {
       const Description = document.getElementById('Description').innerText;
       const Time = document.getElementById('TimeofMeeting').value;
       const Date = document.getElementById('DateofMeeting').value;
-       const Host = document.getElementById('host').innerText;
-      UpdateMeetingInDb(Link, Title, Description,Date, Time,Host, _id);
+      const Host = document.getElementById('host').innerText;
+      UpdateMeetingInDb(Link, Title, Description, Date, Time, Host, _id);
+    }
+  }
+
+  const changeMenu = (e, tab) => {
+    const getFinished = document.getElementById("finished");
+    const getUpcoming = document.getElementById("upcoming");
+    if (tab === "upcoming") {
+      setUpcoming(true);
+      getFinished.classList.remove("Active");
+      getUpcoming.classList.add("Active");
+      
+
+    }
+    else {
+      setUpcoming(false);
+      getFinished.classList.add("Active");
+      getUpcoming.classList.remove("Active");
     }
   }
 
@@ -114,8 +133,23 @@ function Notifications() {
     <>
 
       <LoginNavBar />
+      {/* <div style={{display:"flex"}}> */}
+
+
+
       <div className="MeetingItems" style={{ marginTop: "50px" }}>
 
+        <div className="TabSwitch" style={{ marginBottom: "30px", width: "100%", }}>
+          <Nav style={{ display: "flex", width: "100%", }}>
+            <Nav.Link  id="upcoming" className="Active" style={{ color: "black", width: "50%", textAlign: "center" }} eventKey="/upcoming" onClick={(e) => changeMenu(e, "upcoming")}>
+              Upcoming Meetings
+            </Nav.Link>
+
+            <Nav.Link id="finished" style={{ color: "black", width: "50%", textAlign: "center" }} eventKey="/finished" onClick={(e) => changeMenu(e, "finished")}>
+              Finished Meetings
+            </Nav.Link>
+          </Nav>
+        </div>
 
         <p className='MeetingHeader' >UPCOMING MEETINGS</p>
         {
@@ -138,7 +172,7 @@ function Notifications() {
                         {getFormattedTime(item.Date)}<br></br>
                         {item.Time}
                       </span>
-                      </div>
+                    </div>
                   </Button>
 
                 </div>
@@ -149,7 +183,7 @@ function Notifications() {
         }
         {
           isAdmin ?
-         
+
             <Modal
               show={modalShow}
               onHide={handleHide}
@@ -158,7 +192,7 @@ function Notifications() {
               centered
             >
               <form
-              onSubmit={UpdateMeeting}
+                onSubmit={UpdateMeeting}
               >
                 <Modal.Header closeButton>
                   <Modal.Title id="contained-modal-title-vcenter">
@@ -180,14 +214,14 @@ function Notifications() {
                     </div>
 
                     <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textDecorationColor: "gold", textDecorationThickness: "2px", textUnderlineOffset: "5px", marginTop: "20px" }}>Link </label>
-                        <div>
-                          <a id="linkOfMeeting" href={LinkVar} target="_blank" style={{ textDecorationLine: "underline", fontSize: "16px" }} contentEditable>{LinkVar}</a>
-                        </div>
+                    <div>
+                      <a id="linkOfMeeting" href={LinkVar} target="_blank" style={{ textDecorationLine: "underline", fontSize: "16px" }} contentEditable>{LinkVar}</a>
+                    </div>
 
                     <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textUnderlineOffset: "5px", marginTop: "10px", textDecorationThickness: "2px", textDecorationColor: "gold" }}>Date </label>
-                        <div> <br></br><input name="Date" id="DateofMeeting" type="Date" defaultValue={getFormattedTime1(DateVar)} className="inputEditable" ></input><br></br></div>
+                    <div> <br></br><input name="Date" id="DateofMeeting" type="Date" defaultValue={getFormattedTime1(DateVar)} className="inputEditable" ></input><br></br></div>
                     <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textUnderlineOffset: "5px", marginTop: "10px", textDecorationThickness: "2px", textDecorationColor: "gold" }}>Time </label>
-                        <div> <br></br><input name="Time" id="TimeofMeeting" className="inputEditable" type="Time" defaultValue={TimeVar} ></input><br></br></div>
+                    <div> <br></br><input name="Time" id="TimeofMeeting" className="inputEditable" type="Time" defaultValue={TimeVar} ></input><br></br></div>
 
                   </div>
                 </Modal.Body>
@@ -212,7 +246,7 @@ function Notifications() {
               </form>
             </Modal>
             :
-           
+
             <Modal
               show={modalShow}
               onHide={handleHide}
@@ -220,42 +254,44 @@ function Notifications() {
               aria-labelledby="contained-modal-title-vcenter"
               centered
             >
-                <Modal.Header closeButton>
-                  <Modal.Title id="contained-modal-title-vcenter">
-                      <span id="titleOfForm" style={{ fontSize: "20px", letterSpacing: "1px", textDecorationLine: "underline", textUnderlineOffset: "10px", textDecorationColor: "gold !important", fontWeight: "normal" }}>
-                        {titleVar}
-                      </span>
-                  </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  <div>
-                    <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textDecorationColor: "gold", textDecorationThickness: "2px", textUnderlineOffset: "5px", marginTop: "10px" }}>Description </label>
-                        <div id="DescriptionOfForm" style={{ fontSize: "16px" }} >
-                          {DescVar}
-                        </div>
-                    <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textDecorationColor: "gold", textDecorationThickness: "2px", textUnderlineOffset: "5px", marginTop: "10px" }}>Host </label>
-                        <div id="hostOfMeeting" style={{ fontSize: "16px" }} >
-                          {HostVar}
-                        </div>
-                    <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textDecorationColor: "gold", textDecorationThickness: "2px", textUnderlineOffset: "5px", marginTop: "20px" }}>Link </label>
-                        <div>
-                          <a id="linkOfMeeting" href={LinkVar} target="_blank" style={{ textDecorationLine: "underline", fontSize: "16px" }} >Click to open Link</a>
-                        </div>
-                    <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textUnderlineOffset: "5px", marginTop: "10px", textDecorationThickness: "2px", textDecorationColor: "gold" }}>Date </label>
-                        <div id="Date" name="Date" style={{ fontSize: "16px" }} >
-                          {getFormattedTime(DateVar)}
-                        </div>
-                    <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textUnderlineOffset: "5px", marginTop: "10px", textDecorationThickness: "2px", textDecorationColor: "gold" }}>Time </label>
-
-                        <div id="time" style={{ fontSize: "16px" }} >
-                          {TimeVar}
-                        </div>
+              <Modal.Header closeButton>
+                <Modal.Title id="contained-modal-title-vcenter">
+                  <span id="titleOfForm" style={{ fontSize: "20px", letterSpacing: "1px", textDecorationLine: "underline", textUnderlineOffset: "10px", textDecorationColor: "gold !important", fontWeight: "normal" }}>
+                    {titleVar}
+                  </span>
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <div>
+                  <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textDecorationColor: "gold", textDecorationThickness: "2px", textUnderlineOffset: "5px", marginTop: "10px" }}>Description </label>
+                  <div id="DescriptionOfForm" style={{ fontSize: "16px" }} >
+                    {DescVar}
                   </div>
-                </Modal.Body>
+                  <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textDecorationColor: "gold", textDecorationThickness: "2px", textUnderlineOffset: "5px", marginTop: "10px" }}>Host </label>
+                  <div id="hostOfMeeting" style={{ fontSize: "16px" }} >
+                    {HostVar}
+                  </div>
+                  <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textDecorationColor: "gold", textDecorationThickness: "2px", textUnderlineOffset: "5px", marginTop: "20px" }}>Link </label>
+                  <div>
+                    <a id="linkOfMeeting" href={LinkVar} target="_blank" style={{ textDecorationLine: "underline", fontSize: "16px" }} >Click to open Link</a>
+                  </div>
+                  <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textUnderlineOffset: "5px", marginTop: "10px", textDecorationThickness: "2px", textDecorationColor: "gold" }}>Date </label>
+                  <div id="Date" name="Date" style={{ fontSize: "16px" }} >
+                    {getFormattedTime(DateVar)}
+                  </div>
+                  <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textUnderlineOffset: "5px", marginTop: "10px", textDecorationThickness: "2px", textDecorationColor: "gold" }}>Time </label>
+
+                  <div id="time" style={{ fontSize: "16px" }} >
+                    {TimeVar}
+                  </div>
+                </div>
+              </Modal.Body>
             </Modal>
-            
+
         }
       </div>
+
+      {/* </div> */}
     </>
   )
 }
