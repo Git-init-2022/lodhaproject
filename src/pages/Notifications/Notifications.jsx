@@ -119,7 +119,7 @@ function Notifications() {
 
         <p className='MeetingHeader' >UPCOMING MEETINGS</p>
         {
-          isAdmin ? <p style={{ textAlign: "center", fontSize: "18px", letterSpacing: "1px", }}>Note - To Edit details click on meeting</p> : <span>To view details click on the meeting</span>
+          isAdmin ? <p style={{ textAlign: "center", fontSize: "18px", letterSpacing: "1px", }}>Note - To Edit details click on meeting</p> : <p style={{ textAlign: "center", fontSize: "18px", letterSpacing: "1px", }}>To view details click on the meeting</p>
         }
         <hr style={{ height: "1", backgroundColor: "black", width: "94%", marginLeft: "3%" }}></hr>
         {

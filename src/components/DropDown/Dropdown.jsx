@@ -28,11 +28,11 @@ function Dropdown() {
               <Accordion.Body className='ExpandDropDown'>
                 {(JSON.parse(User).Role === 'admin' || JSON.parse(User).Role === 'am') ? <a href='/Finance'>Finance & Account</a> : <></>}
                 {(JSON.parse(User).Role === 'admin' || JSON.parse(User).Role === 'fm') ? <a href='/FM'>FM</a> : <></>}
-                <a href='/Cultural'>Cultural Section</a>
+                {/* <a href='/Cultural'>Cultural Section</a> */}
                 <a href='/AllComplaints'>All Complaints</a>
                 <a href='/LegalUpdate'>Legal Update</a>
                 <a href='/Purchase'>Purchase & Audit Section</a>
-                <a href='/KeyContacts'>Key Contacts & Email ids</a>
+                <a href='/KeyContacts'>Key Contacts</a>
                 {JSON.parse(User).Role === 'admin'? <a href='/StaffManagement'> Staff Management</a> : <></>}
               </Accordion.Body>
             </Accordion.Item>
@@ -45,7 +45,7 @@ function Dropdown() {
               <a href='/ProcessDocs'>Process & Policy Documents </a>
               <a href='/Communication'>Key Communication</a>
               <a href='/PreviousYearsData'>Previous Years Data</a>
-              <a href='/KeyContacts'>Key Contacts</a>
+              {/* <a href='/KeyContacts'>Key Contacts</a> */}
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="2">
