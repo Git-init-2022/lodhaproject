@@ -12,6 +12,7 @@ const notification = require("./routes/notificationRoute");
 const form = require('./routes/formRoute');
 const meeting = require('./routes/meetingRoute');
 const resetPassword = require("./routes/resetPasswordRoute")
+const userNotification = require("./routes/userNotificationRoute");
 
 app.use("/api/v1", users);
 app.use("/api/v1",complaints);
@@ -19,6 +20,7 @@ app.use("/api/v1",issues);
 app.use("/api/v1",notification);
 app.use("/api/v1", form);
 app.use("/api/v1", meeting);
+app.use("/api/v1", userNotification)
 app.use("/api/v1", resetPassword);
 // MiddleWare for Errors
 

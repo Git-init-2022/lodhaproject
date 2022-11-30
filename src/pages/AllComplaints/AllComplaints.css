@@ -2,12 +2,7 @@
     position: relative;
   }
   
-  @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
-
-
-  *{
-      font-family: 'Open Sans', sans-serif !important; 
-  }
+ 
 
   .editable-cell-value-wrap {
     padding: 5px 12px;
@@ -49,7 +44,7 @@
 
 #title10::first-letter{
     font-size: 33px;
-    font-weight: bolder;
+    
 }
 
 .ComplaintForm{

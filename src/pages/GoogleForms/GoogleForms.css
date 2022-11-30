@@ -17,8 +17,7 @@
 .FormItems {
     position: absolute;
     margin: auto;
-    left: 0;
-    right: 0;
+    margin-left: 20px;
 
     margin-top: 0;
     width: 60%;

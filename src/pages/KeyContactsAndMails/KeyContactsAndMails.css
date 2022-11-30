@@ -47,7 +47,7 @@
     margin-bottom: 50px;
 }
 
-#title::first-letter{
+#title:first-letter{
     font-weight: normal;
     font-size: 33px;
 }

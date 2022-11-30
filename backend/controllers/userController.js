@@ -7,6 +7,7 @@ const sendEmail = require("../utils/sendEmail");
 const cloudinary = require("cloudinary");
 const { idText } = require("typescript");
 const { Complaint } = require("../models/complaintModel");
+const { default: axios, Axios } = require("axios");
 
 // Create User
 exports.createUser = catchAsyncErrors(async (req, res, next) => {
@@ -103,13 +104,17 @@ exports.updateUser = catchAsyncErrors(async (req, res, next) => {
         return next(new ErrorHandler("User not found", 404));
     }
     let message = "";
-    console.log(user1[0].Dues, req.query.user.Dues);
+    // console.log(user1[0].Role, req.query.user.Role);
+    // console.log(user1[0].Dues, req.query.user.Dues);
     if (user1[0].Email !== req.query.user.Email) {
+        message =  "Email has been changed \n Previous Email:" + `${user1[0].Email}` + "\n\n" + `Current Email: ${req.query.user.Email}` + "\n\n",
         sendEmail({
             email: req.query.user.Email,
-            message: `Email has been changed\n Previous Email: ${user1[0].Email} \n\n Current Email: ${req.query.user.Email}\n\n`,
+            message: "Email has been changed \n Previous Email:" + `${user1[0].Email}` + "\n\n" + `Current Email: ${req.query.user.Email}` + "\n\n",
             subject: "Your Email has been Changed"
         })
+       
+        
     }
     else {
         if (user1[0].Dues !== Number(req.query.user.Dues)) {
@@ -120,7 +125,7 @@ exports.updateUser = catchAsyncErrors(async (req, res, next) => {
         }
         if (user1[0].Mobile !== req.query.user.Mobile) {
             message += `Mobile Number has been changed\n Previous Mobile Number: ${user1[0].Mobile} \n\n Current Mobile Number: ${req.query.user.Mobile}\n\n`;
-        } 
+        }
         if (user1[0].ParkingSlot !== req.query.user.ParkingSlot) {
             message += `Parking Slot has been changed\n Previous Parking Slot: ${user1[0].ParkingSlot} \n\n Current Parking Slot: ${req.query.user.ParkingSlot}\n\n`;
         } if (user1[0].OwnerName !== req.query.user.OwnerName) {
@@ -135,11 +140,16 @@ exports.updateUser = catchAsyncErrors(async (req, res, next) => {
         if (user1[0].Role !== req.query.user.Role) {
             message += `Your Role has been changed\n Previous Role: ${user1[0].Role} \n\n Current Role: ${req.query.user.Role}\n\n`;
         }
-        sendEmail({
-            email: user1[0].Email,
-            message: message,
-            subject: "Your Email has been Changed"
-        })
+        if (message !== '') {
+            
+            sendEmail({
+                email: user1[0].Email,
+                message: message,
+                subject: "Your Details have been Changed"
+            });
+            
+         
+        }
     }
     user1[0].FlatNo = req.query.user.FlatNo;
     user1[0].Email = req.query.user.Email;
@@ -157,7 +167,9 @@ exports.updateUser = catchAsyncErrors(async (req, res, next) => {
 
     res.status(200).json({
         success: true,
-        message: "SuccessFully updated"
+        message: message, 
+        subject: "Details Have Been Changed"
+
     })
 });
 
@@ -168,9 +180,9 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
     if (!user1) {
         return next(new ErrorHandler("User not found", 404));
     }
-    const complaintsByUser = await Complaint.find({FlatNo: req.query.FlatNo});
-    
-    for(let complaints of complaintsByUser){
+    const complaintsByUser = await Complaint.find({ FlatNo: req.query.FlatNo });
+
+    for (let complaints of complaintsByUser) {
         complaints.remove();
     }
     sendEmail({

@@ -69,6 +69,11 @@
   border: 3px solid black;
 }
 
+.addStaff{
+  color: black !important;
+  background-color: whitesmoke !important;
+  border: 3px solid black;
+}
 .editButton{
   color: black !important;
   background-color: whitesmoke !important;
@@ -90,10 +95,10 @@
   background-color: rgb(203, 59, 59) !important;
   border: 2px solid black !important;
   transform: scale(1.05);
-  transition: 0.5s;
+  transition: 0s;
 }
 
-#StaffRole{
+.StaffRole{
   height: 50px;
   margin-left: 30px;
   margin-top: 10px;
@@ -101,4 +106,61 @@
   width: 50%;
   background-color: whitesmoke;
   border: 2px solid black;
+}
+
+.addStaff:hover{
+color: black !important;
+background-color: rgb(230, 214, 115) !important;
+border: 3px solid black !important;
+
+}
+
+.invisible{
+  display: none;
+}
+
+.AddStaffDiv{
+  margin-left: 20%;
+  /* border: 1px solid  gray; */
+  display:flex;
+  justify-content: center;
+  margin-top: 30px;
+  width: 60%;
+  /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+  
+}
+
+.AddStaffNote{
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.staffInput{
+  width: 60%;
+  padding: 10px;
+
+}
+
+.hide{
+  display: none;
+}
+
+.move-top {
+  position: fixed;
+  bottom: 50px;
+  right: 100px;
+  /* display: none; */
+  padding: 10px 15px;
+  color: black;
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-size: 16px;
+  background: rgb(219, 206, 128);
+  border: 1px solid black;
+}
+
+.move-top:hover{
+  color: black;
+  transform: scale(1.05);
+
 }

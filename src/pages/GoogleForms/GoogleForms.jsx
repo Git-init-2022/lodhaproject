@@ -69,7 +69,7 @@ function GoogleForms() {
     return (
         <>
             <LoginNavBar />
-            <div className="FormItems" style={{ marginTop: "50px" , marginBottom: "100px"}}>
+            <div className="FormItems" >
                 <p className='FormHeader' >SURVEY FORMS</p>
                 {
                     isAdmin ? <p style={{ textAlign: "center", fontSize: "18px", letterSpacing: "1px", }}>Note - To Edit details click on MORE INFO</p> : 
