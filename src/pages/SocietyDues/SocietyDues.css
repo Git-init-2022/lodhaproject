@@ -1,0 +1,106 @@
+.Remainingdues {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 25px;
+    letter-spacing: 1px;
+    text-decoration-line: underline;
+    text-decoration-color: rgb(148, 133, 48);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 10px;
+}
+
+.duesDiv {
+    display: flex;
+    justify-content: space-between;
+}
+
+.reveal{
+    animation: fadeIn 2s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+.TableValues{
+    width: 70%;
+    margin-top: 10px;
+}
+
+.selectionText{
+    animation: SlideFromLeft 100s;
+}
+
+@keyframes SlideFromLeft {
+    0% { transform : translateX(-100px) ; }
+    100% { transform: translateX(0px); }
+}
+
+.columns{
+    letter-spacing: 1px;
+    font-size: 16px;
+   
+}
+
+.PaymentDiv{
+    width: 26%;
+    height: fit-content;
+    margin-top: 60px;
+    margin-right: 20px;
+    /* border: 2px solid rgb(148, 133, 48); */
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 10px;
+}
+
+.checkButton{
+    border: 1px solid black
+}
+.PaymentText{
+    font-size: 35px;
+    letter-spacing: 2px;
+    color:rgb(148, 133, 48);
+    margin-left: 20px;
+    padding:0px;
+    font-weight: bold;
+    margin-bottom: 0px;
+   
+}
+
+.amount{
+    font-size: 18px;
+    letter-spacing: 1px;
+    color:black;
+    
+    padding: 10px 10px 0px 10px;
+}
+
+.paymentOptions{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+}
+
+.payButton{
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 20px;
+    background-color: white ;
+    color: rgb(148, 133, 48);
+    text-align: center;
+    letter-spacing: 1px;
+    font-weight: bold;
+    padding: 10px;
+    border: 3px solid rgb(148, 133, 48);
+    margin-top: 20px;
+}
+.payButton:hover{
+    color: white !important;
+    background-color: rgb(148, 133, 48) !important;
+    border: 3px solid rgb(148, 133, 48) !important;
+}
+
+.Total{
+    display: flex;
+    justify-content: space-between;
+}

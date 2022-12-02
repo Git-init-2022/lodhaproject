@@ -30,6 +30,7 @@ import UpdatePassword from './pages/UpdatePassword/UpdatePassword';
 import axios from "axios";
 import StaffManagement from './pages/StaffManagement/StaffManagement';
 import UserNotification from './pages/UserNotification/UserNotification';
+import SocietyDues from './pages/SocietyDues/SocietyDues';
 
 export default function App() {
 
@@ -105,6 +106,11 @@ export default function App() {
                     <Route path="/CreateForm"
                         element={<PrivateRoute redirectTo="/login" component={<CreateForm />}
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} role={JSON.parse(localStorage.getItem("User")) !== null && JSON.parse(localStorage.getItem("User")).Role === "admin"} />} />
+                    <Route path="/SocietyDues"
+                        element={<PrivateRoute redirectTo="/login" component={<SocietyDues />}
+                            isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} role={true} />} />
+
+
                 </Routes>
             </Router>
         </>
