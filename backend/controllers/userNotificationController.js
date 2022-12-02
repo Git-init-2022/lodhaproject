@@ -45,7 +45,7 @@ exports.createNotification = catchAsyncErrors(async (req, res, next) => {
 
 exports.getUserNotifications = catchAsyncErrors(async(req,res,next) => {
    
-    const userNotifications = await userNotification.find({FlatNo: req.query.FlatNo}).sort({"Time": 0});
+    const userNotifications = await userNotification.find({FlatNo: req.query.FlatNo}).sort({"Time": -1});
     
     res.status(200).json({
         success:true,
@@ -94,24 +94,15 @@ exports.updateNotification = catchAsyncErrors(async(req,res,next)=> {
     })
 });
 
-// exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
-//     const user1 = await User.find({ FlatNo: req.query.FlatNo });
-//     if (!user1) {
-//         return next(new ErrorHandler("User not found", 404));
-//     }
-//     const complaintsByUser = await Complaint.find({FlatNo: req.query.FlatNo});
+exports.deleteNotification = catchAsyncErrors(async(req,res,next) => {
+    const notification1 = await userNotification.findById(req.query.item._id);
+    if(!notification1) {
+        return next(new ErrorHandler("notification not found",404));
+    }
     
-//     for(let complaints of complaintsByUser){
-//         complaints.remove();
-//     }
-//     sendEmail({
-//         email: user1[0].Email,
-//         message: "Your Profile data is deleted from Lodha Meridian Community",
-//         subject: "User Profile Deletion"
-//     })
-//     await user1[0].remove();
-//     res.status(200).json({
-//         success: true,
-//         message: "User Deletion successful"
-//     })
-// });
+    await notification1.remove();
+    res.status(200).json({
+        success: true,
+        message: "notification Deletion successful"
+    })
+});
