@@ -7,24 +7,11 @@ router.use(function(req, res, next) {
     next();
   });
 
-// router.route("/login").post(loginUser);
-
-// router.route("/password/forgot").post(forgotPassword);
-
-// router.route("/password/reset/:token").put(resetPassword);
-
-// router.route("/logout").get(logout);
-
-// router.route("/me").get(isAuthenticatedUser, getUserDetails);
-
-// router.route("/password/update").put(isAuthenticatedUser, updatePassword);
 router.route("/login").post(loginUser);
-// router.route("/me/update").put(isAuthenticatedUser, updateProfile);
 router.route('/users').get(getAllusers)
 router.route('/register').post(createUser);
 router.route('/userupdate').get(updateUser)
 router.route('/userdelete').get(deleteUser);
 router.route('/singleUser').get(getUser);
-
  
 module.exports = router

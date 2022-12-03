@@ -3,11 +3,10 @@ const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
-
+const crypto = require("crypto");
 const cloudinary = require("cloudinary");
 const { idText } = require("typescript");
 const { Complaint } = require("../models/complaintModel");
-const { default: axios, Axios } = require("axios");
 
 // Create User
 exports.createUser = catchAsyncErrors(async (req, res, next) => {
@@ -43,11 +42,31 @@ exports.createUser = catchAsyncErrors(async (req, res, next) => {
 // login User
 exports.loginUser = catchAsyncErrors(async (req, res, next) => {
     const { FlatNo, Password } = req.body;
-    const user = await User.find({ FlatNo: FlatNo, Password: Password })
-    if (!user && Object.keys(user).length) {
+    const user1 = await User.find({ FlatNo: FlatNo, Password: Password })
+    if (!user1 && Object.keys(user1).length) {
         return next(new ErrorHandler("User does not exists", 404));
     }
-    console.log(req);
+    const role = crypto
+      .createHash("sha256")
+      .update(user1[0].Role)
+      .digest("hex");
+    console.log("admin: ", crypto.createHash("sha256").update("admin").digest("hex"));
+    console.log("user: ", crypto.createHash("sha256").update("user").digest("hex"));
+    console.log("fm: ", crypto.createHash("sha256").update("fm").digest("hex"));
+    console.log("am: ", crypto.createHash("sha256").update("am").digest("hex"));
+    console.log("itsupport: ", crypto.createHash("sha256").update("itsupport").digest("hex"));
+
+    const user = {
+        FlatNo: user1[0].FlatNo,
+        OwnerName: user1[0].OwnerName,
+        RegisteredName: user1[0].RegisteredName,
+        ParkingSlot: user1[0].ParkingSlot,
+        Block: user1[0].Block,
+        Mobile: user1[0].Mobile,
+        Email: user1[0].Email,
+        Dues: user1[0].Dues,
+        Role: role
+    }
     // sendToken(user, 201, res);
     res.status(200).json({
         success: true,
@@ -112,9 +131,7 @@ exports.updateUser = catchAsyncErrors(async (req, res, next) => {
             email: req.query.user.Email,
             message: "Email has been changed \n Previous Email:" + `${user1[0].Email}` + "\n\n" + `Current Email: ${req.query.user.Email}` + "\n\n",
             subject: "Your Email has been Changed"
-        })
-       
-        
+        }) 
     }
     else {
         if (user1[0].Dues !== Number(req.query.user.Dues)) {

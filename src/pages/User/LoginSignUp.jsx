@@ -56,7 +56,6 @@ const LoginSignUp = () => {
       FlatNo: loginFlatNo, Password: loginPassword
     });
     const user = data.user;
-    console.log("user", user);
     setLoading(false);
     if (!user || user.length == 0) {
       setFalseCredentials(true);
@@ -64,20 +63,9 @@ const LoginSignUp = () => {
       setValidCredentials(false);
     }
     else {
-      const user1 = {
-        OwnerName: user[0].OwnerName,
-        RegisteredName: user[0].RegisteredName,
-        FlatNo: user[0].FlatNo,
-        Block: user[0].Block,
-        ParkingSlot: user[0].ParkingSlot,
-        Mobile: user[0].Mobile,
-        Dues: user[0].Dues,
-        Email: user[0].Email,
-        Role: user[0].Role
-      }
-      setUser(JSON.stringify(user1));
+      setUser(JSON.stringify(user));
       setIsAuthenticated(true);
-      localStorage.setItem("User", JSON.stringify(user1));
+      localStorage.setItem("User", JSON.stringify(user));
       localStorage.setItem("isAuthenticated", true);
       navigate('/UserDashboard');
     }
