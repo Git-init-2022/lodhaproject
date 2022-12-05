@@ -7,7 +7,6 @@ import Notifications from "../Notifications/Notifications";
 import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
 import GeneralNotifications from "../GeneralNotifications/GeneralNotifications";
 import Complaints from "../Complaints/Complaints";
-
 import Documents from "../Documents/Documents";
 import UserNotification from "../UserNotification/UserNotification";
 
