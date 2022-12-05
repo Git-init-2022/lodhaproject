@@ -137,7 +137,7 @@ function Notifications() {
 
 
 
-      <div className="MeetingItems" style={{ marginTop: "50px" }}>
+      <div className="MeetingItems" style={{ marginTop: "0px" }}>
 
         <div className="TabSwitch" style={{ marginBottom: "30px", width: "100%", }}>
           <Nav style={{ display: "flex", width: "100%", }}>

@@ -17,15 +17,13 @@
 .FormItems {
     position: absolute;
     margin: auto;
-    margin-left: 20px;
-
+    margin-left: 50px;
     margin-top: 0;
-    width: 60%;
+    width: 50%;
     height: auto;
     /*background-color: #edf6f7;*/
     background-color: whitesmoke;
     border-radius: 10px;
-
     align-items: center;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 

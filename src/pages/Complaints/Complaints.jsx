@@ -26,8 +26,7 @@ function Complaints() {
     <>
       <LoginNavBar />
       <div className="middle" style={{ marginTop: "0px" }}>
-        <p id="title3">COMPLAINTS</p>
-        {/* <div style={{ marginLeft: "5px", height: "3px", width: "130px", backgroundColor: "gold" }}></div> */}
+        {/* <p id="title3">COMPLAINTS</p> */}
         <div className="Note" style={{ marginTop: "10px", marginLeft:"20px" }}>
           <p className="NoteTitle">NOTE</p>
           <ul>
@@ -37,14 +36,9 @@ function Complaints() {
           </ul>
         </div>
         {
-
           complaints.map(item => <Posts props={item} />)
         }
       </div>
-      <div style={{ height: "100px" }}>
-
-      </div>
-
     </>
   );
 }

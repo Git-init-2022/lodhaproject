@@ -3,10 +3,10 @@
 
 .middle{
   position: absolute;
-  width:60%;
-
+  width:55%;
   background-color: white;
 }
+
 .accordion-button {
   color: black;
   font-weight: bolder;
@@ -19,6 +19,7 @@
     margin:auto;
   }
 }
+
 
 #title3{
   margin-top: 20px !important;

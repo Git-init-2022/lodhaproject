@@ -1,0 +1,10 @@
+.card{
+    margin-left: 100px;
+    width: 250px;
+    position: absolute;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 200px 200px;
+}

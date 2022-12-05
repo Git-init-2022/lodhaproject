@@ -85,7 +85,7 @@ function GoogleForms() {
                                         <p style={{ textDecorationLine: "underline", textUnderlineOffset: "10px" }}>SURVEY TITLE</p>
                                         <p style={{ textTransform: "capitalize" }}>{item.Title}</p>
                                     </span>
-                                    <span style={{ padding: "3px", borderRadius: "5px", marginTop: "20px", paddingLeft: "10%"}}>MORE INFO</span>
+                                    <span style={{ padding: "3px", borderRadius: "5px", marginTop: "20px", paddingLeft: "5%"}}>MORE INFO</span>
                                     {/* <span className="FormView">
                                         <button className="Viewbutton" style={{ padding: "3px", borderRadius: "5px", marginTop: "20px" }}>More &rarr;</button>
                                     </span> */}

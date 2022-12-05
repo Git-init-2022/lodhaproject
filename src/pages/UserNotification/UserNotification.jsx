@@ -98,7 +98,7 @@ function UserNotification() {
     }
     return (
         <>
-            <div style={{ marginRight: "50px" }}>
+            <div style={{ marginRight: "20px" }}>
 
                 <div style={{ width: "500px", boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px", backgroundColor: "#F5F5F5" }}>
                     <div style={{ display: "flex", justifyContent: "center" }}>
