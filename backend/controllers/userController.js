@@ -4,7 +4,7 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 
-const cloudinary = require("cloudinary");
+const cloudinary = require("../utils/imageUpload");
 const { idText } = require("typescript");
 const { Complaint } = require("../models/complaintModel");
 const { default: axios, Axios } = require("axios");
@@ -194,5 +194,22 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
     res.status(200).json({
         success: true,
         message: "User Deletion successful"
+    })
+});
+
+exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
+    const {FlatNo} = req.body;
+    const user1 = await User.find({ FlatNo: FlatNo });
+    if (!user1 || user1.length==0) {
+        return next(new ErrorHandler("User not found", 404));
+    }
+
+    const result = await cloudinary.uploader.upload( req.file.path, {
+        public_id: `${user1[0]._id}_profile`
+    })
+    
+    res.status(200).json({
+        success: true,
+        message: "User Profile Update successful"
     })
 });

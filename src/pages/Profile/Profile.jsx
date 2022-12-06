@@ -1,13 +1,14 @@
 import axios from "axios";
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { setSourceMapRange } from "typescript";
 import './Profile.css';
 import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
-import {useGlobalContext} from "/src/context/StateContext";
+import { useGlobalContext } from "/src/context/StateContext";
 
 function Profile() {
-    
+
     const { User, setUser } = useGlobalContext();
+    const [visible, setVisible] = useState(false);
     // useEffect(()=>{
     //     const fetchUsers = async() => {
     //         if(User !== null){
@@ -36,7 +37,7 @@ function Profile() {
     //     fetchUsers();
     //   }
     // },[])
-    const update = async(e)=>{
+    const update = async (e) => {
         const FlatNo = e.target.FlatNo.value;
         const ParkingSlot = e.target.ParkingSlot.value;
         const Block = e.target.Block.value;
@@ -45,21 +46,21 @@ function Profile() {
         const OwnerName = e.target.OwnerName.value;
         const RegisteredName = e.target.RegisteredName.value;
 
-        const { data } = await axios.put("http:localhost:4000/api/v1/userupdate",{
+        const { data } = await axios.put("http:localhost:4000/api/v1/userupdate", {
             OwnerName: OwnerName,
             RegisteredName: RegisteredName,
             Email: Email,
             Mobile: Mobile,
             ParkingSlot: ParkingSlot,
-            FlatNo: FlatNo, 
+            FlatNo: FlatNo,
             Block: Block
         })
         const user = data.user;
-        if(user!==[] && !user){
+        if (user !== [] && !user) {
             navigate('/UserProfile');
         }
-        else{
-            localStorage.getItem("User",JSON.stringify(user));
+        else {
+            localStorage.getItem("User", JSON.stringify(user));
             setUser(JSON.stringify(user));
         }
 
@@ -71,59 +72,76 @@ function Profile() {
 
     return (
         <>
-        <LoginNavBar/>
+            <LoginNavBar />
             <div>
                 <form onSubmit={UpdateSubmit}>
                     <div className="UserProfileDiv">
                         <p id="userProfileTitle">USER PROFILE</p>
+                        <div style={{display:"flex", justifyContent:"space-between"}}>
+                            <div style={{ display: "flex", flexDirection:"column", width:"30%"}}>
 
-                        <div style={{ display: "flex", justifyContent: "center" }}>
-                            <img src="/src/assests/user.svg" id="userProfileImg" ></img>
-                        </div>
-                        <div className="ProfileInput" style={{marginTop:"40px"}}>
-                            <p className="EditTitle">NAME</p>
-                           
-                            <input placeholder={JSON.parse(User).OwnerName} name="OwnerName" className="EditInput"></input>
-                             
-                        </div>
-                        <div className="ProfileInput">
-                            <p className="EditTitle">EMAIL ADDRESS</p>
-                            <input placeholder={JSON.parse(User).Email} name="Email" className="EditInput"></input>
-                             
-                        </div>
-                        <div className="ProfileInput">
-                            <p className="EditTitle">MOBILE NUMBER</p>
-                            
-                            <input placeholder={JSON.parse(User).Mobile} name="Mobile" className="EditInput"></input>
-                             
-                        </div>
-                        <div className="ProfileInput">
-                            <p className="EditTitle">BLOCK</p>
-                            
-                            <input placeholder={JSON.parse(User).Block} name="Block" className="EditInput"></input>
-                             
-                        </div>
-                        <div className="ProfileInput">
-                            <p className="EditTitle">FLAT NUMBER</p>
-                            <input placeholder={JSON.parse(User).FlatNo} name="FlatNo" className="EditInput"></input>
-                             
-                        </div>
-                        
-                        <div className="ProfileInput" >
-                            <p className="EditTitle">PROPERTY REGISTERED NAME</p>
-                            <input placeholder={JSON.parse(User).RegisteredName} name="RegisteredName" className="EditInput"></input>
-                             
-                        </div>
+                                <img src="/src/assests/user.svg" id="userProfileImg" ></img>
+                                <button className="btn btn-primary uploadButton" onClick={() => setVisible(true)}>
+                                <img src='/src/assests/camera.png' height="20px" width="20px" style={{marginRight:"10px"}}>
+                                </img>Upload
+                                </button>
 
-                        <div className="ProfileInput" >
-                            <p className="EditTitle">PARKING SLOT</p>
-                            <input placeholder={JSON.parse(User).ParkingSlot} name="ParkingSlot" className="EditInput"></input>
-                             
-                        </div>
-                        <div style={{display:"flex", justifyContent:"center"}}>
-                        <button className="UserProfileSubmit" type="submit">UPDATE</button>
+                                <form encType="multipart/form-data" >
+                                    <input type="file"></input>
+                                    <button></button>
+                                    
+                                </form>
+                            </div>
+
+                            
+                            <div style={{width:"70%"}}>
+                                <div className="ProfileInput" style={{ marginTop: "40px" }}>
+                                    <p className="EditTitle">NAME</p>
+
+                                    <input placeholder={JSON.parse(User).OwnerName} name="OwnerName" className="EditInput"></input>
+
+                                </div>
+                                <div className="ProfileInput">
+                                    <p className="EditTitle">EMAIL ADDRESS</p>
+                                    <input placeholder={JSON.parse(User).Email} name="Email" className="EditInput"></input>
+
+                                </div>
+                                <div className="ProfileInput">
+                                    <p className="EditTitle">MOBILE NUMBER</p>
+
+                                    <input placeholder={JSON.parse(User).Mobile} name="Mobile" className="EditInput"></input>
+
+                                </div>
+                                <div className="ProfileInput">
+                                    <p className="EditTitle">BLOCK</p>
+
+                                    <input placeholder={JSON.parse(User).Block} name="Block" className="EditInput"></input>
+
+                                </div>
+                                <div className="ProfileInput">
+                                    <p className="EditTitle">FLAT NUMBER</p>
+                                    <input placeholder={JSON.parse(User).FlatNo} name="FlatNo" className="EditInput"></input>
+
+                                </div>
+
+                                <div className="ProfileInput" >
+                                    <p className="EditTitle">PROPERTY REGISTERED NAME</p>
+                                    <input placeholder={JSON.parse(User).RegisteredName} name="RegisteredName" className="EditInput"></input>
+
+                                </div>
+
+                                <div className="ProfileInput" >
+                                    <p className="EditTitle">PARKING SLOT</p>
+                                    <input placeholder={JSON.parse(User).ParkingSlot} name="ParkingSlot" className="EditInput"></input>
+
+                                </div>
+                                <div style={{ display: "flex", justifyContent: "center" }}>
+                                    <button className="UserProfileSubmit" type="submit">UPDATE</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                 </form>
             </div>
         </>

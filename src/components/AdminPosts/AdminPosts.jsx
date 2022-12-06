@@ -2,6 +2,7 @@ import React from 'react'
 import './AdminPosts.css'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { Web3Storage } from 'web3.storage';
 import {
     MDBBtn,
     MDBCard,
@@ -19,8 +20,10 @@ import { useGlobalContext } from '/src/context/StateContext';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useState } from 'react';
-
+const client = new Web3Storage({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDcxOTdiN2M2OGFEMTNhNzREMGIzMGQ3OTI4OTNGMDc4MWQxZjE4M2QiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NzAxNjM1MTczNDIsIm5hbWUiOiJsb2RoYS1maWxlcyJ9.rmkUCge8MPPj5TC6i8Z5lVAjIevCSVni0gpu-_jUzlI" });
+        
 function AdminPosts({ props, selectedOption }) {
+
     const [singleUser, setSingleUser] = useState([])
     const user = async () => {
         const { data } = await axios.get("http://localhost:4000/api/v1/singleUser", { params: { FlatNo: props.FlatNo } });
@@ -31,6 +34,17 @@ function AdminPosts({ props, selectedOption }) {
 
     useEffect(() => {
         user()
+    }, []);
+
+    const getFiles = async () => {
+       console.log(String(props.FileHashes));
+        const result = await client.get(String(props.FileHashes));
+        const files= await result.files();
+        console.log(files);
+    }
+
+    useEffect(() => {
+        getFiles();
     }, []);
     const refreshPage = () => {
         window.location.reload();
@@ -98,6 +112,7 @@ function AdminPosts({ props, selectedOption }) {
     return (
         <>
             {
+
                 (check(props.Time)) ? <Card className="m-3 backgroundcoloring PostBackground1">
                     <form>
                         <Card.Header className="PostTitle">
@@ -142,7 +157,20 @@ function AdminPosts({ props, selectedOption }) {
                                 <p className='DescriptionTitle'>DESCRIPTION</p>
                                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                                     <div contentEditable style={{ width: "100%" }} id={props._id}>{props.Description}</div>
+
                                 </div>
+                                {
+                                    props.FileHashes !== "" ?
+                                        <div style={{ display: "grid", gridTemplateColumns: "auto auto" }}>
+                                            <a href={"https://" + props.FileHashes + ".ipfs.w3s.link/"} target="blank">
+                                                File
+
+                                            </a>
+                                        </div>
+                                        :
+                                        <>
+                                        </>
+                                }
                                 <div style={{ display: "flex", justifyContent: "center", marginTop: "50px" }}>
                                     <button className="btn btn-primary " type="submit" onClick={(e) => UpdateComplaint(e)}>Edit Complaint</button>
                                     <button className="btn btn-danger" type="submit" style={{ marginLeft: "50px" }} onClick={(e) => DeleteComplaint(e)}>Delete Complaint</button>

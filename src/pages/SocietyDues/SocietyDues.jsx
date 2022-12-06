@@ -132,7 +132,7 @@ function SocietyDues() {
                         </div>
                     </div>
                 </div>
-            </div>
+                </div>
         </>
     );
 }

@@ -298,7 +298,7 @@ function AllComplaints() {
             <Accordion.Body>
               <div>
                 <form onSubmit={
-                  isvalid && issueSubmit
+                   issueSubmit
                 } className="ComplaintForm">
                   <div style={{ display: "flex" }}>
                     <input placeholder="Complaint Type" type="text" name="issue" className="IssueInput" />

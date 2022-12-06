@@ -24,8 +24,8 @@ const complaintSchema = mongoose.Schema({
     FlatNo: {
         type: String,
         required: [true,"Please Enter Flat Number"]
-    }
-
+    },
+    FileHashes: String
 })
 
 const Complaint = mongoose.model("Complaint", complaintSchema);

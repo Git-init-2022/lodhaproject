@@ -31,6 +31,7 @@ import axios from "axios";
 import StaffManagement from './pages/StaffManagement/StaffManagement';
 import UserNotification from './pages/UserNotification/UserNotification';
 import SocietyDues from './pages/SocietyDues/SocietyDues';
+import NoAccessPage from './pages/NoAccessPage/NoAccessPage';
 
 export default function App() {
 
@@ -46,6 +47,7 @@ export default function App() {
                     <Route path='/forgotpassword' element={<ForgotPassword />} />
                     <Route path='/updatepassword/:token' element={<UpdatePassword />} />
                     <Route path='/Seperate' element={<Seperate />} />
+                    <Route path='/NoAccess' element={<NoAccessPage />} />
                     <Route path="/Home"
                         element={<PrivateRoute redirectTo="/login" component={<LoggedHome />}
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} role={true} />} />
