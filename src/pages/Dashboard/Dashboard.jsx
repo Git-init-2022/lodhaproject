@@ -7,7 +7,6 @@ import Notifications from "../Notifications/Notifications";
 import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
 import GeneralNotifications from "../GeneralNotifications/GeneralNotifications";
 import Complaints from "../Complaints/Complaints";
-
 import Documents from "../Documents/Documents";
 import UserNotification from "../UserNotification/UserNotification";
 
@@ -60,14 +59,14 @@ function Dashboard() {
             setIsDocuments(true);
             setIsAnnoucements(false);
         }
-        if (tab == "Announcements") {
-            setIsComplaints(false);
-            setIsForms(false);
-            setIsMeeting(false);
-            setIsNotification(false);
-            setIsDocuments(false);
-            setIsAnnoucements(true);
-        }
+        // if (tab == "Announcements") {
+        //     setIsComplaints(false);
+        //     setIsForms(false);
+        //     setIsMeeting(false);
+        //     setIsNotification(false);
+        //     setIsDocuments(false);
+        //     setIsAnnoucements(true);
+        // }
     };
 
 
@@ -88,20 +87,20 @@ function Dashboard() {
                             <Nav.Item>
                                 <Nav.Link className="FacilityLink" eventKey="/home" onClick={(e) => changeMenu(e, "Notifications")}>
                                     <div style={{ display: "flex", alignItems: "center", flexDirection: "column", textAlign: "center" }}>
-                                        <img src="/src/assests/notifications.png" height="50px" width="50px"></img>
-                                        <pre style={{ fontFamily: "Montserrat" }}> Notifications</pre>
+                                        <img src="/src/assests/announcement.png" height="50px" width="50px"></img>
+                                        <pre style={{ fontFamily: "Montserrat" }}>Announcements</pre>
                                     </div>
                                 </Nav.Link>
                             </Nav.Item>
 
-                            <Nav.Item className="navbarLink">
+                            {/* <Nav.Item className="navbarLink">
                                 <Nav.Link className="FacilityLink" eventKey="/announcements" onClick={(e) => changeMenu(e, "Annoucements")}>
                                     <div style={{ display: "flex", alignItems: "center", flexDirection: "column", textAlign: "center" }}>
                                         <img src="/src/assests/announcement.png" height="50px" width="50px"></img>
                                         <pre style={{ fontFamily: "Montserrat" }}>Annoucements</pre>
                                     </div>
                                 </Nav.Link>
-                            </Nav.Item>
+                            </Nav.Item> */}
 
                             <Nav.Item className="navbarLink">
                                 <Nav.Link className="FacilityLink" eventKey="/forms" onClick={(e) => changeMenu(e, "Forms")}>

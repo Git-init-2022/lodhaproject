@@ -17,9 +17,8 @@
 .MeetingItems {
   position: absolute;
   margin: auto;
-  margin-left: 20px;
-
-  width: 60%;
+  margin-left: 50px;
+  width: 50%;
   height: auto;
   /*background-color: #edf6f7;*/
   background-color: whitesmoke;

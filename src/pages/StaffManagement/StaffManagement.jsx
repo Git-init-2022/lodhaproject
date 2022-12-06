@@ -235,10 +235,18 @@ const StaffManagement = () => {
           </Modal.Footer>
         </Modal>
         <div>
-          <div className="StaffTitleDiv">
-            <div className="sideLines" ></div>
-            <p id="userDashboardTitle" style={{ marginLeft: "5px", marginRight: "5px", color: "rgb(148, 133, 48)" }}>ADMINS</p>
-            <div className="sideLines"></div>
+          <div className="StaffTitleDiv" style={{display: "flex" }}>
+            <div>
+              <div className="sideLines" style={{width: "250px", marginTop: "20px" }}></div>
+              <div className="sideLines" style={{width: "247px",marginTop: "5px" }}></div>
+              <div className="sideLines" style={{width: "250px",marginTop: "5px" }}></div>
+            </div>
+            <p id="userDashboardTitle" style={{ marginLeft: "10px", color: "rgb(110, 97, 29)"}}>ADMINS</p>
+            <div className="linesright">
+              <div className="sideLines" style={{ marginLeft: "10px", marginTop: "20px" }}></div>
+              <div className="sideLines" style={{marginLeft: "13px",marginTop: "5px" }}></div>
+              <div className="sideLines" style={{ marginLeft: "10px", marginTop: "5px" }}></div>
+            </div>
           </div>
           <div className="displayUsers">
             {
@@ -248,10 +256,10 @@ const StaffManagement = () => {
                     <form>
                       <div className="DisplayCard">
                         <div>
-                          <img src="/src/assests/admin.png" width="200px" height="200px" style={{ margin: "25px" }}></img>
+                          <img src="/src/assests/admin.png" width="150px" height="150px" style={{ margin: "25px" }}></img>
 
                         </div>
-                        <div style={{ width: "100%", marginTop: "5px" }}>
+                        <div style={{ width: "90%", marginTop: "5px" }}>
                           <label className="StaffLabel">name</label>
                           <span className="StaffValue">{i.OwnerName}</span>
                           <br></br>
@@ -288,16 +296,16 @@ const StaffManagement = () => {
                             <Popconfirm
                               title="Click ok to Edit User Details"
                               onConfirm={() => HandleEdit(i)}>
-                              <button className="btn btn-primary editButton" style={{ width: "45%" }}>
+                              <button className="btn btn-primary editButton" style={{ width: "40%" }}>
                                 <img src="/src/assests/Edit.png" height="20px" width="20px"></img>
-                                <span style={{ marginLeft: "10px" }}>Edit Staff</span></button>
+                                <span style={{ marginLeft: "10px" }}>Edit</span></button>
                             </Popconfirm>
                             <Popconfirm
                               title="Click ok to Confirm Deletion of user"
                               onConfirm={() => HandleDelete(i)}>
                               <button className="btn btn-danger DeleteButton" style={{ width: "45%", marginLeft: "10px" }}>
                                 <img src="/src/assests/Delete.png" height="20px" width="20px"></img>
-                                <span style={{ marginLeft: "10px" }}>Delete Staff</span> </button>
+                                <span style={{ marginLeft: "10px" }}>Delete</span> </button>
                             </Popconfirm>
                           </div>
                         </div>
@@ -314,11 +322,18 @@ const StaffManagement = () => {
         </div>
 
         <div>
-          <div className="StaffTitleDiv">
-            <div className="sideLines" style={{ width: "36%" }} ></div>
-            <p id="userDashboardTitle" style={{ marginLeft: "2px", marginright: "2px", color: "rgb(148, 133, 48)" }}>FACILITY MANAGEMENT</p>
-            <div className="sideLines" style={{ width: "35%" }}></div>
-
+          <div className="StaffTitleDiv" style={{display: "flex" }}>
+            <div>
+              <div className="sideLines" style={{width: "200px", marginTop: "20px" }}></div>
+              <div className="sideLines" style={{width: "197px",marginTop: "5px" }}></div>
+              <div className="sideLines" style={{width: "200px",marginTop: "5px" }}></div>
+            </div>
+            <p id="userDashboardTitle" style={{ marginLeft: "10px", color: "rgb(110, 97, 29)"}}>FACILITY MANAGEMENT</p>
+            <div className="linesright">
+              <div className="sideLines" style={{ marginLeft: "10px", marginTop: "20px" }}></div>
+              <div className="sideLines" style={{marginLeft: "13px",marginTop: "5px" }}></div>
+              <div className="sideLines" style={{ marginLeft: "10px", marginTop: "5px" }}></div>
+            </div>
           </div>
           <div className="displayUsers">
             {
@@ -328,7 +343,7 @@ const StaffManagement = () => {
                     <form>
                       <div className="DisplayCard">
                         <div>
-                          <img src="/src/assests/admin.png" width="200px" height="200px" style={{ margin: "25px" }}></img>
+                          <img src="/src/assests/admin.png" width="150px" height="150px" style={{ margin: "25px" }}></img>
 
                         </div>
                         <div style={{ width: "100%", marginTop: "5px" }}>
@@ -370,14 +385,14 @@ const StaffManagement = () => {
                               onConfirm={() => HandleEdit(i)}>
                               <button className="btn btn-primary editButton" type="submit" style={{ width: "45%" }}>
                                 <img src="/src/assests/Edit.png" height="20px" width="20px"></img>
-                                <span style={{ marginLeft: "10px" }}>Edit Staff</span></button>
+                                <span style={{ marginLeft: "10px" }}>Edit</span></button>
                             </Popconfirm>
                             <Popconfirm
                               title="Click ok to Confirm Deletion of user"
                               onConfirm={() => HandleDelete(i)}>
                               <button className="btn btn-danger DeleteButton" style={{ width: "45%", marginLeft: "10px" }}>
                                 <img src="/src/assests/Delete.png" height="20px" width="20px"></img>
-                                <span style={{ marginLeft: "10px" }}>Delete Staff</span> </button>
+                                <span style={{ marginLeft: "10px" }}>Delete</span> </button>
                             </Popconfirm>
                           </div>
                         </div>
@@ -394,11 +409,18 @@ const StaffManagement = () => {
         </div>
 
         <div>
-          <div className="StaffTitleDiv">
-            <div className="sideLines" style={{ width: "35%" }} ></div>
-            <p id="userDashboardTitle" style={{ marginLeft: "2px", marginright: "2px", color: "rgb(148, 133, 48)", minWidth: "401px !important" }}>FINANCE &amp; ACCOUNT</p>
-            <div className="sideLines" style={{ width: "35%" }}></div>
-
+          <div className="StaffTitleDiv" style={{display: "flex" }}>
+            <div>
+              <div className="sideLines" style={{width: "200px", marginTop: "20px" }}></div>
+              <div className="sideLines" style={{width: "197px",marginTop: "5px" }}></div>
+              <div className="sideLines" style={{width: "200px",marginTop: "5px" }}></div>
+            </div>
+            <p id="userDashboardTitle" style={{ marginLeft: "10px", color: "rgb(110, 97, 29)"}}>FINANCE &amp; ACCOUNTS</p>
+            <div className="linesright">
+              <div className="sideLines" style={{ marginLeft: "10px", marginTop: "20px" }}></div>
+              <div className="sideLines" style={{marginLeft: "13px",marginTop: "5px" }}></div>
+              <div className="sideLines" style={{ marginLeft: "10px", marginTop: "5px" }}></div>
+            </div>
           </div>
           <div className="displayUsers">
             {
@@ -408,7 +430,7 @@ const StaffManagement = () => {
                     <form>
                       <div className="DisplayCard">
                         <div>
-                          <img src="/src/assests/admin.png" width="200px" height="200px" style={{ margin: "25px" }}></img>
+                          <img src="/src/assests/admin.png" width="150px" height="150px" style={{ margin: "25px" }}></img>
 
                         </div>
                         <div style={{ width: "100%", marginTop: "5px" }}>
@@ -450,14 +472,14 @@ const StaffManagement = () => {
                               onConfirm={() => HandleEdit(i)}>
                               <button className="btn btn-primary editButton" type="submit" style={{ width: "45%" }}>
                                 <img src="/src/assests/Edit.png" height="20px" width="20px"></img>
-                                <span style={{ marginLeft: "10px" }}>Edit Staff</span></button>
+                                <span style={{ marginLeft: "10px" }}>Edit</span></button>
                             </Popconfirm>
                             <Popconfirm
                               title="Click ok to Confirm Deletion of user"
                               onConfirm={() => HandleDelete(i)}>
                               <button className="btn btn-danger DeleteButton" style={{ width: "45%", marginLeft: "10px" }}>
                                 <img src="/src/assests/Delete.png" height="20px" width="20px"></img>
-                                <span style={{ marginLeft: "10px" }}>Delete Staff</span> </button>
+                                <span style={{ marginLeft: "10px" }}>Delete</span> </button>
                             </Popconfirm>
                           </div>
                         </div>
@@ -474,11 +496,18 @@ const StaffManagement = () => {
         </div>
 
         <div>
-          <div className="StaffTitleDiv">
-            <div className="sideLines" style={{ width: "43%" }} ></div>
-            <p id="userDashboardTitle" style={{ marginLeft: "2px", marginright: "2px", color: "rgb(148, 133, 48)" }}>IT SUPPORT</p>
-            <div className="sideLines" style={{ width: "43%" }}></div>
-
+          <div className="StaffTitleDiv" style={{display: "flex" }}>
+            <div>
+              <div className="sideLines" style={{width: "240px", marginTop: "20px" }}></div>
+              <div className="sideLines" style={{width: "237px",marginTop: "5px" }}></div>
+              <div className="sideLines" style={{width: "240px",marginTop: "5px" }}></div>
+            </div>
+            <p id="userDashboardTitle" style={{ marginLeft: "10px", color: "rgb(110, 97, 29)"}}>IT SUPPORT</p>
+            <div className="linesright">
+              <div className="sideLines" style={{ marginLeft: "10px", marginTop: "20px" }}></div>
+              <div className="sideLines" style={{marginLeft: "13px",marginTop: "5px" }}></div>
+              <div className="sideLines" style={{ marginLeft: "10px", marginTop: "5px" }}></div>
+            </div>
           </div>
           <div className="displayUsers">
             {
@@ -488,7 +517,7 @@ const StaffManagement = () => {
                     <form>
                       <div className="DisplayCard">
                         <div>
-                          <img src="/src/assests/admin.png" width="200px" height="200px" style={{ margin: "25px" }}></img>
+                          <img src="/src/assests/admin.png" width="150px" height="150px" style={{ margin: "25px" }}></img>
 
                         </div>
                         <div style={{ width: "100%", marginTop: "5px" }}>
@@ -530,14 +559,14 @@ const StaffManagement = () => {
                               onConfirm={() => HandleEdit(i)}>
                               <button className="btn btn-primary editButton" type="submit" style={{ width: "45%" }}>
                                 <img src="/src/assests/Edit.png" height="20px" width="20px"></img>
-                                <span style={{ marginLeft: "10px" }}>Edit Staff</span></button>
+                                <span style={{ marginLeft: "10px" }}>Edit</span></button>
                             </Popconfirm>
                             <Popconfirm
                               title="Click ok to Confirm Deletion of user"
                               onConfirm={() => HandleDelete(i)}>
                               <button className="btn btn-danger DeleteButton" style={{ width: "45%", marginLeft: "10px" }}>
                                 <img src="/src/assests/Delete.png" height="20px" width="20px"></img>
-                                <span style={{ marginLeft: "10px" }}>Delete Staff</span> </button>
+                                <span style={{ marginLeft: "10px" }}>Delete</span> </button>
                             </Popconfirm>
                           </div>
                         </div>

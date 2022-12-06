@@ -37,11 +37,10 @@ function GeneralNotifications() {
     return (
         <>
             <div className="NotifyItems">
-                <p className='NotifyHeader' >GENERAL NOTIFICATIONS</p>
+                <p className='NotifyHeader' >COMMUNITY ANNOUNCEMENTS</p>
                 <p style={{ textAlign: "center", fontSize: "18px", letterSpacing: "1px", }}>Note - To View details click on MORE INFO</p>
                 <hr style={{ height: "1", backgroundColor: "black", width: "94%", marginLeft: "3%" }}></hr>
                 {
-
                     generalNotifications.map((item, index) => {
                         return (
                             <div key={index}>
@@ -53,7 +52,7 @@ function GeneralNotifications() {
                                                 <p>{item.Title}</p>
                                             </div>
                                         </span>
-                                        <span style={{ padding: "3px", borderRadius: "5px", marginTop: "20px", paddingLeft: "10%"}}>MORE INFO</span>
+                                        <span style={{ padding: "3px", borderRadius: "5px", marginTop: "20px", paddingLeft: "5%"}}>MORE INFO</span>
                                         {/* <span className="NotifyView">
                                             <button className="Viewbutton" style={{ padding: "3px", borderRadius: "5px", marginTop:"20px" }}>More &rarr;</button>
                                         </span> */}
