@@ -4,22 +4,18 @@ contract imageUpload {
   struct image{
     string id;
     string imageHash;
-    bool isSet;
   }
   
   mapping(string => image ) images;
 
 
   function uploadImage(string memory id,string memory hash) public returns (bool) {
-    images[id] = image(id,hash,true);
+    images[id] = image(id,hash);
     return true;
   }
 
 
   function retrieveHash(string memory id) public view returns (string memory) {
-    if(images[id].isSet == false) {
-        return ("Images Hash does not exsists");
-    }
     return (images[id].imageHash);
   }
 }
