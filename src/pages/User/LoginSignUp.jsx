@@ -283,6 +283,7 @@ const LoginSignUp = () => {
         <Fragment>
           <NavBar />
           <div style={{ marginTop: "100px" }}>
+            
             <div className="container">
               <div style={{ marginBottom: "60px" }} className="container">
                 <div className="login_signUp_toggle">

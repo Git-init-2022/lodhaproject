@@ -6,6 +6,7 @@ import './HelpDesk.css';
 import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar';
 import { useGlobalContext } from '/src/context/StateContext';
 import Spinner from "../../components/Spinner/Spinner";
+import { TeamOutlined } from "@ant-design/icons";
 
 function HelpDesk() {
     const { User, setLoading, loading } = useGlobalContext();
@@ -20,11 +21,17 @@ function HelpDesk() {
         
         const cid = await client.put(files);
         console.log(cid);
+        const temp = []
+        for(let file of files){
+            temp.push(file.name);
+        }
+        console.log(temp);
         const { data } = await axios.post("http://localhost:4000/api/v1/complaint/new", {
             FlatNo: FlatNo,
             Issue: Issue,
             Description: Description, 
-            FileHashes: cid
+            FileHashes: cid,
+            FileObjects: temp
         });
         setIsLoading(false);
         if (data.success === false) {
@@ -74,7 +81,7 @@ function HelpDesk() {
                     :
                     <Alert message="Success" type="success" description="Complaint Posted Successfully! Kindly Wait for Admins response" showIcon closable style={{ marginBottom: "20px",marginTop:"20px", width:"60%", letterSpacing:"2px", boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px", marginLeft:"20%" }} /> : <></>
                 }
-                <div class="container" >
+                <div class="container " >
                     <div class="row mx-0 justify-content-center">
                         <div class="col-md-10 col-lg-9 px-lg-2 col-xl-8 px-xl-0">
                             <form

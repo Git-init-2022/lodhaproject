@@ -129,3 +129,19 @@ option {
     -moz-border-radius: 25px;
     border-radius: 25px;
 }
+
+.documentDiv{
+    display: flex;
+    /* justify-content: space-around; */
+}
+
+.CardDocument{
+    background-color: rgb(247, 244, 228);
+    padding: 0px !important;
+}
+
+
+
+.CardBodyDiv{
+    padding: 10px !important;
+}

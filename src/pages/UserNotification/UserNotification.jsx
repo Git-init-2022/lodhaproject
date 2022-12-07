@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useGlobalContext } from '/src/context/StateContext';
 import axios from "axios";
+import "./UserNotification.css"
 
 
 function UserNotification() {
@@ -100,7 +101,7 @@ function UserNotification() {
         <>
             <div style={{ marginRight: "20px" }}>
 
-                <div style={{ width: "500px", boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px", backgroundColor: "#F5F5F5" }}>
+                <div className="notificationBlockdiv" >
                     <div style={{ display: "flex", justifyContent: "center" }}>
                         <Badge count={count} style={{ marginTop: "30px" }}>
                             <Avatar shape="circle" size="large" icon={<BellFilled />} style={{ color: "#675A0E", backgroundColor: "#F5F5F5", marginTop: "20px" }} />

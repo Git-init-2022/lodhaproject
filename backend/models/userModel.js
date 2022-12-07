@@ -1,5 +1,7 @@
 const mongoose = require("mongoose")
 const crypto =require("crypto");
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv").config({path: '../config/config.env'})
 const userSchema = mongoose.Schema({
     OwnerName:{
         type: String,
@@ -59,11 +61,11 @@ const userSchema = mongoose.Schema({
   });
   
   // JWT TOKEN
-  // userSchema.methods.getJWTToken = function () {
-  //   return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
-  //     expiresIn: process.env.JWT_EXPIRE,
-  //   });
-  // };
+  userSchema.methods.getJWTToken = function () {
+    return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+      expiresIn: "1 day",
+    });
+  };
   
   // Compare Password
   

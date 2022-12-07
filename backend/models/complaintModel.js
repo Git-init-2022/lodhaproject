@@ -1,4 +1,5 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+
 
 
 const complaintSchema = mongoose.Schema({
@@ -25,7 +26,8 @@ const complaintSchema = mongoose.Schema({
         type: String,
         required: [true,"Please Enter Flat Number"]
     },
-    FileHashes: String
+    FileHashes: String,
+    FileObjects: [String] 
 })
 
 const Complaint = mongoose.model("Complaint", complaintSchema);

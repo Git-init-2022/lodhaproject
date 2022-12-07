@@ -1,0 +1,19 @@
+
+.notificationBlockdiv{
+    width: 100% ;
+    float:right ;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px ;
+    background-color: #F5F5F5;
+}
+
+@media (max-width: 1400px) {
+    .notificationBlockdiv{
+        width: 400px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .notificationBlockdiv{
+        
+    }
+}

@@ -31,21 +31,19 @@ exports.createUser = catchAsyncErrors(async (req, res, next) => {
             ParkingSlot: ParkingSlot,
             Role: Role
         });
-        //sendToken(user, 201, res);
-        res.status(201).json({
-            success: true,
-            user
-        });
+        sendToken(user, 201, res)
     }
 });
 
 // login User
 exports.loginUser = catchAsyncErrors(async (req, res, next) => {
     const { FlatNo, Password } = req.body;
+    
     const user1 = await User.find({ FlatNo: FlatNo, Password: Password })
     if (!user1 && Object.keys(user1).length) {
         return next(new ErrorHandler("User does not exists", 404));
     }
+
     const role = crypto
       .createHash("sha256")
       .update(user1[0].Role)

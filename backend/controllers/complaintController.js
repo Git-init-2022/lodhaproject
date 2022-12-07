@@ -8,7 +8,7 @@ const User = require("../models/userModel");
 // Create Complaint
 exports.createComplaint = catchAsyncErrors(async (req, res, next) => {
 
-    const { Issue, Description, FlatNo, FileHashes} = req.body;
+    const { Issue, Description, FlatNo} = req.body;
     const complaint1 = await Complaint.find({ Issue: Issue, Description: Description, FlatNo: FlatNo })
     if (complaint1 && Object.keys(complaint1).length) {
         res.status(201).json({

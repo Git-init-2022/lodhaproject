@@ -13,6 +13,7 @@ const form = require('./routes/formRoute');
 const meeting = require('./routes/meetingRoute');
 const resetPassword = require("./routes/resetPasswordRoute")
 const userNotification = require("./routes/userNotificationRoute");
+const document = require("./routes/documentRoute");
 
 app.use("/api/v1", users);
 app.use("/api/v1",complaints);
@@ -22,6 +23,8 @@ app.use("/api/v1", form);
 app.use("/api/v1", meeting);
 app.use("/api/v1", userNotification)
 app.use("/api/v1", resetPassword);
+app.use("/api/v1", document);
+
 // MiddleWare for Errors
 
 

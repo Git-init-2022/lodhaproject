@@ -20,11 +20,15 @@ import { useGlobalContext } from '/src/context/StateContext';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useState } from 'react';
+
 const client = new Web3Storage({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDcxOTdiN2M2OGFEMTNhNzREMGIzMGQ3OTI4OTNGMDc4MWQxZjE4M2QiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NzAxNjM1MTczNDIsIm5hbWUiOiJsb2RoYS1maWxlcyJ9.rmkUCge8MPPj5TC6i8Z5lVAjIevCSVni0gpu-_jUzlI" });
-        
+
+
+
 function AdminPosts({ props, selectedOption }) {
 
     const [singleUser, setSingleUser] = useState([])
+    const [filesNames, setFilesNames] = useState([])
     const user = async () => {
         const { data } = await axios.get("http://localhost:4000/api/v1/singleUser", { params: { FlatNo: props.FlatNo } });
         const singleuser = data.user1[0];
@@ -36,16 +40,7 @@ function AdminPosts({ props, selectedOption }) {
         user()
     }, []);
 
-    const getFiles = async () => {
-       console.log(String(props.FileHashes));
-        const result = await client.get(String(props.FileHashes));
-        const files= await result.files();
-        console.log(files);
-    }
 
-    useEffect(() => {
-        getFiles();
-    }, []);
     const refreshPage = () => {
         window.location.reload();
     }
@@ -107,6 +102,29 @@ function AdminPosts({ props, selectedOption }) {
             return true;
         }
         return false;
+
+    }
+
+    const getSourceimg = (item) => {
+        let x = ''
+        let i = item.lastIndexOf('.');
+        for (let index = i + 1; index < item.length; index++) {
+            x += item[index]
+        }
+        if (x === 'docx' || x === 'doc') {
+            console.log("hello");
+            return '/src/assests/docx.png';
+        }
+        if (x === 'pdf') {
+            return '/src/assests/pdf.png'
+        }
+        if (x === 'xlsx' || x === 'xls') {
+            return '/src/assests/excel.png'
+        }
+        if (x === 'pptx' || x === 'ppt') {
+            return '/src/assests/ppt.png'
+        }
+
     }
 
     return (
@@ -159,17 +177,43 @@ function AdminPosts({ props, selectedOption }) {
                                     <div contentEditable style={{ width: "100%" }} id={props._id}>{props.Description}</div>
 
                                 </div>
-                                {
-                                    props.FileHashes !== "" ?
-                                        <div style={{ display: "grid", gridTemplateColumns: "auto auto" }}>
-                                            <a href={"https://" + props.FileHashes + ".ipfs.w3s.link/"} target="blank">
-                                                File
+                                <p className='DescriptionTitle'>DOCUMENTS</p>
 
-                                            </a>
+                                {
+                                    props.FileObjects.length ?
+                                        <div className='documentDiv'>
+                                            {
+                                                props.FileObjects.map((item) => {
+                                                    return (
+                                                        <Card className="card CardDocument" style={{ width: "250px", margin: "10px"}}>
+                                                            <Card.Body className='CardBodyDiv'>
+
+                                                                {
+                                                                    item.endsWith(".png") || item.endsWith(".jpg") || item.endsWith(".jpeg") || item.endsWith(".gif") ?
+                                                                        <div>
+                                                                            <img src={"https://" + props.FileHashes + ".ipfs.w3s.link/" + item} width="90%" height="90%">
+                                                                            </img>
+                                                                            <p > {item}</p>
+                                                                        </div>
+                                                                        :
+                                                                        <div style={{ display: "flex", }}>
+                                                                            <img src={getSourceimg(item)} width="50px" height="50px"></img>
+
+                                                                            <p style={{ marginLeft: "10px" }}> {item}</p>
+                                                                        </div>
+                                                                }
+                                                            </Card.Body>
+                                                            <Button href={"https://" + props.FileHashes + ".ipfs.w3s.link/" + item} style={{ width: "100%", marginBottom: "0px" }} target="blank" variant="primary" >View document</Button>
+
+                                                        </Card>
+                                                    );
+                                                })
+                                            }
                                         </div>
                                         :
-                                        <>
-                                        </>
+                                        <p>
+                                            No Documents!
+                                        </p>
                                 }
                                 <div style={{ display: "flex", justifyContent: "center", marginTop: "50px" }}>
                                     <button className="btn btn-primary " type="submit" onClick={(e) => UpdateComplaint(e)}>Edit Complaint</button>
