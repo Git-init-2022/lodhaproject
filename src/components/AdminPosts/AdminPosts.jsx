@@ -111,6 +111,9 @@ function AdminPosts({ props, selectedOption }) {
         for (let index = i + 1; index < item.length; index++) {
             x += item[index]
         }
+        if (x === 'png' || x === 'jpg' || x === 'gif' || x === 'jpeg') {
+            return '/src/assests/image.png';
+        }
         if (x === 'docx' || x === 'doc') {
             console.log("hello");
             return '/src/assests/docx.png';
@@ -124,7 +127,7 @@ function AdminPosts({ props, selectedOption }) {
         if (x === 'pptx' || x === 'ppt') {
             return '/src/assests/ppt.png'
         }
-
+        
     }
 
     return (
@@ -171,50 +174,45 @@ function AdminPosts({ props, selectedOption }) {
                         </Card.Header>
                         <Card.Body>
                             <Card.Text className="PostDesc">
+                                <div style={{ display: "flex", }}>
+                                    <div style={{width:"50%"}}>
+                                        <p className='DescriptionTitle'>DESCRIPTION</p>
+                                        <div contentEditable style={{ width: "100%" }} id={props._id}>{props.Description}</div>
+                                    </div>
+                                    <div style={{width:"50%"}}>
+                                        <p className='DescriptionTitle'>DOCUMENTS</p>
 
-                                <p className='DescriptionTitle'>DESCRIPTION</p>
-                                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                                    <div contentEditable style={{ width: "100%" }} id={props._id}>{props.Description}</div>
+                                        {
+                                            props.FileObjects.length ?
+                                                <div className='documentDiv'>
+                                                    {
+                                                        props.FileObjects.map((item) => {
+                                                            return (
+                                                                <Card className="card CardDocument" style={{ width: "250px", margin: "10px" }}>
+                                                                    <Card.Body className='CardBodyDiv'>
 
-                                </div>
-                                <p className='DescriptionTitle'>DOCUMENTS</p>
 
-                                {
-                                    props.FileObjects.length ?
-                                        <div className='documentDiv'>
-                                            {
-                                                props.FileObjects.map((item) => {
-                                                    return (
-                                                        <Card className="card CardDocument" style={{ width: "250px", margin: "10px"}}>
-                                                            <Card.Body className='CardBodyDiv'>
-
-                                                                {
-                                                                    item.endsWith(".png") || item.endsWith(".jpg") || item.endsWith(".jpeg") || item.endsWith(".gif") ?
-                                                                        <div>
-                                                                            <img src={"https://" + props.FileHashes + ".ipfs.w3s.link/" + item} width="90%" height="90%">
-                                                                            </img>
-                                                                            <p > {item}</p>
-                                                                        </div>
-                                                                        :
                                                                         <div style={{ display: "flex", }}>
                                                                             <img src={getSourceimg(item)} width="50px" height="50px"></img>
 
                                                                             <p style={{ marginLeft: "10px" }}> {item}</p>
                                                                         </div>
-                                                                }
-                                                            </Card.Body>
-                                                            <Button href={"https://" + props.FileHashes + ".ipfs.w3s.link/" + item} style={{ width: "100%", marginBottom: "0px" }} target="blank" variant="primary" >View document</Button>
 
-                                                        </Card>
-                                                    );
-                                                })
-                                            }
-                                        </div>
-                                        :
-                                        <p>
-                                            No Documents!
-                                        </p>
-                                }
+                                                                    </Card.Body>
+                                                                    <Button href={"https://" + props.FileHashes + ".ipfs.w3s.link/" + item} style={{ width: "100%", marginBottom: "0px" }} target="blank" variant="primary" >View document</Button>
+
+                                                                </Card>
+                                                            );
+                                                        })
+                                                    }
+                                                </div>
+                                                :
+                                                <p>
+                                                    No Documents!
+                                                </p>
+                                        }
+                                    </div>
+                                </div>
                                 <div style={{ display: "flex", justifyContent: "center", marginTop: "50px" }}>
                                     <button className="btn btn-primary " type="submit" onClick={(e) => UpdateComplaint(e)}>Edit Complaint</button>
                                     <button className="btn btn-danger" type="submit" style={{ marginLeft: "50px" }} onClick={(e) => DeleteComplaint(e)}>Delete Complaint</button>
