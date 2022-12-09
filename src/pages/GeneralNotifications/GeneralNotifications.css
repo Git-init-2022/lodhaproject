@@ -70,3 +70,10 @@
     color: black;
 background-color: rgb(233, 222, 156);
 }
+
+@media (max-width: 1200px) {
+    .NotifyItems{
+        width: 80%;
+        margin-left: 10%;
+    }
+}

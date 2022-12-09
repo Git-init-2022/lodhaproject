@@ -14,10 +14,10 @@ import UserNotification from "../UserNotification/UserNotification";
 function Dashboard() {
     const [IsForms, setIsForms] = useState(false);
     const [IsMeeting, setIsMeeting] = useState(false);
-    const [IsNotification, setIsNotification] = useState(true);
+    const [IsNotification, setIsNotification] = useState(false);
     const [IsComplaints, setIsComplaints] = useState(false);
     const [IsDocuments, setIsDocuments] = useState(false);
-    const [IsAnnoucements, setIsAnnoucements] = useState(false);
+    const [IsAnnoucements, setIsAnnoucements] = useState(true);
     const changeMenu = (e, tab) => {
         if (tab == "Forms") {
             setIsForms(true);
@@ -59,14 +59,14 @@ function Dashboard() {
             setIsDocuments(true);
             setIsAnnoucements(false);
         }
-        // if (tab == "Announcements") {
-        //     setIsComplaints(false);
-        //     setIsForms(false);
-        //     setIsMeeting(false);
-        //     setIsNotification(false);
-        //     setIsDocuments(false);
-        //     setIsAnnoucements(true);
-        // }
+        if (tab == "Announcements") {
+            setIsComplaints(false);
+            setIsForms(false);
+            setIsMeeting(false);
+            setIsNotification(false);
+            setIsDocuments(false);
+            setIsAnnoucements(true);
+        }
     };
 
 
@@ -85,7 +85,7 @@ function Dashboard() {
                         <Nav variant="pills" defaultActiveKey="/home">
 
                             <Nav.Item>
-                                <Nav.Link className="FacilityLink" eventKey="/home" onClick={(e) => changeMenu(e, "Notifications")}>
+                                <Nav.Link className="FacilityLink" eventKey="/home" onClick={(e) => changeMenu(e, "Announcements")}>
                                     <div style={{ display: "flex", alignItems: "center", flexDirection: "column", textAlign: "center" }}>
                                         <img src="/src/assests/announcement.png" height="50px" width="50px"></img>
                                         <pre style={{ fontFamily: "Montserrat" }}>Announcements</pre>
@@ -135,6 +135,13 @@ function Dashboard() {
                                         <pre style={{ fontFamily: "Montserrat" }}>   Documents   </pre>
                                     </div></Nav.Link>
                             </Nav.Item>
+                            <Nav.Item className="NotificationLinkItem">
+                                <Nav.Link className="FacilityLink" eventKey="/notify" onClick={(e) => changeMenu(e, "Notifications")}>
+                                    <div style={{ display: "flex", alignItems: "center", flexDirection: "column", textAlign: "center" }}>
+                                        <img src="/src/assests/notifications.png" height="50px" width="50px"></img>
+                                        <pre style={{ fontFamily: "Montserrat" }}>   Notifications   </pre>
+                                    </div></Nav.Link>
+                            </Nav.Item>
 
                         </Nav>
 
@@ -143,10 +150,13 @@ function Dashboard() {
 
                     {IsForms && <GoogleForms />}
                     {IsMeeting && <Notifications />}
-                    {IsNotification && <GeneralNotifications />}
+                    {IsAnnoucements && <GeneralNotifications />}
                     {IsComplaints && <Complaints />}
                     {IsDocuments && <Documents />}
-                    <div style={{ float: "right" }}>
+                    <div className="userNotificationDivItem1">
+                    {IsNotification && <UserNotification />}
+                    </div>
+                    <div className="userNotificationDivItem" style={{ float: "right" }}>
                         {<UserNotification />}
                     </div>
            

@@ -60,6 +60,18 @@ function BasicExample() {
 
   }
 
+  const getimagesource = (type) => {
+    if(type==='legal'){
+      return '/src/assests/legalUpdate.png';
+    }
+    if(Type==='bank'){
+      
+    }
+    if(Type === 'audit'){
+
+    }
+  }
+
   const getFormattedDate = (date) => {
 
     let timeStamp = Date.parse(date);
@@ -96,7 +108,10 @@ function BasicExample() {
               Documents.map((item) => {
                 return (
                   <Card className="DocumentCard">
-                    <Card.Img variant="top" src={"/src/assests/lodhalogo.png" }/>
+                    <Card.Title >
+                    <img  height="100px" width="100px" style={{marginTop:"10px"}} src={getimagesource(item.Type)} ></img>
+                    </Card.Title>
+                    
                     <Card.Body>
                       <p style={{ letterSpacing: "1px", fontSize: "20px", textDecorationLine:"underline", textUnderlineOffset:"10px", textDecorationColor:"gray"}}>{types[String(item.Type)]}</p>
                       <div className="DisplayDiv">
@@ -109,7 +124,8 @@ function BasicExample() {
                       <Card.Text>
 
                       </Card.Text>
-                      <Button variant="primary" target="blank" href={"https://" + item.Hash + ".ipfs.w3s.link/" + item.Name}>View document</Button>
+                      <Button variant="primary" target="blank" href={"https://" + item.Hash + ".ipfs.w3s.link/" + item.Name} className="viewDocumentButton">
+                        <img src="/src/assests/document.png" height="20px" width = "20px" style={{marginRight:"10px"}}></img>View Document</Button>
                     </Card.Body>
                   </Card>
                 );

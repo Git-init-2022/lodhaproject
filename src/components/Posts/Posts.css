@@ -97,3 +97,9 @@
   text-underline-offset: 10px;
   font-weight: bold;
 }
+
+@media (max-width: 800px) {
+  .ComplaintsButton{
+    width: 80% !important;
+  }
+}

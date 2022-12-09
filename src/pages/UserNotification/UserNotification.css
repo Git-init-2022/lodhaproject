@@ -8,14 +8,9 @@
     border:2px solid #675A0E;
 }
 
-@media (max-width: 1400px) {
-    .notificationBlockdiv{
-        width: 400px;
-    }
-}
 
-@media (max-width: 1000px) {
+@media (min-width: 1200px) {
     .notificationBlockdiv{
-        
+       width: 400px
     }
 }

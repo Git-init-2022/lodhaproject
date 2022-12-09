@@ -55,3 +55,27 @@
   justify-content: center;
  }
 
+.NotificationLinkItem{
+    display: none;
+}
+.userNotificationDivItem1{
+    width: 80%;
+    margin-left: 10%;        
+}
+
+
+@media (max-width: 1200px) {
+    .NotificationLinkItem{
+        display: inherit;
+    }
+    .userNotificationDivItem{
+        display:none;
+    }
+   
+}
+
+@media (min-width:1200px) {
+    .userNotificationDivItem1{
+        display: none;
+    }
+}
