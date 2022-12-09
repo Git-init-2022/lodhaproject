@@ -176,48 +176,57 @@ const KeyContactsAndMails = () => {
       title: "Flat Number",
       dataIndex: "FlatNo",
       key: "FlatNo",
+      className:"TableColumns",
+
       editable: true
     },
     {
       title: "Owner Name",
       dataIndex: "OwnerName",
       key: "OwnerName",
+        className:"TableColumns",
       editable: true
     },
     {
       title: "Property Registered Name",
       dataIndex: "RegisteredName",
       key: "RegisteredName",
+        className:"TableColumns",
       editable: true
     },
     {
       title: "Email",
       dataIndex: "Email",
       key: "Email",
+        className:"TableColumns",
       editable: true
     },
     {
       title: "Mobile Number",
       dataIndex: "Mobile",
       key: "Mobile",
+        className:"TableColumns",
       editable: true,
     },
     {
       title: "Block",
       dataIndex: "Block",
       key: "Block",
+        className:"TableColumns",
       editable: true
     },
     {
       title: "Parking Slot",
       dataIndex: "ParkingSlot",
       key: "ParkingSlot",
+        className:"TableColumns",
       editable: true
     },
     {
       title: "Society Dues",
       dataIndex: "Dues",
       key: "Dues",
+        className:"TableColumns",
       editable: false
     },
     {
@@ -330,12 +339,15 @@ const KeyContactsAndMails = () => {
           dataSource={filteredData}
           columns={columns}
           loading={loading}
-          pagination={false}
+          pagination={true}
           style={{
+            
             marginTop: "20px",
             marginRight: "20px",
+            overflowX:"auto",
             boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
           }}
+          
         />
       </div>
       <div style={{ height: "100px", color: "white" }}></div>

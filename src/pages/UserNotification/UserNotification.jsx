@@ -111,6 +111,7 @@ function UserNotification() {
                     <hr></hr>
                     <div className="alertDiv" style={{ width: "100%", display: "grid", gridTemplateColumns: "auto ", rowGap: "20px", padding: "20px" }} >
                         {
+                            Notifications.length ?
                             Notifications.map((item) => {
                                 return (
                                     <>
@@ -171,6 +172,8 @@ function UserNotification() {
                                     </>
                                 );
                             })
+                            :
+                            <p style={{textAlign:"center", letterSpacing:"1px", fontSize:"18px"}}>No Notifications!</p>
                         }
                     </div>
                 </div>
