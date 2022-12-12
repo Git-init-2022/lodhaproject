@@ -82,14 +82,11 @@ function Profile() {
 
                                 <img src="/src/assests/user.svg" id="userProfileImg" ></img>
                                 <button className="btn btn-primary uploadButton" onClick={() => setVisible(true)}>
-                                <img src='/src/assests/camera.png' height="20px" width="20px" style={{marginRight:"10px"}}>
-                                </img>Upload
+                                <img src='/src/assests/camera.png' height="20px" width="20px" style={{marginRight:"10px"}}></img>
+                                Upload
                                 </button>
-
                                 <form encType="multipart/form-data" >
-                                    <input type="file"></input>
-                                    <button></button>
-                                    
+                                    <input type="file" className="btn btn-primary uploadButton"></input>    
                                 </form>
                             </div>
 

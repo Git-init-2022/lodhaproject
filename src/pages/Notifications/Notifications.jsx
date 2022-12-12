@@ -294,7 +294,146 @@ function Notifications() {
             </div>
 
             :
-            <></>
+            <div>
+              <p className='MeetingHeader' >FINISHED MEETINGS</p>
+              {
+                <p style={{ textAlign: "center", fontSize: "18px", letterSpacing: "1px", }}>To view details click on the meeting</p>
+              }
+              <hr style={{ height: "1", backgroundColor: "black", width: "94%", marginLeft: "3%" }}></hr>
+              {
+
+                Notification.map((item) => {
+                  return (
+                    <>
+                      <div>
+                        <Button variant="primary" onClick={() => handleShow(item.Title, item.Description, item.Link, item.Host, item.Date, item.Time, item._id)} className="NotifyBar">
+                          <div className="ModalNotify">
+                            <span className='Date'>
+                              <p style={{ textDecorationLine: "underline", textUnderlineOffset: "10px", textDecorationThickness: "2px" }}>MEETING TITLE</p>
+                              <p>{item.Title}</p>
+                            </span>
+                            <span className='Date'>
+                              {getFormattedTime(item.Date)}<br></br>
+                              {item.Time}
+                            </span>
+                          </div>
+                        </Button>
+
+                      </div>
+                      <hr style={{ width: "94%", marginLeft: "3%" }}></hr>
+                    </>
+                  );
+                })
+              }
+              {
+                isAdmin ?
+
+                  <Modal
+                    show={modalShow}
+                    onHide={handleHide}
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                  >
+                    <form
+                      onSubmit={UpdateMeeting}
+                    >
+                      <Modal.Header closeButton>
+                        <Modal.Title id="contained-modal-title-vcenter">
+                          <span id="title" className="inputEditable" style={{ fontSize: "20px", letterSpacing: "1px", fontWeight: "normal" }} contentEditable>
+                            {titleVar}
+                          </span>
+                        </Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <div>
+                          <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textDecorationColor: "gold", textDecorationThickness: "2px", textUnderlineOffset: "5px", marginTop: "10px" }}>Description </label>
+                          <div id="Description" className="inputEditable" style={{ fontSize: "16px" }} contentEditable>
+                            {DescVar}
+                          </div>
+
+                          <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textDecorationColor: "gold", textDecorationThickness: "2px", textUnderlineOffset: "5px", marginTop: "10px" }}>Host </label>
+                          <div id="host" className="inputEditable" style={{ fontSize: "16px" }} contentEditable>
+                            {HostVar}
+                          </div>
+
+                          <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textDecorationColor: "gold", textDecorationThickness: "2px", textUnderlineOffset: "5px", marginTop: "20px" }}>Link </label>
+                          <div>
+                            <a id="linkOfMeeting" href={LinkVar} target="_blank" style={{ textDecorationLine: "underline", fontSize: "16px" }} contentEditable>{LinkVar}</a>
+                          </div>
+
+                          <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textUnderlineOffset: "5px", marginTop: "10px", textDecorationThickness: "2px", textDecorationColor: "gold" }}>Date </label>
+                          <div> <br></br><input name="Date" id="DateofMeeting" type="Date" defaultValue={getFormattedTime1(DateVar)} className="inputEditable" ></input><br></br></div>
+                          <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textUnderlineOffset: "5px", marginTop: "10px", textDecorationThickness: "2px", textDecorationColor: "gold" }}>Time </label>
+                          <div> <br></br><input name="Time" id="TimeofMeeting" className="inputEditable" type="Time" defaultValue={TimeVar} ></input><br></br></div>
+
+                        </div>
+                      </Modal.Body>
+                      <Modal.Footer>
+
+                        <div >
+                          <div style={{ textAlign: "left" }}>
+                            <ul style={{ textAlign: "left" }}>
+                              <li>Click on the fields to edit Details</li>
+                              <li>To Edit Meeting details click on "Edit Meeting" button</li>
+                              <li>To Delete Meeting details click on "Delete Meeting" button</li>
+                            </ul>
+                          </div>
+
+                          <div style={{ display: "flex", justifyContent: "center", }}>
+                            <button className="btn btn-primary " type="submit" onClick={(e) => UpdateMeeting(e, idvalue)}>Edit Meeting</button>
+                            <button className="btn btn-danger" type="submit" style={{ marginLeft: "50px" }} onClick={(e) => DeleteMeeting(e, idvalue)}>Delete Meeting</button>
+                          </div>
+                        </div>
+
+                      </Modal.Footer>
+                    </form>
+                  </Modal>
+                  :
+
+                  <Modal
+                    show={modalShow}
+                    onHide={handleHide}
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                  >
+                    <Modal.Header closeButton>
+                      <Modal.Title id="contained-modal-title-vcenter">
+                        <span id="titleOfForm" style={{ fontSize: "20px", letterSpacing: "1px", textDecorationLine: "underline", textUnderlineOffset: "10px", textDecorationColor: "gold !important", fontWeight: "normal" }}>
+                          {titleVar}
+                        </span>
+                      </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <div>
+                        <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textDecorationColor: "gold", textDecorationThickness: "2px", textUnderlineOffset: "5px", marginTop: "10px" }}>Description </label>
+                        <div id="DescriptionOfForm" style={{ fontSize: "16px" }} >
+                          {DescVar}
+                        </div>
+                        <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textDecorationColor: "gold", textDecorationThickness: "2px", textUnderlineOffset: "5px", marginTop: "10px" }}>Host </label>
+                        <div id="hostOfMeeting" style={{ fontSize: "16px" }} >
+                          {HostVar}
+                        </div>
+                        <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textDecorationColor: "gold", textDecorationThickness: "2px", textUnderlineOffset: "5px", marginTop: "20px" }}>Link </label>
+                        <div>
+                          <a id="linkOfMeeting" href={LinkVar} target="_blank" style={{ textDecorationLine: "underline", fontSize: "16px" }} >Click to open Link</a>
+                        </div>
+                        <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textUnderlineOffset: "5px", marginTop: "10px", textDecorationThickness: "2px", textDecorationColor: "gold" }}>Date </label>
+                        <div id="Date" name="Date" style={{ fontSize: "16px" }} >
+                          {getFormattedTime(DateVar)}
+                        </div>
+                        <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textUnderlineOffset: "5px", marginTop: "10px", textDecorationThickness: "2px", textDecorationColor: "gold" }}>Time </label>
+
+                        <div id="time" style={{ fontSize: "16px" }} >
+                          {TimeVar}
+                        </div>
+                      </div>
+                    </Modal.Body>
+                  </Modal>
+
+              }
+            </div>
         }
       </div>
 

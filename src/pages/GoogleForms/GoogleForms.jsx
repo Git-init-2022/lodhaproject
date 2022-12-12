@@ -95,10 +95,6 @@ function GoogleForms() {
                         </>
                     ))
                 }
-            
-            <div style={{ height: "100px", backgroundColor: "white" }}>
-
-            </div>
 
             <Modal
                 show={modalShow}

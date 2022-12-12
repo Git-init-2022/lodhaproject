@@ -30,7 +30,7 @@ function Complaints() {
         <div className="Note" style={{ marginTop: "10px", marginLeft:"20px" }}>
           <p className="NoteTitle">NOTE</p>
           <ul>
-            <li className="NoteList">
+            <li className="NoteList" style={{marginRight: "20px"}}>
               Click on the Description to edit and press "Edit Complaint" button to save your changes.
             </li>
           </ul>

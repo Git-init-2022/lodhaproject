@@ -19,7 +19,8 @@
   margin: auto;
   margin-left: 50px;
   width: 50%;
-  height: auto;
+  height: 100%;
+  overflow-y: scroll;
   /*background-color: #edf6f7;*/
   background-color: whitesmoke;
   border-radius: 10px;
@@ -147,9 +148,28 @@
 }
 
 
-@media (max-width: 1200px) {
+@media (max-width: 1000px) {
   .MeetingItems{
-    width: 80%;
+    width: 80% !important;
     margin-left: 10%;
   }
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #675a0e;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

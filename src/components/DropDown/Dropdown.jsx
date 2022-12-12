@@ -29,11 +29,11 @@ function Dropdown() {
               <Accordion.Body className='ExpandDropDown'>
                 {(JSON.parse(User).Role === 'c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918' || JSON.parse(User).Role === 'ab6db599234d2636659cba1aa191bd014c3867d5cfade98ff694785c20c28fc6') ? <a href='/Finance'>Finance & Account</a> : <></>}
                 {(JSON.parse(User).Role === 'c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918' || JSON.parse(User).Role === '440f3041c89adee0f2ad780704bcc0efae1bdb30f8d77dc455a2f6c823b87ca0') ? <a href='/FM'>FM</a> : <></>}
-                <a href='/Cultural'>Cultural Section</a>
                 <a href='/AllComplaints'>All Complaints</a>
                 <a href='/LegalUpdate'>Legal Update</a>
                 <a href='/Purchase'>Purchase & Audit Section</a>
                 <a href='/KeyContacts'>Key Contacts & Email ids</a>
+                <a href='/StaffManagement'>Staff Management</a>
                 {JSON.parse(User).Role === 'c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'? <a href='/StaffManagement'> Staff Management</a> : <></>}
               </Accordion.Body>
             </Accordion.Item>
@@ -65,16 +65,24 @@ function Dropdown() {
                 {isAdmin ? <a href="/Meeting">Set-Up a Meeting</a> : <></>}
                 {isAdmin ? <a href="/CreateForm">Create Survey Forms</a> : <></>}
                 {isAdmin ? <a href='/Cultural'>Cultural Activities</a> : <></>}
-                {/* <a href='/Notifications'>Upcoming Zoom Meetings</a> */}
                 <a href='/MyGate'>My Gate</a>
-                {/* <a href='/Forms'>Google Forms</a> */}
                 <a href='/Emergency'>Emergency Services</a>
                 <a href='/Vendors'>Vendors Directory & Negotiated Rates</a>
-                {/* <a href='/Translation'>Google Translation</a> */}
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
 
+          <Accordion.Item eventKey="5">
+              <Accordion.Header ><p className='DropDownHeader'></p> </Accordion.Header>
+            </Accordion.Item>
+
+            <Accordion.Item eventKey="5">
+              <Accordion.Header ><p className='DropDownHeader'></p> </Accordion.Header>
+            </Accordion.Item>
+
+            <Accordion.Item eventKey="5">
+              <Accordion.Header ><p className='DropDownHeader'></p> </Accordion.Header>
+            </Accordion.Item>
         </div>
       
     </>
