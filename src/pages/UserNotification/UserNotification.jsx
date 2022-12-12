@@ -117,15 +117,15 @@ function UserNotification() {
                                     <>
                                         {item.Flag === 0 ?
                                         
-                                            <Toast style={{ width: "100%" }} onClose={() => DeleteNotification(item)}>
+                                            <Toast style={{ width: "100%",}} onClose={() => DeleteNotification(item)}>
                                                 <Toast.Header style={{ backgroundColor: "rgb(245, 242, 242)" }}>
 
-                                                    <div style={{ display: "flex", justifyContent: "space-between", width: "90%", }}>
+                                                    <div style={{ display: "flex", justifyContent: "space-between", width: "90%"}}>
                                                         <div>
                                                             {/* <img width="15px" height="15px"
                                                             src="/src/assests/info.png"
                                                              /> */}
-                                                            <span style={{ letterSpacing: "1px", fontSize: "18px", fontWeight: "bold", marginLeft: "5px", marginTop: "5px", color: "black" }}>
+                                                            <span style={{ letterSpacing: "1px", fontSize: "16px" ,fontWeight: "bold", marginLeft: "5px", marginTop: "5px", color: "black" }}>
                                                                 {item.NotificationTitle}
                                                             </span>
                                                         </div>

@@ -76,7 +76,7 @@ function Dashboard() {
 
             <div>
                 <div style={{ display: "flex", marginTop: "100px", justifyContent: "center", }}>
-                    <img src="/src/assests/dashboard.png" style={{ height: "40px", width: "40px", marginBottom: "0px", }}></img>
+                    <img src="/src/assests/dashboard.png" style={{ height: "55px", width: "50px", marginBottom: "0px", }}></img>
                     <p id="userDashboardTitle">USER DASHBOARD</p>
                 </div>
                 
@@ -86,7 +86,7 @@ function Dashboard() {
 
                             <Nav.Item>
                                 <Nav.Link className="FacilityLink" eventKey="/home" onClick={(e) => changeMenu(e, "Announcements")}>
-                                    <div style={{ display: "flex", alignItems: "center", flexDirection: "column", textAlign: "center" }}>
+                                    <div style={{ display: "flex", alignItems: "center",height:"100%" , flexDirection: "column", textAlign: "center" }}>
                                         <img src="/src/assests/announcement.png" height="50px" width="50px"></img>
                                         <pre style={{ fontFamily: "Montserrat" }}>Announcements</pre>
                                     </div>

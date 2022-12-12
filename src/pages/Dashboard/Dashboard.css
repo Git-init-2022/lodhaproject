@@ -1,81 +1,92 @@
-.FacilityNavBar{
+.FacilityNavBar {
     margin-top: 40px !important;
-     width: fit-content;
-     /* background-color: rgb(244, 226, 124) !important;
+    width: fit-content;
+    /* background-color: rgb(244, 226, 124) !important;
      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
-     box-shadow:none ;
-     display: flex;
-     flex-direction: row;
-     /* justify-content: center; */
-     border-bottom: 1px solid black;
-     border-radius: 0px;    
-     
- }
- 
- .FacilityLink, .FacilityLink1{
-   margin: 5px !important;
-   color: black !important ;
-   font-size: 16px;
-   flex-grow: 1;
-            flex-basis: 0;
-            min-width: 0;
- }
- .FacilityLink:first-letter, .FacilityLink1:first-letter{
-     font-size: 22px;
- }
- 
- #userDashboardTitle{
-     font-size: 35px;
-     font-weight: bolder;
-     margin: 0px;
-     letter-spacing: 2px;
-     margin-left: 15px;
- }
- 
- #userDashboardTitle:first-letter{
-     font-weight: bolder;
-     font-size: 35px;
-     
- }
- 
- .FacilityNavBar .active{
-     background-color: rgb(209, 197, 130) !important;
-     color: black !important;
- }
- 
- .FacilityLink:hover, .FacilityLink1:hover{
+    box-shadow: none;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    border-bottom: 1px solid black;
+    border-radius: 0px;
+
+}
+
+.FacilityLink,
+.FacilityLink1 {
+    margin: 5px !important;
+    margin-bottom: 0px !important;
+    color: black !important;
+    font-size: 16px;
+    flex-grow: 1;
+    flex-basis: 0;
+    min-width: 0;
+    padding-bottom:0px;
+}
+
+.FacilityLink:first-letter,
+.FacilityLink1:first-letter {
+    font-size: 22px;
+}
+
+#userDashboardTitle {
+    font-size: 45px;
+    font-weight: bolder;
+    margin: 0px;
+    letter-spacing: 2px;
+    margin-left: 15px;
+    text-align: center;
+}
+
+#userDashboardTitle:first-letter {
+    font-weight: bolder;
+    font-size: 45px;
+
+}
+
+.FacilityNavBar .active {
+    background-color: rgb(247, 236, 172) !important;
+    border-bottom: 5px solid rgb(89, 81, 42);
+    color: black !important;
+}
+
+.FacilityLink:hover,
+.FacilityLink1:hover {
     background-color: rgb(185, 183, 176);
     color: black !important;
-    
- }
 
- .navbarLink{
-  display: flex;
+}
 
-  justify-content: center;
- }
+.navbarLink {
+    display: flex;
 
-.NotificationLinkItem{
+    justify-content: center;
+}
+
+.NotificationLinkItem {
     display: none;
 }
-.userNotificationDivItem1{
+
+.userNotificationDivItem1 {
     width: 80%;
-    margin-left: 10%;        
+    margin-left: 10%;
 }
+
 
 
 @media (max-width: 1200px) {
-    .NotificationLinkItem{
+    .NotificationLinkItem {
         display: inherit;
     }
-    .userNotificationDivItem{
-        display:none;
+
+    .userNotificationDivItem {
+        display: none;
     }
-   
+
 }
 
 @media (min-width:1200px) {
-    .userNotificationDivItem1{
+    .userNotificationDivItem1 {
         display: none;
     }
 }

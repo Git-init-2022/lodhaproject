@@ -1,8 +1,8 @@
 
 .notificationBlockdiv{
-    width: 100% ;
+    width: 500px !important;
     float:right ;
-    /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px ; */
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px ;
     background-color: #F5F5F5;
     border-radius: 5px;
     border:2px solid #675A0E;

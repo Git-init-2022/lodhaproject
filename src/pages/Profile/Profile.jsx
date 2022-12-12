@@ -77,24 +77,24 @@ function Profile() {
                 <form onSubmit={UpdateSubmit}>
                     <div className="UserProfileDiv">
                         <p id="userProfileTitle">USER PROFILE</p>
-                        <div style={{display:"flex", justifyContent:"space-between"}}>
-                            <div style={{ display: "flex", flexDirection:"column", width:"30%"}}>
+                        <div className="ProfileFlexDiv" style={{ display: "flex", justifyContent: "space-between" }}>
+                            <div style={{ display: "flex", flexDirection: "column", width: "30%" }}>
 
                                 <img src="/src/assests/user.svg" id="userProfileImg" ></img>
                                 <button className="btn btn-primary uploadButton" onClick={() => setVisible(true)}>
-                                <img src='/src/assests/camera.png' height="20px" width="20px" style={{marginRight:"10px"}}>
-                                </img>Upload
+                                    <img src='/src/assests/camera.png' height="20px" width="20px" style={{ marginRight: "10px" }}>
+                                    </img>Upload
                                 </button>
 
                                 <form encType="multipart/form-data" >
                                     <input type="file"></input>
                                     <button></button>
-                                    
+
                                 </form>
                             </div>
 
-                            
-                            <div style={{width:"70%"}}>
+
+                            <div style={{ width: "70%" }}>
                                 <div className="ProfileInput" style={{ marginTop: "40px" }}>
                                     <p className="EditTitle">NAME</p>
 
@@ -112,18 +112,23 @@ function Profile() {
                                     <input placeholder={JSON.parse(User).Mobile} name="Mobile" className="EditInput"></input>
 
                                 </div>
-                                <div className="ProfileInput">
-                                    <p className="EditTitle">BLOCK</p>
+                                <div style={{ display: "flex", }}>
+                                    <div style={{width:"50%"}}>
+                                        <div className="ProfileInput">
+                                            <p className="EditTitle">BLOCK</p>
 
-                                    <input placeholder={JSON.parse(User).Block} name="Block" className="EditInput"></input>
+                                            <input placeholder={JSON.parse(User).Block} name="Block" className="EditInput"></input>
 
+                                        </div>
+                                    </div>
+                                    <div style={{width:"50%"}}>
+                                        <div className="ProfileInput">
+                                            <p className="EditTitle">FLAT NUMBER</p>
+                                            <input placeholder={JSON.parse(User).FlatNo} name="FlatNo" className="EditInput"></input>
+
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="ProfileInput">
-                                    <p className="EditTitle">FLAT NUMBER</p>
-                                    <input placeholder={JSON.parse(User).FlatNo} name="FlatNo" className="EditInput"></input>
-
-                                </div>
-
                                 <div className="ProfileInput" >
                                     <p className="EditTitle">PROPERTY REGISTERED NAME</p>
                                     <input placeholder={JSON.parse(User).RegisteredName} name="RegisteredName" className="EditInput"></input>
