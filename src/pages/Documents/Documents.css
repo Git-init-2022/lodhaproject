@@ -63,7 +63,7 @@
     border: 2px solid rgb(83, 74, 26) !important;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1000px) {
     .mainDiv {
         width: 100%;
         position: absolute;

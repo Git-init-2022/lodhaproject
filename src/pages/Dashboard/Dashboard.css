@@ -74,8 +74,8 @@
 
 
 
-@media (max-width: 1200px) {
-    .NotificationLinkItem {
+@media (max-width: 1000px) {
+    .NotificationLinkItem{
         display: inherit;
     }
 
@@ -85,8 +85,8 @@
 
 }
 
-@media (min-width:1200px) {
-    .userNotificationDivItem1 {
+@media (min-width:1000px) {
+    .userNotificationDivItem1{
         display: none;
     }
 }

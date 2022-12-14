@@ -9,11 +9,9 @@
   height: 100%;
   width: 300px;
   position:fixed;
-  
   z-index: 10000 !important;
-
   background-color: #FFFFFF;
-  
+  overflow-y: scroll;
   padding-top: 20px;
   box-shadow: 2px 2px 12px #cacac8;
 }
