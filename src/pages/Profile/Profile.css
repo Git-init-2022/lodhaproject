@@ -106,7 +106,7 @@
 .UserProfileSubmit {
     width: 50%;
     font-size: 18px;
-    /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     margin-top: 50px;
     font-weight: bold;
     margin-bottom: 50px;
@@ -128,8 +128,7 @@
     .ProfileFlexDiv{
         display: inherit;
     }
-}
- */
+}*/
 
  .gradient-custom {
      /* Chrome 10-25, Safari 5.1-6 */
