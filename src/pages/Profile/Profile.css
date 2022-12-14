@@ -1,4 +1,4 @@
-.UserProfileDiv {
+/* .UserProfileDiv {
     background-color: whitesmoke !important;
     width: 80%;
     margin-left: 10%;
@@ -8,18 +8,18 @@
     align-items: center;
     border-radius: 10px;
     margin-bottom: 50px;
-}
+}*/
 
 #userProfileTitle {
-    padding: 20px 0px 0px 0px;
+    padding: 85px 0px 0px 0px;
     font-size: 25px;
     font-weight: bolder;
-    margin-bottom: 0;
+    margin-bottom: -75px;
     letter-spacing: 2px;
     text-align: center;
 }
 
-#userProfileTitle:first-letter {
+/*#userProfileTitle:first-letter {
     font-weight: bold;
     font-size: 33px;
 }
@@ -123,4 +123,33 @@
     background-color: black;
     color: gold;
 }
+ */
 
+ .gradient-custom {
+     /* Chrome 10-25, Safari 5.1-6 */
+     background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(198, 193, 112));
+
+     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+     background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgb(198, 192, 112))
+ }
+
+h4{
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+h5{
+    font-size: 25px;
+    color: #413807;
+    font-weight: bold;
+}
+
+h6{
+    font-size: 19px;
+    color:#564b0b;
+}
+
+ .text-muted{
+    font-size: 15px;
+    color: black !important;
+ }
