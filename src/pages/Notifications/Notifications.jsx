@@ -117,15 +117,17 @@ function Notifications() {
     const getUpcoming = document.getElementById("upcoming");
     if (tab === "upcoming") {
       setUpcoming(true);
-      getFinished.classList.remove("Active");
-      getUpcoming.classList.add("Active");
-
-
+      getUpcoming.style.border = "5px solid #675a0e";
+      getUpcoming.style.backgroundColor = "rgb(220, 219, 216)";
+      getFinished.style.border= "none";
+      getFinished.style.backgroundColor = "whitesmoke";
     }
     else {
+      getFinished.style.border= "5px solid #675a0e";
+      getFinished.style.backgroundColor = "rgb(220, 219, 216)";
+      getUpcoming.style.border= "none";
+      getUpcoming.style.backgroundColor = "whitesmoke";
       setUpcoming(false);
-      getFinished.classList.add("Active");
-      getUpcoming.classList.remove("Active");
     }
   }
 
@@ -140,7 +142,7 @@ function Notifications() {
       <div className="MeetingItems" style={{ marginTop: "0px" }}>
 
         <div className="TabSwitch" style={{ marginBottom: "30px", width: "100%", }}>
-          <Nav style={{ display: "flex", width: "100%", }}>
+          <Nav style={{ display: "flex", width: "100%"}}>
             <Nav.Link id="upcoming" className="Active" style={{ color: "black", width: "50%", textAlign: "center" }} eventKey="/upcoming" onClick={(e) => changeMenu(e, "upcoming")}>
               Upcoming Meetings
             </Nav.Link>

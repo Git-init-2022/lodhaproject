@@ -143,8 +143,9 @@
 
 
 .Active {
-  border-bottom: 5px solid #675a0e;
+  border: 5px solid #675a0e ;
   background-color: rgb(220, 219, 216);
+  
 }
 
 
