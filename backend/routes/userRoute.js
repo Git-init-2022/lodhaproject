@@ -16,5 +16,5 @@ router.route('/register').post(createUser);
 router.route('/userupdate').get(updateUser)
 router.route('/userdelete').get(deleteUser);
 router.route('/singleUser').get(getUser);
- 
+ router.route('/updateProfile').post(updateProfile);
 module.exports = router

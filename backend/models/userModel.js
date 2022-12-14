@@ -48,6 +48,12 @@ const userSchema = mongoose.Schema({
         default: 0,
         required: true
     },
+    ImageToken: {
+      type: String
+    },
+    ImageName: {
+      type: String
+    },
     resetPasswordToken: String,
     resetPasswordExpire: Date,
 });

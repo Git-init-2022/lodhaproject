@@ -63,7 +63,7 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
         Mobile: user1[0].Mobile,
         Email: user1[0].Email,
         Dues: user1[0].Dues,
-        Role: role
+        Role: role, 
     }
     // sendToken(user, 201, res);
     res.status(200).json({
@@ -213,16 +213,15 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
 });
 
 exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
-    const {FlatNo} = req.body;
+    const {FlatNo, cid, name} = req.body;
     const user1 = await User.find({ FlatNo: FlatNo });
     if (!user1 || user1.length==0) {
         return next(new ErrorHandler("User not found", 404));
     }
-
-    const result = await cloudinary.uploader.upload( req.file.path, {
-        public_id: `${user1[0]._id}_profile`
-    })
-    
+    console.log(name, cid);
+    user1[0].ImageName = name;
+    user1[0].ImageToken = cid;
+    user1[0].save();
     res.status(200).json({
         success: true,
         message: "User Profile Update successful"

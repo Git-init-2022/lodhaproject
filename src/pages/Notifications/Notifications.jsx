@@ -12,6 +12,10 @@ import { useGlobalContext } from '/src/context/StateContext';
 function Notifications() {
   const [modalShow, setModalShow] = useState(false);
   const [Notification, setNotification] = useState([]);
+  const [upcoming, setUpcoming] = useState(true);
+  const [FinishedMeetings, setFinishedMeetings] = useState([]);
+  const [upcomingMeetings, setUpcomingMeetings] = useState([]);
+
   const [titleVar, setTitleVar] = useState('');
   const [DescVar, setDescVar] = useState('');
   const [LinkVar, setLinkVar] = useState('');
@@ -19,11 +23,24 @@ function Notifications() {
   const [DateVar, setDateVar] = useState('');
   const [TimeVar, setTimeVar] = useState('');
   const [idvalue, setidvalue] = useState('');
-  const [upcoming, setUpcoming] = useState(true);
+  const [finished, setFinished] = useState(false);
+  
   const { User } = useGlobalContext();
   const [isAdmin, setisAdmin] = useState(JSON.parse(User).Role === 'admin');
   const fetchMeetings = async () => {
     const { data } = await axios.get("http://localhost:4000/api/v1/AllMeetings");
+    const temp1 = [], temp2 = [];
+    for(let meeting of data.meetings){
+      if(CompareDate(meeting.Date)){
+        temp1.push(meeting);
+      }
+      else{
+        temp2.push(meeting);
+      }
+    }
+    console.log(temp1, temp2);
+    setFinishedMeetings(temp2);
+    setUpcomingMeetings(temp1);
     setNotification(data.meetings);
   }
   useEffect(() => {
@@ -131,6 +148,17 @@ function Notifications() {
     }
   }
 
+  const CompareDate = (DateOfMeeting) =>  {
+    let timeStamp = Date.parse(DateOfMeeting);
+    var date = new Date(timeStamp);
+    if(timeStamp >= Date.now()){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
   return (
     <>
 
@@ -161,8 +189,8 @@ function Notifications() {
               }
               <hr style={{ height: "1", backgroundColor: "black", width: "94%", marginLeft: "3%" }}></hr>
               {
-
-                Notification.map((item) => {
+                upcomingMeetings.length ? 
+                upcomingMeetings.map((item) => {
                   return (
                     <>
                       <div>
@@ -184,6 +212,8 @@ function Notifications() {
                     </>
                   );
                 })
+                :
+                <p>No Upcoming Meetings</p>
               }
               {
                 isAdmin ?
@@ -304,7 +334,7 @@ function Notifications() {
               <hr style={{ height: "1", backgroundColor: "black", width: "94%", marginLeft: "3%" }}></hr>
               {
 
-                Notification.map((item) => {
+                FinishedMeetings.map((item) => {
                   return (
                     <>
                       <div>
