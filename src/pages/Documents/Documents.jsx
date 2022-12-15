@@ -109,7 +109,7 @@ function BasicExample() {
                 return (
                   <Card className="DocumentCard">
                     <Card.Title >
-                    <img  height="100px" width="100px" style={{marginTop:"10px"}} src={"https://" + item.Hash + ".ipfs.w3s.link/" + item.Name} ></img>
+                    <img  height="100px" width="100px" style={{marginTop:"10px"}} src={getimagesource(item.Type)} ></img>
                     </Card.Title>
                     
                     <Card.Body>

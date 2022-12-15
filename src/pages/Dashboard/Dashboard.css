@@ -68,7 +68,7 @@
 }
 
 .userNotificationDivItem1 {
-    width: 80%;
+    width: 80% !important;
     margin-left: 10%;
 }
 

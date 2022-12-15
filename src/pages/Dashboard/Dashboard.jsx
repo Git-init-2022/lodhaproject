@@ -153,7 +153,7 @@ function Dashboard() {
                     {IsAnnoucements && <GeneralNotifications />}
                     {IsComplaints && <Complaints />}
                     {IsDocuments && <Documents />}
-                    <div className="userNotificationDivItem1">
+                    <div className="userNotificationDivItem1" style={{float:"center"}}>
                     {IsNotification && <UserNotification />}
                     </div>
                     <div className="userNotificationDivItem" style={{ float: "right" }}>

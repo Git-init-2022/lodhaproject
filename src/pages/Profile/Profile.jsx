@@ -4,7 +4,6 @@ import { setSourceMapRange } from "typescript";
 import './Profile.css';
 import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
 import { useGlobalContext } from "/src/context/StateContext";
-import { Web3Storage } from "web3.storage";
 
 // function Profile() {
 

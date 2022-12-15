@@ -45,7 +45,7 @@ const UpdatePassword = ({match}) => {
                             <form className="forgotPasswordForm" method='put' onSubmit={UpdatePasswordSubmit}>
                                 <div className="forgotPasswordEmail">
                                     <div>
-                                        <label className="ForgotPasswordLabel">NEW PASSWORD</label><br></br>
+                                        <label className="ForgotPasswordLabel">New Password</label><br></br>
                                         <input
                                             type="password"
                                             placeholder="Enter your New Password"
@@ -55,7 +55,7 @@ const UpdatePassword = ({match}) => {
                                         />
                                     </div>
                                     <div>
-                                        <label className="ForgotPasswordLabel">CONFIRM NEW PASSWORD</label><br></br>
+                                        <label className="ForgotPasswordLabel">Confirm New Password</label><br></br>
                                         <input
                                             type="password"
                                             placeholder="Confirm Password"

@@ -11,6 +11,7 @@ import Card from "antd/lib/card/Card"
 import Meta from "antd/lib/card/Meta"
 import Modal from 'react-bootstrap/Modal';
 import { SemanticClassificationFormat } from "typescript"
+import { Web3Storage } from "web3.storage";
 
 
 
@@ -256,7 +257,7 @@ const StaffManagement = () => {
                     <form>
                       <div className="DisplayCard">
                         <div>
-                          <img src="/src/assests/admin.png" width="150px" height="150px" style={{ margin: "25px" }}></img>
+                          <img src={i.ImageToken ===undefined ? "/src/assests/admin.png" : "https://" + i.ImageToken + ".ipfs.w3s.link/" + i.ImageName } width="150px" height="150px" style={{ margin: "25px" }}></img>
 
                         </div>
                         <div style={{ width: "90%", marginTop: "5px" }}>
@@ -343,7 +344,7 @@ const StaffManagement = () => {
                     <form>
                       <div className="DisplayCard">
                         <div>
-                          <img src="/src/assests/admin.png" width="150px" height="150px" style={{ margin: "25px" }}></img>
+                        <img src={i.ImageToken ===undefined ? "/src/assests/admin.png" : "https://" + i.ImageToken + ".ipfs.w3s.link/" + i.ImageName } width="150px" height="150px" style={{ margin: "25px" }}></img>
 
                         </div>
                         <div style={{ width: "100%", marginTop: "5px" }}>
@@ -430,7 +431,7 @@ const StaffManagement = () => {
                     <form>
                       <div className="DisplayCard">
                         <div>
-                          <img src="/src/assests/admin.png" width="150px" height="150px" style={{ margin: "25px" }}></img>
+                        <img src={i.ImageToken ===undefined ? "/src/assests/admin.png" : "https://" + i.ImageToken + ".ipfs.w3s.link/" + i.ImageName } width="150px" height="150px" style={{ margin: "25px" }}></img>
 
                         </div>
                         <div style={{ width: "100%", marginTop: "5px" }}>
@@ -517,7 +518,7 @@ const StaffManagement = () => {
                     <form>
                       <div className="DisplayCard">
                         <div>
-                          <img src="/src/assests/admin.png" width="150px" height="150px" style={{ margin: "25px" }}></img>
+                        <img src={i.ImageToken ===undefined ? "/src/assests/admin.png" : "https://" + i.ImageToken + ".ipfs.w3s.link/" + i.ImageName } width="150px" height="150px" style={{ margin: "25px" }}></img>
 
                         </div>
                         <div style={{ width: "100%", marginTop: "5px" }}>

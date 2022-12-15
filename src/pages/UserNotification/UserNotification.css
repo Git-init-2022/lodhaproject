@@ -1,6 +1,6 @@
 
 .notificationBlockdiv{
-    width: 500px !important;
+    width: 500px ;
     float:right ;
     height: 100%;
     overflow-y: scroll;
@@ -10,9 +10,16 @@
     border:2px solid #675A0E;
 }
 
-@media (max-width: 1200px) {
+@media (min-width:1000px) and (max-width: 1300px) {
     .notificationBlockdiv{
         width: 400px !important;
+    }
+}
+
+@media (max-width:1000px) {
+    .notificationBlockdiv{
+        width: auto;
+        float:none;
     }
 }
 

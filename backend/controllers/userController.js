@@ -103,7 +103,9 @@ exports.getAllusers = catchAsyncErrors(async (req, res) => {
                 Mobile: ele.Mobile,
                 Email: ele.Email,
                 Dues: ele.Dues,
-                Role: ele.Role
+                Role: ele.Role, 
+                ImageName: ele.ImageName,
+                ImageToken: ele.ImageToken
             }
         );
     })

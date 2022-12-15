@@ -213,7 +213,7 @@ function Notifications() {
                   );
                 })
                 :
-                <p>No Upcoming Meetings</p>
+                <p>No Upcoming Meetings!</p>
               }
               {
                 isAdmin ?

@@ -99,7 +99,7 @@ function UserNotification() {
     }
     return (
         <>
-            <div style={{ marginRight: "20px" }}>
+            <div>
 
                 <div className="notificationBlockdiv" >
                     <div style={{ display: "flex", justifyContent: "center" }}>
