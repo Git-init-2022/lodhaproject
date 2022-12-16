@@ -42,10 +42,21 @@
 /* On mouse-over */
 .sidenav a:hover{
   font-weight: bold;
-  border-bottom: 1px solid black;
+  /* border-bottom: 1px solid black; */
 
 }
 
+.sidenav a:after {
+  transition: all ease-in-out .2s;
+  background: none repeat scroll 0 0 #000;
+  content: "";
+  display: block;
+  height: 2px;
+  width: 0;
+}
+.sidenav a:hover:after {
+  width: 100%;
+}
 .sidenav a:first-letter{
   font-size: 16px;
 }

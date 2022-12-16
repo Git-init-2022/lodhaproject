@@ -16,11 +16,13 @@
    }
    
    #location{
-     color:#d19c29;
+     color:#bba734;
      font-weight:bold;
      font-size:22px;
      margin:0px;
      margin-left: 10px;
+     letter-spacing: 2px;
+     
    }
    #location:first-letter{
      font-size: 30px;
@@ -32,13 +34,14 @@
      font-size:22px;
      margin:0px;
      margin-left: 15px;
+     letter-spacing: 2px;
    }
    #our:first-letter{
      font-size: 30px;
    }
    
    #locationicon{
-     border:3px solid #d19c29;
+     border:3px solid #bba734;
      width:60px;
      margin-left : 5%;
      margin-top:0%;
@@ -50,24 +53,26 @@
      font-size:22px;
      margin:0px;
      margin-left: 15px;
+     letter-spacing: 2px;
    }
    #our1:first-letter{
      font-size : 30px;
    }
    
    #facility{
-     color:#d19c29;
+     color:#bba734;
      font-weight:bold;
      font-size:22px;
      margin:0px;
      margin-left: 10px;
+     letter-spacing: 2px;
    }
    #facility:first-letter{
      font-size: 30px;
      
    }
    #facilities{
-     border:3px solid #d19c29;
+     border:3px solid #bba734;
      width:60px;
      margin-left : 5%;
      margin-top:0%;

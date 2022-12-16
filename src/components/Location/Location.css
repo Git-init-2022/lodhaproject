@@ -2,13 +2,15 @@
 #shado{
   
   box-shadow: 5px 5px 20px;
-  background-color: #F0F8FF;
+  background-color: #ded9b9;
+  
    /*background-color: #f2d491;*/
 }
 #margins{
   width: 94%;
  margin-right:2%;
   margin-top:50px;
+ 
 }
 
 

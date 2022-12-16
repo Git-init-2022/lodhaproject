@@ -50,7 +50,7 @@ function LoggedHome() {
       <div className="mb-3 container" >
         <Carousels />
       </div>
-      <hr style={{ width: "90%", marginLeft: "5%", marginTop: "5%", height: "3px", backgroundColor: "gold" }}></hr>
+      <div style={{width: "100%", backgroundColor:"#675A0E", height:"2px", marginTop:"50px"}}></div>
 
       <div className='locationtitle'>
         <img src="src/assests/apartment.svg" id="facilities"></img>
@@ -62,7 +62,7 @@ function LoggedHome() {
       <div className="container">
         <Facilities />
       </div>
-      <hr style={{ width: "90%", marginLeft: "5%", marginTop: "5%", height: "3px", backgroundColor: "gold" }}></hr>
+      <div style={{width: "100%", backgroundColor:"#675A0E", height:"2px", marginTop:"50px"}}></div>
       <div className='locationtitle'>
         <img src="src/assests/homemap.svg" id="locationicon"></img>
         <div style={{ justifyContent: "center", display: "flex" }}>
@@ -72,7 +72,10 @@ function LoggedHome() {
 
       </div>
       <Location />
-      <Contact />
+      {/* <Contact /> */}
+      <div style={{height:"100px"}}>
+
+      </div>
     </>
   );
 }
