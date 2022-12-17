@@ -4,7 +4,7 @@ import { setSourceMapRange } from "typescript";
 import './Profile.css';
 import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
 import { useGlobalContext } from "/src/context/StateContext";
-
+import Spinner from "/src/components/Spinner/Spinner"
 // function Profile() {
 
 //     const { User, setUser } = useGlobalContext();
@@ -148,10 +148,11 @@ import { useGlobalContext } from "/src/context/StateContext";
 // export default Profile;
 
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography, MDBIcon } from 'mdb-react-ui-kit';
-
+import {Web3Storage} from 'web3.storage';
 export default function Profile() {
   const { User, setUser } = useGlobalContext();
   const [isVisible, setisVisible] = useState(true);
+  const [Loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchUsers = async () => {
       if (User !== null) {
@@ -225,13 +226,14 @@ export default function Profile() {
   }
 
   const uploadPicOfUser = async() =>  {
+    setLoading(true);
     const files = document.getElementsByName("profilePic").item(0).files;
     const client =  new Web3Storage({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDcxOTdiN2M2OGFEMTNhNzREMGIzMGQ3OTI4OTNGMDc4MWQxZjE4M2QiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NzAxNjM1MTczNDIsIm5hbWUiOiJsb2RoYS1maWxlcyJ9.rmkUCge8MPPj5TC6i8Z5lVAjIevCSVni0gpu-_jUzlI" });
     const cid = await client.put(files);
     console.log(cid);
     const FileName = files[0].name;
     const {data} = await axios.post("http://localhost:4000/api/v1/updateProfile", {cid: cid, name: FileName, FlatNo: JSON.parse(User).FlatNo});
-   
+   setLoading(false);
     refreshPage();
   }
 
@@ -251,6 +253,12 @@ export default function Profile() {
       <div style={{ backgroundColor: "#f4f5f7", height: "1000px" }}>
         <section >
           <p id="userProfileTitle">USER PROFILE</p>
+          {
+           Loading ?  
+           <div className="Profilediv">
+          <Spinner />
+          </div>
+          :
           <MDBContainer className="h-100 Profilediv" >
             <MDBRow className="justify-content-center align-items-center h-100">
               <MDBCol lg="10" className="mb-4 mb-lg-0">
@@ -333,6 +341,7 @@ export default function Profile() {
               </MDBCol>
             </MDBRow>
           </MDBContainer>
+}
         </section>
       </div>
     </>
