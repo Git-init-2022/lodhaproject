@@ -148,7 +148,7 @@ import Spinner from "/src/components/Spinner/Spinner"
 // export default Profile;
 
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography, MDBIcon } from 'mdb-react-ui-kit';
-import {Web3Storage} from 'web3.storage';
+import { Web3Storage } from 'web3.storage';
 export default function Profile() {
   const { User, setUser } = useGlobalContext();
   const [isVisible, setisVisible] = useState(true);
@@ -225,15 +225,15 @@ export default function Profile() {
     window.location.reload();
   }
 
-  const uploadPicOfUser = async() =>  {
+  const uploadPicOfUser = async () => {
     setLoading(true);
     const files = document.getElementsByName("profilePic").item(0).files;
-    const client =  new Web3Storage({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDcxOTdiN2M2OGFEMTNhNzREMGIzMGQ3OTI4OTNGMDc4MWQxZjE4M2QiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NzAxNjM1MTczNDIsIm5hbWUiOiJsb2RoYS1maWxlcyJ9.rmkUCge8MPPj5TC6i8Z5lVAjIevCSVni0gpu-_jUzlI" });
+    const client = new Web3Storage({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDcxOTdiN2M2OGFEMTNhNzREMGIzMGQ3OTI4OTNGMDc4MWQxZjE4M2QiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NzAxNjM1MTczNDIsIm5hbWUiOiJsb2RoYS1maWxlcyJ9.rmkUCge8MPPj5TC6i8Z5lVAjIevCSVni0gpu-_jUzlI" });
     const cid = await client.put(files);
     console.log(cid);
     const FileName = files[0].name;
-    const {data} = await axios.post("http://localhost:4000/api/v1/updateProfile", {cid: cid, name: FileName, FlatNo: JSON.parse(User).FlatNo});
-   setLoading(false);
+    const { data } = await axios.post("http://localhost:4000/api/v1/updateProfile", { cid: cid, name: FileName, FlatNo: JSON.parse(User).FlatNo });
+    setLoading(false);
     refreshPage();
   }
 
@@ -254,94 +254,94 @@ export default function Profile() {
         <section >
           <p id="userProfileTitle">USER PROFILE</p>
           {
-           Loading ?  
-           <div className="Profilediv">
-          <Spinner />
-          </div>
-          :
-          <MDBContainer className="h-100 Profilediv" >
-            <MDBRow className="justify-content-center align-items-center h-100">
-              <MDBCol lg="10" className="mb-4 mb-lg-0">
-                <MDBCard className="card" style={{ borderRadius: '.5rem' }}>
-                  <MDBRow className="g-0">
-                    <MDBCol md="4" className="gradient-custom text-center text-white profileLeftDiv"
-                      style={{ borderTopLeftRadius: '.5rem', borderBottomLeftRadius: '.5rem', display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", margin: "auto", }}>
+            Loading ?
+              <div className="Profilediv">
+                <Spinner />
+              </div>
+              :
+              <MDBContainer className="h-100 Profilediv" >
+                <MDBRow className="justify-content-center align-items-center h-100">
+                  <MDBCol lg="10" className="mb-4 mb-lg-0">
+                    <MDBCard className="card" style={{ borderRadius: '.5rem' }}>
+                      <MDBRow className="g-0">
+                        <MDBCol md="4" className="gradient-custom text-center text-white profileLeftDiv"
+                          style={{ borderTopLeftRadius: '.5rem', borderBottomLeftRadius: '.5rem', display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", margin: "auto", }}>
 
-                      <MDBCardImage className="my-5 profileImage" src= {JSON.parse(User).ImageToken !== undefined ? "https://" + JSON.parse(User).ImageToken + ".ipfs.w3s.link/" + JSON.parse(User).ImageName : "/src/assests/user.svg" }
-                        alt="Avatar" style={{ width: '150px', height: '150px' }} fluid />
-                      <MDBTypography tag="h4" className="ProfileName">{JSON.parse(User).OwnerName}</MDBTypography>
-                      <MDBTypography tag="h4" className="ProfileRole">{JSON.parse(User).Role}</MDBTypography>
+                          <MDBCardImage className="my-5 profileImage" src={JSON.parse(User).ImageToken !== undefined ? "https://" + JSON.parse(User).ImageToken + ".ipfs.w3s.link/" + JSON.parse(User).ImageName : "/src/assests/user.svg"}
+                            alt="Avatar" style={{ width: '150px', height: '150px' }} fluid />
+                          <MDBTypography tag="h4" className="ProfileName">{JSON.parse(User).OwnerName}</MDBTypography>
+                          <MDBTypography tag="h4" className="ProfileRole">{JSON.parse(User).Role}</MDBTypography>
 
 
-                      {
-                        isVisible ?
-                          <button className="uploadButton" onClick={() => change()}>Change Picture</button>
-                          :
-                          <></>
-                      }
-                      {
-                        !isVisible ?
-                          <form>
-                            <p className="BackButton" onClick={() => change()}>&larr; Back</p>
-                            <input type="file" className="fileInput" name="profilePic" accept="image/*" >
-                            </input>
-                            <button className="uploadButton" type="submit" style={{ marginBottom: "15px" }} onClick={(e) => uploadPhoto(e)}>
-                              <img src="/src/assests/camera.png" height="20px" width="20px" style={{ marginRight: "10px" }}></img>Upload
-                            </button>
-                          </form>
-                          :
-                          <></>
-                      }
-                    </MDBCol>
-                    <MDBCol md="8">
-                      <MDBCardBody className="p-4">
-                        <MDBTypography tag="h5" className="ProfileHeader">Details</MDBTypography>
-                        <hr className="mt-0 mb-4" />
-                        <MDBRow className="pt-1">
-                          <MDBCol size="6" className="mb-3" style={{ marginTop: "30px" }}>
-                            <MDBTypography tag="h6" className="InputHeader">Email</MDBTypography>
-                            <MDBCardText className="text-muted">{JSON.parse(User).Email}</MDBCardText>
-                          </MDBCol>
-                          <MDBCol size="6" className="mb-3" style={{ marginTop: "30px" }}>
-                            <MDBTypography tag="h6" className="InputHeader">Phone</MDBTypography>
-                            <MDBCardText className="text-muted">{JSON.parse(User).Mobile}</MDBCardText>
-                          </MDBCol>
-                          <MDBCol size="6" className="mb-3" style={{ marginTop: "30px" }}>
-                            <MDBTypography tag="h6" className="InputHeader">Block</MDBTypography>
-                            <MDBCardText className="text-muted">{JSON.parse(User).Block}</MDBCardText>
-                          </MDBCol>
-                          <MDBCol size="6" className="mb-3" style={{ marginTop: "30px" }}>
-                            <MDBTypography tag="h6" className="InputHeader">Flat No.</MDBTypography>
-                            <MDBCardText className="text-muted">{JSON.parse(User).FlatNo}</MDBCardText>
-                          </MDBCol>
-                          <MDBCol size="6" className="mb-3" style={{ marginTop: "30px" }}>
-                            <MDBTypography tag="h6" className="InputHeader">Property Registered Name</MDBTypography>
-                            <MDBCardText className="text-muted">{JSON.parse(User).RegisteredName}</MDBCardText>
-                          </MDBCol>
-                          <MDBCol size="6" className="mb-3" style={{ marginTop: "30px" }}>
-                            <MDBTypography tag="h6" className="InputHeader">Parking slot</MDBTypography>
-                            <MDBCardText className="text-muted">{JSON.parse(User).ParkingSlot}</MDBCardText>
-                          </MDBCol>
-                          <div style={{ display: "flex", justifyContent: "space-between" }}>
-                            <button className="btn btn-primary editProfileButton">
-                              <img src="/src/assests/edit.png" height="15px" width="15px" style={{ marginRight: "10px" }}></img>
-                              Edit
-                            </button>
-                            <button className="btn btn-primary editProfileButton">
-                              <img src="/src/assests/update.png" height="15px" width="15px" style={{ marginRight: "10px" }}></img>
-                              Update
-                            </button>
-                          </div>
-                        </MDBRow>
+                          {
+                            isVisible ?
+                              <button className="uploadButton" onClick={() => change()}>Change Picture</button>
+                              :
+                              <></>
+                          }
+                          {
+                            !isVisible ?
+                              <form>
+                                <p className="BackButton" onClick={() => change()}>&larr; Back</p>
+                                <input type="file" className="fileInput" name="profilePic" accept="image/*" >
+                                </input>
+                                <button className="uploadButton" type="submit" style={{ marginBottom: "15px" }} onClick={(e) => uploadPhoto(e)}>
+                                  <img src="/src/assests/camera.png" height="20px" width="20px" style={{ marginRight: "10px" }}></img>Upload
+                                </button>
+                              </form>
+                              :
+                              <></>
+                          }
+                        </MDBCol>
+                        <MDBCol md="8">
+                          <MDBCardBody className="p-4">
+                            <MDBTypography tag="h5" className="ProfileHeader">Details</MDBTypography>
+                            <hr className="mt-0 mb-4" />
+                            <MDBRow className="pt-1">
+                              <MDBCol size="6" className="mb-3" style={{ marginTop: "30px" }}>
+                                <MDBTypography tag="h6" className="InputHeader">Email</MDBTypography>
+                                <MDBCardText className="text-muted">{JSON.parse(User).Email}</MDBCardText>
+                              </MDBCol>
+                              <MDBCol size="6" className="mb-3" style={{ marginTop: "30px" }}>
+                                <MDBTypography tag="h6" className="InputHeader">Phone</MDBTypography>
+                                <MDBCardText className="text-muted">{JSON.parse(User).Mobile}</MDBCardText>
+                              </MDBCol>
+                              <MDBCol size="6" className="mb-3" style={{ marginTop: "30px" }}>
+                                <MDBTypography tag="h6" className="InputHeader">Block</MDBTypography>
+                                <MDBCardText className="text-muted">{JSON.parse(User).Block}</MDBCardText>
+                              </MDBCol>
+                              <MDBCol size="6" className="mb-3" style={{ marginTop: "30px" }}>
+                                <MDBTypography tag="h6" className="InputHeader">Flat No.</MDBTypography>
+                                <MDBCardText className="text-muted">{JSON.parse(User).FlatNo}</MDBCardText>
+                              </MDBCol>
+                              <MDBCol size="6" className="mb-3" style={{ marginTop: "30px" }}>
+                                <MDBTypography tag="h6" className="InputHeader">Property Registered Name</MDBTypography>
+                                <MDBCardText className="text-muted">{JSON.parse(User).RegisteredName}</MDBCardText>
+                              </MDBCol>
+                              <MDBCol size="6" className="mb-3" style={{ marginTop: "30px" }}>
+                                <MDBTypography tag="h6" className="InputHeader">Parking slot</MDBTypography>
+                                <MDBCardText className="text-muted">{JSON.parse(User).ParkingSlot}</MDBCardText>
+                              </MDBCol>
+                              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                                <button className="btn btn-primary editProfileButton">
+                                  <img src="/src/assests/edit.png" height="15px" width="15px" style={{ marginRight: "10px" }}></img>
+                                  Edit
+                                </button>
+                                <button className="btn btn-primary editProfileButton">
+                                  <img src="/src/assests/update.png" height="15px" width="15px" style={{ marginRight: "10px" }}></img>
+                                  Update
+                                </button>
+                              </div>
+                            </MDBRow>
 
-                      </MDBCardBody>
-                    </MDBCol>
-                  </MDBRow>
-                </MDBCard>
-              </MDBCol>
-            </MDBRow>
-          </MDBContainer>
-}
+                          </MDBCardBody>
+                        </MDBCol>
+                      </MDBRow>
+                    </MDBCard>
+                  </MDBCol>
+                </MDBRow>
+              </MDBContainer>
+          }
         </section>
       </div>
     </>

@@ -19,6 +19,7 @@ function LoginNavBar() {
         setUser(null);
     }
 
+
     return (
         <div id="nav-container">
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -32,15 +33,23 @@ function LoginNavBar() {
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto NavClass">
                         </Nav>
-                        <Nav className='LoginNavBarLink'>
-                            <Nav.Link id="Menu" onClick={() => { setMenu(!Menu) }}><img src="/src/assests/menu.png" height="25px" width="25px"></img><span style={{ padding: "10px" }}>Menu</span></Nav.Link>
-                            <Nav.Link id="Menu" href='/UserDashboard'><img src="/src/assests/dashboardnav.png" height="25px" width="25px"></img><span style={{ padding: "10px" }}>Dashboard</span></Nav.Link>
-                            <Nav.Link id="User" href="/"><img src="/src/assests/home.png" height="25px" width="25px"></img><span style={{ padding: "10px" }}>Home</span></Nav.Link>
-                           
+                        <div className='navBarLinkActive'>
+                            <Nav>
+                                <Nav.Item>
+                                    <Nav.Link id="Menu" onClick={() => { setMenu(!Menu) }}><img src="/src/assests/menu.png" height="25px" width="25px"></img><span style={{ padding: "10px" }}>Menu</span></Nav.Link>
+                                </Nav.Item>
+                                <Nav.Item>
+                                    <Nav.Link id="Menu" href='/UserDashboard'><img src="/src/assests/dashboardnav.png" height="25px" width="25px"></img><span style={{ padding: "10px" }}>Dashboard</span></Nav.Link>
+                                </Nav.Item>
+                                <Nav.Item>
+                                    <Nav.Link id="User" href="/"><img src="/src/assests/home.png" height="25px" width="25px"></img><span style={{ padding: "10px" }}>Home</span></Nav.Link>
+                                </Nav.Item>
+
                                 <NavDropdown
-                                   id="LoginDropdown"
+                                    id="LoginDropdown"
                                     title={JSON.parse(User).OwnerName}
                                     menuVariant="dark"
+                                    
                                 >
                                     <div className="ProfileDiv" style={{ display: "flex" }}>
                                         <img src="/src/assests/profile.png" style={{ paddingLeft: "5px", height: "30px", width: "40px" }}></img>
@@ -54,8 +63,9 @@ function LoginNavBar() {
                                         </NavDropdown.Item>
                                     </div>
                                 </NavDropdown>
-                            
-                        </Nav>
+
+                            </Nav>
+                        </div>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>

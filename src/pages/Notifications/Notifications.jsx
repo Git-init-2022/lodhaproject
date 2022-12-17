@@ -7,6 +7,7 @@ import Modal from 'react-bootstrap/Modal';
 import axios from "axios";
 import { Radio, Space, Tabs } from 'antd';
 import { useGlobalContext } from '/src/context/StateContext';
+import { getTwoToneColor } from "@ant-design/icons";
 
 
 function Notifications() {
@@ -24,17 +25,17 @@ function Notifications() {
   const [TimeVar, setTimeVar] = useState('');
   const [idvalue, setidvalue] = useState('');
   const [finished, setFinished] = useState(false);
-  
+  let colorArray = ['rgb(106, 101, 73)', '#b8860b', '#a28557', 'rgb(181, 173, 127)', '#675A0E'];
   const { User } = useGlobalContext();
   const [isAdmin, setisAdmin] = useState(JSON.parse(User).Role === 'admin');
   const fetchMeetings = async () => {
     const { data } = await axios.get("http://localhost:4000/api/v1/AllMeetings");
     const temp1 = [], temp2 = [];
-    for(let meeting of data.meetings){
-      if(CompareDate(meeting.Date)){
+    for (let meeting of data.meetings) {
+      if (CompareDate(meeting.Date, meeting.Time)) {
         temp1.push(meeting);
       }
-      else{
+      else {
         temp2.push(meeting);
       }
     }
@@ -74,8 +75,11 @@ function Notifications() {
     var year = date.getFullYear();
     var month = months[date.getMonth()];
     var dateVal = date.getDate();
-    var formattedDate = dateVal + 'th ' + month + ', ' + year;
-    return formattedDate;
+    dateVal = dateVal.toString();
+    if (dateVal.length == 1) {
+      dateVal = "0" + dateVal;
+    }
+    return dateVal;
   }
 
   const getFormattedTime1 = (DateOfMeeting) => {
@@ -83,16 +87,12 @@ function Notifications() {
 
     let timeStamp = Date.parse(DateOfMeeting);
     var date = new Date(timeStamp);
+    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
     var day = date.getDate();
-    var month = date.getMonth() + 1;
+    var month = date.getMonth();
     var year = date.getFullYear();
-
-    if (month < 10) month = "0" + month;
-    if (day < 10) day = "0" + day;
-    var today = year + "-" + month + "-" + day;
-
-    return today;
+    return months[month] + " " + year;
   }
 
 
@@ -136,26 +136,40 @@ function Notifications() {
       setUpcoming(true);
       getUpcoming.style.border = "5px solid #675a0e";
       getUpcoming.style.backgroundColor = "rgb(220, 219, 216)";
-      getFinished.style.border= "none";
+      getFinished.style.border = "none";
       getFinished.style.backgroundColor = "whitesmoke";
     }
     else {
-      getFinished.style.border= "5px solid #675a0e";
+      getFinished.style.border = "5px solid #675a0e";
       getFinished.style.backgroundColor = "rgb(220, 219, 216)";
-      getUpcoming.style.border= "none";
+      getUpcoming.style.border = "none";
       getUpcoming.style.backgroundColor = "whitesmoke";
       setUpcoming(false);
     }
   }
 
-  const CompareDate = (DateOfMeeting) =>  {
+  const CompareDate = (DateOfMeeting, TimeofMeeting) => {
     let timeStamp = Date.parse(DateOfMeeting);
     var date = new Date(timeStamp);
-    if(timeStamp >= Date.now()){
+    date.setHours((TimeofMeeting[0] - '0') * 10 + (TimeofMeeting[1] - '0'));
+    date.setMinutes((TimeofMeeting[3] - '0') * 10 + (TimeofMeeting[4] - '0'));
+    if (date >= Date.now()) {
       return true;
     }
-    else{
+    else {
       return false;
+    }
+  }
+
+  const getColor = (index, DateOfMeeting) => {
+    let timeStamp = Date.parse(DateOfMeeting);
+    var date = new Date(timeStamp);
+    var date1 = new Date();
+    if (date <= date1 && date.getDate() === date1.getDate()) {
+      return 'green';
+    }
+    else {
+      return colorArray[index % 5];
     }
   }
 
@@ -163,14 +177,13 @@ function Notifications() {
     <>
 
       <LoginNavBar />
-      {/* <div style={{display:"flex"}}> */}
 
 
 
       <div className="MeetingItems" style={{ marginTop: "0px" }}>
 
         <div className="TabSwitch" style={{ marginBottom: "30px", width: "100%", }}>
-          <Nav style={{ display: "flex", width: "100%"}}>
+          <Nav style={{ display: "flex", width: "100%" }}>
             <Nav.Link id="upcoming" className="Active" style={{ color: "black", width: "50%", textAlign: "center" }} eventKey="/upcoming" onClick={(e) => changeMenu(e, "upcoming")}>
               Upcoming Meetings
             </Nav.Link>
@@ -189,31 +202,55 @@ function Notifications() {
               }
               <hr style={{ height: "1", backgroundColor: "black", width: "94%", marginLeft: "3%" }}></hr>
               {
-                upcomingMeetings.length ? 
-                upcomingMeetings.map((item) => {
-                  return (
-                    <>
-                      <div>
-                        <Button variant="primary" onClick={() => handleShow(item.Title, item.Description, item.Link, item.Host, item.Date, item.Time, item._id)} className="NotifyBar">
-                          <div className="ModalNotify">
-                            <span className='Date'>
-                              <p style={{ textDecorationLine: "underline", textUnderlineOffset: "10px", textDecorationThickness: "2px" }}>MEETING TITLE</p>
-                              <p>{item.Title}</p>
-                            </span>
-                            <span className='Date'>
-                              {getFormattedTime(item.Date)}<br></br>
-                              {item.Time}
+                upcomingMeetings.length ?
+                  upcomingMeetings.map((item, index) => {
+                    return (
+                      <>
+
+                        <div style={{ width: "95%", marginLeft: "2.5%", marginBottom: "20px", display: "grid", gridTemplateColumns: "auto auto auto" }}>
+                          <div style={{ border: "3px solid " + getColor(index, item.Date), padding: "5px 20px 5px 20px", color: "black", width: "fit-content", textAlign: "center" }}>
+                            <span className='Date' >
+                              <span style={{ fontSize: "40px", letterSpacing: "1px" }}>
+                                {getFormattedTime(item.Date)}
+                              </span>
+                              <br>
+                              </br>
+                              <span style={{ fonSize: "16px", letterSpacing: "1px" }}>
+                                {getFormattedTime1(item.Date)}
+                              </span>
+                              <br>
+                              </br>
+                              <span style={{ fontSize: "14px", letterSpacing: "1px" }}>
+                                {item.Time}
+                              </span>
                             </span>
                           </div>
-                        </Button>
+                          <div style={{ marginLeft: "30px" }}>
+                            <span className='Date' >
+                              <p style={{ fontSize: "22px", textTransform: "capitalize", letterSpacing: "1px", textAlign: "left", textDecorationLine: "underline", textUnderlineOffset: "10px", textDecorationColor: "#675A0E", textDecorationThickness: "2px" }}>
+                                {item.Title}
+                              </p>
+                              <p style={{ fontSize: "14px", textTransform: "capitalize", letterSpacing: "1px", textAlign: "left" }}>
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. A, deserunt!
+                              </p>
+                              <a href={item.Link} style={{textDecoration:"none", color:"black", }}>
+                                <span style={{ fontSize: "16px", textTransform: "capitalize", letterSpacing: "1px", textAlign: "left",}}>
+                                  Meeting Link &rarr;
+                                </span>
+                              </a>
 
-                      </div>
-                      <hr style={{ width: "94%", marginLeft: "3%" }}></hr>
-                    </>
-                  );
-                })
-                :
-                <p>No Upcoming Meetings!</p>
+                            </span>
+                          </div>
+                          <div>
+                            <button variant="primary" className="MoreButton" onClick={() => handleShow(item.Title, item.Description, item.Link, item.Host, item.Date, item.Time, item._id)} > More &rarr;</button>
+                          </div>
+                        </div>
+                        <hr style={{ height: "1", backgroundColor: "black", width: "94%", marginLeft: "3%" }}></hr>
+                      </>
+                    );
+                  })
+                  :
+                  <p>No Upcoming Meetings!</p>
               }
               {
                 isAdmin ?
@@ -334,25 +371,48 @@ function Notifications() {
               <hr style={{ height: "1", backgroundColor: "black", width: "94%", marginLeft: "3%" }}></hr>
               {
 
-                FinishedMeetings.map((item) => {
+                FinishedMeetings.map((item, index) => {
                   return (
                     <>
-                      <div>
-                        <Button variant="primary" onClick={() => handleShow(item.Title, item.Description, item.Link, item.Host, item.Date, item.Time, item._id)} className="NotifyBar">
-                          <div className="ModalNotify">
-                            <span className='Date'>
-                              <p style={{ textDecorationLine: "underline", textUnderlineOffset: "10px", textDecorationThickness: "2px" }}>MEETING TITLE</p>
-                              <p>{item.Title}</p>
-                            </span>
-                            <span className='Date'>
-                              {getFormattedTime(item.Date)}<br></br>
-                              {item.Time}
+                     <div style={{ width: "95%", marginLeft: "2.5%", marginBottom: "20px", display: "grid", gridTemplateColumns: "auto auto auto" }}>
+                          <div style={{ border: "3px solid " + getColor(index, item.Date), padding: "5px 20px 5px 20px", color: "black", width: "fit-content", textAlign: "center" }}>
+                            <span className='Date' >
+                              <span style={{ fontSize: "40px", letterSpacing: "1px" }}>
+                                {getFormattedTime(item.Date)}
+                              </span>
+                              <br>
+                              </br>
+                              <span style={{ fonSize: "16px", letterSpacing: "1px" }}>
+                                {getFormattedTime1(item.Date)}
+                              </span>
+                              <br>
+                              </br>
+                              <span style={{ fontSize: "14px", letterSpacing: "1px" }}>
+                                {item.Time}
+                              </span>
                             </span>
                           </div>
-                        </Button>
+                          <div style={{ marginLeft: "30px" }}>
+                            <span className='Date' >
+                              <p style={{ fontSize: "22px", textTransform: "capitalize", letterSpacing: "1px", textAlign: "left", textDecorationLine: "underline", textUnderlineOffset: "10px", textDecorationColor: "#675A0E", textDecorationThickness: "2px" }}>
+                                {item.Title}
+                              </p>
+                              <p style={{ fontSize: "14px", textTransform: "capitalize", letterSpacing: "1px", textAlign: "left" }}>
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. A, deserunt!
+                              </p>
+                              <a href={item.Link} style={{textDecoration:"none", color:"black", }}>
+                                <span style={{ fontSize: "16px", textTransform: "capitalize", letterSpacing: "1px", textAlign: "left",}}>
+                                  Video Link &rarr;
+                                </span>
+                              </a>
 
-                      </div>
-                      <hr style={{ width: "94%", marginLeft: "3%" }}></hr>
+                            </span>
+                          </div>
+                          <div>
+                            <button variant="primary" className="MoreButton" onClick={() => handleShow(item.Title, item.Description, item.Link, item.Host, item.Date, item.Time, item._id)} > More &rarr;</button>
+                          </div>
+                        </div>
+                        <hr style={{ height: "1", backgroundColor: "black", width: "94%", marginLeft: "3%" }}></hr>
                     </>
                   );
                 })
