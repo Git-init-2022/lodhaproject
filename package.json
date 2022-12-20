@@ -1,0 +1,17 @@
+{
+    "name": "lodha-meridian-community-website",
+    "version": "1.0.0",
+    "description": "community portal",
+    "main": "index.js",
+    "scripts": {
+        "build": "cd backend && npm install && cd ../frontend && npm install && npm run build",
+        "backend-start": "cd backend && npm install && npm run dev",
+        "frontend-start": "cd frontend && npm install && npm run dev"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Git-init-2022/lodhaproject"
+    },
+    "author": "Jyothi Swaroop Reddy, Sai Krishna, John Caleb",
+    "homepage": "https://github.com/Git-init-2022/lodhaproject#readme"
+}
