@@ -1,8 +1,23 @@
 const Meeting = require("../models/MeetingModel");
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
-
-
+const bunyan = require('bunyan');
+const log = bunyan.createLogger({
+    name: 'meetings',
+    streams: [
+    {
+        level: 'info',
+        stream: process.stdout
+    },
+    {
+        type: 'rotating-file',
+        level: 'info',
+        path: __dirname+'/logs/meetings.log',
+        period: '1m',
+        count: 12
+    }
+    ]
+    });
 
 
 // Create Meeting
@@ -67,6 +82,7 @@ exports.deleteMeeting = catchAsyncErrors(async (req, res) => {
         })
     }
     else {
+        log.info(`${req.query.Admin} has delete the meeting: ${meeting1}`);
         await meeting1.remove();
         res.status(201).json({
             success: true,

@@ -4,7 +4,6 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 
 
 
-
 // Create Notification
 exports.createNotification = catchAsyncErrors(async (req, res, next) => {
 
