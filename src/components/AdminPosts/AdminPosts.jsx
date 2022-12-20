@@ -46,12 +46,12 @@ function AdminPosts({ props, selectedOption }) {
     }
 
     const updateComplaint = async () => {
-        const { data } = await axios.get("http://localhost:4000/api/v1/updatecomplaint", { params: { complaint: props } });
+        const { data } = await axios.get("http://localhost:4000/api/v1/updatecomplaint", { params: { complaint: props, Admin: JSON.parse(localStorage.getItem("User")).FlatNo } });
         refreshPage();
     }
 
     const deleteUserComplaint = async () => {
-        const { data } = await axios.get("http://localhost:4000/api/v1/deletecomplaint", { params: { complaint: props } });
+        const { data } = await axios.get("http://localhost:4000/api/v1/deletecomplaint", { params: { complaint: props, Admin: JSON.parse(localStorage.getItem("User")).FlatNo } });
         refreshPage();
     }
 

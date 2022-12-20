@@ -5,6 +5,7 @@ const userNotification = require("../models/userNotification");
 const Notifications = require("../models/Notifications");
 
 
+
 exports.createNotification = catchAsyncErrors(async (req, res, next) => {
     const { FlatNo, NotificationTitle, NotificationDesc } = req.body;
     const user1 = await userNotification.find({ FlatNo: FlatNo, NotificationDesc: NotificationDesc, NotificationTitle: NotificationTitle });

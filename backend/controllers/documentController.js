@@ -4,7 +4,6 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const userNotification = require("../models/userNotification");
 const Document = require("../models/documentModel");
 
-
 exports.createDocument = catchAsyncErrors(async (req, res, next) => {
     const document1 = await Document.find(req.body);
     console.log(req.body);
@@ -44,7 +43,6 @@ exports.deleteDocument = catchAsyncErrors(async (req, res, next) => {
     if (!document1) {
         return next(new ErrorHandler("notification not found", 404));
     }
-
     await document1.remove();
     res.status(200).json({
         success: true,

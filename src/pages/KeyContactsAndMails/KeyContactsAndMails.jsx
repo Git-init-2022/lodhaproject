@@ -157,9 +157,10 @@ const KeyContactsAndMails = () => {
     const users = data.users
     return users
   }
-
-  const deleteUser = async (key) => {
-    const { data } = await axios.get("http://localhost:4000/api/v1/userdelete", { params: { FlatNo: key } });
+  
+  const deleteUser = async(key)=> {
+    console.log(`${localStorage.getItem("User")}`);
+    const {data} = await axios.get("http://localhost:4000/api/v1/userdelete", {params: {FlatNo: key, Admin: JSON.parse(localStorage.getItem("User")).FlatNo }});
     console.log(data.message);
     refreshPage();
   }
@@ -272,8 +273,8 @@ const KeyContactsAndMails = () => {
     }
   ]
 
-  const updateUser = async (row) => {
-    const { data } = await axios.get("http://localhost:4000/api/v1/userupdate", { params: { user: row } });
+  const updateUser = async(row)=> {
+    const {data} = await axios.get("http://localhost:4000/api/v1/userupdate", {params: {user: row, Admin: JSON.parse(localStorage.getItem("User")).FlatNo}});
     console.log(data.user);
     refreshPage();
   }
@@ -281,16 +282,6 @@ const KeyContactsAndMails = () => {
   const handleSave = row => {
     console.log("row", JSON.stringify(row));
     updateUser(row);
-    // const newData = [...dataSource]
-    // const index = newData.findIndex(item => row.FlatNo === item.FlatNo)
-    // console.log("data", dataSource);
-    // console.log("index", index);
-    // const item = newData[index];
-    // newData.splice(index, 1, {
-    //   ...item,
-    //   ...row
-    // })
-    // setDataSource(newData)
   }
 
   const components = {

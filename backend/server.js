@@ -13,12 +13,14 @@ process.on("uncaughtException",(err)=>{
 })
 
 //config
-dotenv.config({ path: path.resolve(__dirname, '\config\\config.env') })
+console.log(__dirname+'/config/config.env');
+dotenv.config({ path: __dirname + '/config/config.env' });
 
 // connecting to database
 connectDatabase();
 
 
+console.log(`${process.env.PORT}`);
 
 const server = app.listen(process.env.PORT, () => {
     console.log(`Server id working on http://localhost:${process.env.PORT}`);

@@ -7,6 +7,23 @@ const crypto = require("crypto");
 const cloudinary = require("../utils/imageUpload");
 const { idText } = require("typescript");
 const { Complaint } = require("../models/complaintModel");
+const bunyan = require('bunyan');
+const log = bunyan.createLogger({
+    name: 'users',
+    streams: [
+    {
+        level: 'info',
+        stream: process.stdout
+    },
+    {
+        type: 'rotating-file',
+        level: 'info',
+        path: __dirname+'/logs/users.log',
+        period: '1m',
+        count: 12
+    }
+    ]
+    });
 
 // Create User
 exports.createUser = catchAsyncErrors(async (req, res, next) => {
@@ -123,6 +140,8 @@ exports.updateUser = catchAsyncErrors(async (req, res, next) => {
         return next(new ErrorHandler("User not found", 404));
     }
     let message = "";
+
+    const user2 = user1;
     // console.log(user1[0].Role, req.query.user.Role);
     // console.log(user1[0].Dues, req.query.user.Dues);
     if (user1[0].Email !== req.query.user.Email) {
@@ -179,9 +198,8 @@ exports.updateUser = catchAsyncErrors(async (req, res, next) => {
     user1[0].Role = req.query.user.Role;
 
     user1[0].save();
-
+    log.info(`${req.query.Admin} has changed details of ${user1[0].FlatNo} : ${message}`);
     user1 = await User.find({ FlatNo: req.query.user.FlatNo });
-
     res.status(200).json({
         success: true,
         message: message, 
@@ -206,7 +224,8 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
         email: user1[0].Email,
         message: "Your Profile data is deleted from Lodha Meridian Community",
         subject: "User Profile Deletion"
-    })
+    });
+    log.info(`${req.query.Admin} has deleted profile of ${user1}`);
     await user1[0].remove();
     res.status(200).json({
         success: true,

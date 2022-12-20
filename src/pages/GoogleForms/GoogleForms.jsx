@@ -43,7 +43,7 @@ function GoogleForms() {
     }
 
     const DeleteFormFromDb = async (_id) => {
-        const { data } = await axios.get("http://localhost:4000/api/v1/deleteform", { params: { _id: _id } });
+        const { data } = await axios.get("http://localhost:4000/api/v1/deleteform", { params: { _id: _id, Admin: JSON.parse(localStorage.getItem("User")).FlatNo} });
         refreshPage();
     }
 
@@ -53,7 +53,7 @@ function GoogleForms() {
     }
 
     const UpdateFormInDb = async (Link, Title, Description, _id) => {
-        const { data } = await axios.get("http://localhost:4000/api/v1/updateform", { params: { _id: _id, Title: Title, Description: Description, Link: Link } });
+        const { data } = await axios.get("http://localhost:4000/api/v1/updateform", { params: { _id: _id, Title: Title, Description: Description, Link: Link, Admin: JSON.parse(localStorage.getItem("User")).FlatNo } });
         refreshPage();
     }
 

@@ -178,7 +178,8 @@ function AllComplaints() {
 
   const delete_Issue = async (ele) => {
     const issue = await axios.post("http://localhost:4000/api/v1/delete_issue", {
-      issue: ele.Name
+      issue: ele.Name,
+      Admin: JSON.parse(localStorage.getItem("User")).FlatNo
     })
     setIssues([]);
   }
