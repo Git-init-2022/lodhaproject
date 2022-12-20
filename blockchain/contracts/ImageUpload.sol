@@ -1,21 +1,34 @@
 pragma solidity >=0.4.22 <0.9.0;
 
 contract imageUpload {
+
+  uint public count = 0; 
+
   struct image{
-    string id;
+    uint id;
     string imageHash;
   }
+
   
-  mapping(string => image ) images;
+  mapping(uint => image ) public images;
 
+  event sendHash(
+    string imageHash
+  );
+   
+   event getHash(
+    uint id
+   );
 
-  function uploadImage(string memory id,string memory hash) public returns (bool) {
-    images[id] = image(id,hash);
-    return true;
+  function uploadImage(string memory hash) public  {
+    count++;
+    images[count] = image(count,hash);
+    emit getHash(count);
   }
 
 
-  function retrieveHash(string memory id) public view returns (string memory) {
-    return (images[id].imageHash);
+  function retrieveHash(uint id) public {
+    image memory v1 = images[id];
+    emit sendHash(v1.imageHash);
   }
 }

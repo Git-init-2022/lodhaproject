@@ -65,10 +65,11 @@ function CulturalSection() {
             let imageHash = await client.put(files);
             imageHash = imageHash.toString();
             console.log("imageHash: ", imageHash);
-            contract.methods.uploadImage(id, imageHash).send({ from: account,gasPrice: '1' }).then((res) => {
+            contract.methods.uploadImage(imageHash).send({ from: account,gasPrice: '1' }).then((res) => {
                 console.log("Data added to blockchain node");
                 window.alert("file added to blockchain node");
             })
+            console.log("address: ", contract.options.address);
         if (data.success === false) {
             setDuplicateNotification(2);
         }

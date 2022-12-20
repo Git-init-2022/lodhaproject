@@ -13,7 +13,7 @@ process.on("uncaughtException",(err)=>{
 })
 
 //config
-dotenv.config({ path: path.resolve(__dirname, '\config\\config.env') })
+dotenv.config({ path: __dirname+ "/config/config.env" })
 
 // connecting to database
 connectDatabase();
