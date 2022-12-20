@@ -9,7 +9,7 @@ const { idText } = require("typescript");
 const { Complaint } = require("../models/complaintModel");
 const bunyan = require('bunyan');
 const log = bunyan.createLogger({
-    name: 'server',
+    name: 'users',
     streams: [
     {
         level: 'info',
@@ -18,7 +18,7 @@ const log = bunyan.createLogger({
     {
         type: 'rotating-file',
         level: 'info',
-        path: __dirname+'/logs/server-logs.log',
+        path: __dirname+'/logs/users.log',
         period: '1m',
         count: 12
     }
