@@ -45,7 +45,6 @@ export default function App() {
                     <Route path='/login' element={<LoginSignUp />} />
                     <Route path='/forgotpassword' element={<ForgotPassword />} />
                     <Route path='/updatepassword/:token' element={<UpdatePassword />} />
-                    <Route path='/Seperate' element={<Seperate />} />
                     <Route path='/NoAccess' element={<NoAccessPage Type="Forbidden" ErrorTitle="Access Forbidden" Status="403"/>} />
                     <Route path="/Home"
                         element={<PrivateRoute redirectTo="/NoAccess" component={<LoggedHome />}
