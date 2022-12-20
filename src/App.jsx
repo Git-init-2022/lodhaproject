@@ -25,7 +25,6 @@ import GeneralNotifications from './pages/GeneralNotifications/GeneralNotificati
 import AllComplaints from './pages/AllComplaints/AllComplaints';
 import CreateForm from './pages/CreateForms/CreateForm';
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
-import Seperate from './pages/seperate/seperate';
 import UpdatePassword from './pages/UpdatePassword/UpdatePassword';
 import axios from "axios";
 import StaffManagement from './pages/StaffManagement/StaffManagement';
