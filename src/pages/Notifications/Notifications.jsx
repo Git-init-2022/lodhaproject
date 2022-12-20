@@ -27,7 +27,7 @@ function Notifications() {
   const [finished, setFinished] = useState(false);
   let colorArray = ['rgb(106, 101, 73)', '#b8860b', '#a28557', 'rgb(181, 173, 127)', '#675A0E'];
   const { User } = useGlobalContext();
-  const [isAdmin, setisAdmin] = useState(JSON.parse(User).Role === 'admin');
+  const [isAdmin, setisAdmin] = useState(JSON.parse(User).Role === '440f3041c89adee0f2ad780704bcc0efae1bdb30f8d77dc455a2f6c823b87ca0');
   const fetchMeetings = async () => {
     const { data } = await axios.get("http://localhost:4000/api/v1/AllMeetings");
     const temp1 = [], temp2 = [];
@@ -95,6 +95,18 @@ function Notifications() {
     return months[month] + " " + year;
   }
 
+
+  const getFormattedTime2 = (DateOfMeeting) => {
+
+
+    let timeStamp = Date.parse(DateOfMeeting);
+    var date = new Date(timeStamp);
+    var day = date.getDate();
+    var month = date.getMonth();
+    var year = date.getFullYear();
+
+    return day + "-" + (month) + "-" + year;
+  }
 
 
   const refreshPage = () => {
@@ -198,7 +210,7 @@ function Notifications() {
             <div>
               <p className='MeetingHeader' >UPCOMING MEETINGS</p>
               {
-                isAdmin ? <p style={{ textAlign: "center", fontSize: "18px", letterSpacing: "1px", }}>Note - To Edit details click on meeting</p> : <p style={{ textAlign: "center", fontSize: "18px", letterSpacing: "1px", }}>To view details click on the meeting</p>
+                isAdmin ? <p style={{ textAlign: "center", fontSize: "18px", letterSpacing: "1px", }}>To Edit details click on More Button</p> : <p style={{ textAlign: "center", fontSize: "18px", letterSpacing: "1px", }}>To view details click on the meeting</p>
               }
               <hr style={{ height: "1", backgroundColor: "black", width: "94%", marginLeft: "3%" }}></hr>
               {
@@ -207,7 +219,7 @@ function Notifications() {
                     return (
                       <>
 
-                        <div style={{ width: "95%", marginLeft: "2.5%", marginBottom: "20px", display: "grid", gridTemplateColumns: "auto auto auto" }}>
+                        <div className="announcement" style={{ width: "95%", marginLeft: "2.5%", marginBottom: "20px", display: "grid", gridTemplateColumns: "auto auto auto" }}>
                           <div style={{ border: "3px solid " + getColor(index, item.Date), padding: "5px 20px 5px 20px", color: "black", width: "fit-content", textAlign: "center" }}>
                             <span className='Date' >
                               <span style={{ fontSize: "40px", letterSpacing: "1px" }}>
@@ -290,7 +302,7 @@ function Notifications() {
                           </div>
 
                           <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textUnderlineOffset: "5px", marginTop: "10px", textDecorationThickness: "2px", textDecorationColor: "gold" }}>Date </label>
-                          <div> <br></br><input name="Date" id="DateofMeeting" type="Date" defaultValue={getFormattedTime1(DateVar)} className="inputEditable" ></input><br></br></div>
+                          <div> <br></br><input name="Date" id="DateofMeeting" type="Date" defaultValue={getFormattedTime2(DateVar)} className="inputEditable" ></input><br></br></div>
                           <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textUnderlineOffset: "5px", marginTop: "10px", textDecorationThickness: "2px", textDecorationColor: "gold" }}>Time </label>
                           <div> <br></br><input name="Time" id="TimeofMeeting" className="inputEditable" type="Time" defaultValue={TimeVar} ></input><br></br></div>
 
@@ -348,7 +360,7 @@ function Notifications() {
                         </div>
                         <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textUnderlineOffset: "5px", marginTop: "10px", textDecorationThickness: "2px", textDecorationColor: "gold" }}>Date </label>
                         <div id="Date" name="Date" style={{ fontSize: "16px" }} >
-                          {getFormattedTime(DateVar)}
+                          {getFormattedTime2(DateVar)}
                         </div>
                         <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textUnderlineOffset: "5px", marginTop: "10px", textDecorationThickness: "2px", textDecorationColor: "gold" }}>Time </label>
 
@@ -366,7 +378,7 @@ function Notifications() {
             <div>
               <p className='MeetingHeader' >FINISHED MEETINGS</p>
               {
-                <p style={{ textAlign: "center", fontSize: "18px", letterSpacing: "1px", }}>To view details click on the meeting</p>
+                <p style={{ textAlign: "center", fontSize: "18px", letterSpacing: "1px", }}>To view details click on More Button</p>
               }
               <hr style={{ height: "1", backgroundColor: "black", width: "94%", marginLeft: "3%" }}></hr>
               {
@@ -455,7 +467,7 @@ function Notifications() {
                           </div>
 
                           <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textUnderlineOffset: "5px", marginTop: "10px", textDecorationThickness: "2px", textDecorationColor: "gold" }}>Date </label>
-                          <div> <br></br><input name="Date" id="DateofMeeting" type="Date" defaultValue={getFormattedTime1(DateVar)} className="inputEditable" ></input><br></br></div>
+                          <div> <br></br><input name="Date" id="DateofMeeting" type="Date" defaultValue={getFormattedTime2(DateVar)} className="inputEditable" ></input><br></br></div>
                           <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textUnderlineOffset: "5px", marginTop: "10px", textDecorationThickness: "2px", textDecorationColor: "gold" }}>Time </label>
                           <div> <br></br><input name="Time" id="TimeofMeeting" className="inputEditable" type="Time" defaultValue={TimeVar} ></input><br></br></div>
 
@@ -513,7 +525,7 @@ function Notifications() {
                         </div>
                         <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textUnderlineOffset: "5px", marginTop: "10px", textDecorationThickness: "2px", textDecorationColor: "gold" }}>Date </label>
                         <div id="Date" name="Date" style={{ fontSize: "16px" }} >
-                          {getFormattedTime(DateVar)}
+                          {getFormattedTime2(DateVar)}
                         </div>
                         <label style={{ fontSize: "18px", letterSpacing: "1px", marginRight: "10px", textDecorationLine: "underline", textUnderlineOffset: "5px", marginTop: "10px", textDecorationThickness: "2px", textDecorationColor: "gold" }}>Time </label>
 

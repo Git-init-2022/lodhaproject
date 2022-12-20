@@ -47,71 +47,71 @@ export default function App() {
                     <Route path='/forgotpassword' element={<ForgotPassword />} />
                     <Route path='/updatepassword/:token' element={<UpdatePassword />} />
                     <Route path='/Seperate' element={<Seperate />} />
-                    <Route path='/NoAccess' element={<NoAccessPage />} />
+                    <Route path='/NoAccess' element={<NoAccessPage Type="Forbidden" ErrorTitle="Access Forbidden" Status="403"/>} />
                     <Route path="/Home"
-                        element={<PrivateRoute redirectTo="/login" component={<LoggedHome />}
+                        element={<PrivateRoute redirectTo="/NoAccess" component={<LoggedHome />}
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} />} />
                     <Route path="/StaffManagement"
-                        element={<PrivateRoute redirectTo="/login" component={<StaffManagement />}
+                        element={<PrivateRoute redirectTo="/NoAccess" component={<StaffManagement />}
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} />} />
                     <Route path="/UserProfile"
-                        element={<PrivateRoute redirectTo="/login" component={<Profile />}
+                        element={<PrivateRoute redirectTo="/NoAccess" component={<Profile />}
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))}  />} />
 
                     <Route path="/AllComplaints"
-                        element={<PrivateRoute redirectTo="/login" component={<AllComplaints />}
+                        element={<PrivateRoute redirectTo="/NoAccess" component={<AllComplaints />}
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} />} />
 
-                    <Route path="/Complaints"
-                        element={<PrivateRoute redirectTo="/login" component={<Complaints />}
+                    {/* <Route path="/Complaints"
+                        element={<PrivateRoute redirectTo="/NoAccess" component={<Complaints />}
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} />} />
 
                     <Route path="/Meeting"
-                        element={<PrivateRoute redirectTo="/login" component={<Meeting />}
-                            isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} />} />
+                        element={<PrivateRoute redirectTo="/NoAccess" component={<Meeting />}
+                            isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} />} /> */}
                     <Route path="/Emergency"
-                        element={<PrivateRoute redirectTo="/login" component={<Emergency />}
+                        element={<PrivateRoute redirectTo="/NoAccess" component={<Emergency />}
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} />} />
-                    <Route path="/Forms"
-                        element={<PrivateRoute redirectTo="/login" component={<GoogleForms />}
+                    {/* <Route path="/Forms"
+                        element={<PrivateRoute redirectTo="/NoAccess" component={<GoogleForms />}
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} />} />
                     <Route path="/Notifications"
-                        element={<PrivateRoute redirectTo="/login" component={<Notifications />}
-                            isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} />} />
+                        element={<PrivateRoute redirectTo="/NoAccess" component={<Notifications />}
+                            isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} />} /> */}
                     <Route path="/KeyContacts"
-                        element={<PrivateRoute redirectTo="/login" component={<KeyContactsAndMails />}
+                        element={<PrivateRoute redirectTo="/NoAccess" component={<KeyContactsAndMails />}
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} />} />
                     <Route path="/Finance"
-                        element={<PrivateRoute redirectTo="/login" component={<FinanceAndAccount />}
+                        element={<PrivateRoute redirectTo="/NoAccess" component={<FinanceAndAccount />}
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} />} />
                     <Route path="/FM"
-                        element={<PrivateRoute redirectTo="/login" component={<FacilityManagement />}
+                        element={<PrivateRoute redirectTo="/NoAccess" component={<FacilityManagement />}
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))}/>} />
                     <Route path="/HelpDesk"
-                        element={<PrivateRoute redirectTo="/login" component={<HelpDesk />}
+                        element={<PrivateRoute redirectTo="/NoAccess" component={<HelpDesk />}
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} />} />
                     <Route path="/Cultural"
-                        element={<PrivateRoute redirectTo="/login" component={<CulturalSection />}
+                        element={<PrivateRoute redirectTo="/NoAccess" component={<CulturalSection />}
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} />} />
                     <Route path="/LegalUpdate"
-                        element={<PrivateRoute redirectTo="/login" component={<LegalUpdate />}
+                        element={<PrivateRoute redirectTo="/NoAccess" component={<LegalUpdate />}
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} />} />
                     <Route path="/UserDashboard"
-                        element={<PrivateRoute redirectTo="/login" component={<Dashboard />}
+                        element={<PrivateRoute redirectTo="/NoAccess" component={<Dashboard />}
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} />} />
-                    <Route path="/GeneralNotifications"
-                        element={<PrivateRoute redirectTo="/login" component={<Dashboard />}
+                    {/* <Route path="/GeneralNotifications"
+                        element={<PrivateRoute redirectTo="/NoAccess" component={<Dashboard />}
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} />} />
                     <Route path="/userNotifications"
-                        element={<PrivateRoute redirectTo="/login" component={<UserNotification />}
-                            isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))}  />} />
+                        element={<PrivateRoute redirectTo="/NoAccess" component={<UserNotification />}
+                            isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))}  />} /> */}
                     <Route path="/CreateForm"
-                        element={<PrivateRoute redirectTo="/login" component={<CreateForm />}
+                        element={<PrivateRoute redirectTo="/NoAccess" component={<CreateForm />}
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} />} />
                     <Route path="/SocietyDues"
-                        element={<PrivateRoute redirectTo="/login" component={<SocietyDues />}
+                        element={<PrivateRoute redirectTo="/NoAccess" component={<SocietyDues />}
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))}/>} />
-
+                    <Route path = "*" element={<NoAccessPage Status="404" ErrorTitle="Page Not Found" Type="Not found"/>} />
 
                 </Routes>
             </Router>

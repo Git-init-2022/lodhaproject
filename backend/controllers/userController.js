@@ -53,7 +53,7 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
     console.log("fm: ", crypto.createHash("sha256").update("fm").digest("hex"));
     console.log("am: ", crypto.createHash("sha256").update("am").digest("hex"));
     console.log("itsupport: ", crypto.createHash("sha256").update("itsupport").digest("hex"));
-
+    
     const user = {
         FlatNo: user1[0].FlatNo,
         OwnerName: user1[0].OwnerName,

@@ -30,17 +30,23 @@
 }
 
 #userDashboardTitle {
-    font-size: 45px;
-    font-weight: bolder;
+    font-size: 50px;
+    font-weight:bolder;
     margin: 0px;
     letter-spacing: 2px;
     margin-left: 15px;
     text-align: center;
+    animation: fadeIn 1s;
 }
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
 
 #userDashboardTitle:first-letter {
     font-weight: bolder;
-    font-size: 45px;
+    font-size: 52px;
 
 }
 

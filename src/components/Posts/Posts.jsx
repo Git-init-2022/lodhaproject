@@ -3,6 +3,10 @@ import './Posts.css'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Popconfirm } from 'antd';
+import { Web3Storage } from 'web3.storage';
+const client = new Web3Storage({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDcxOTdiN2M2OGFEMTNhNzREMGIzMGQ3OTI4OTNGMDc4MWQxZjE4M2QiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NzAxNjM1MTczNDIsIm5hbWUiOiJsb2RoYS1maWxlcyJ9.rmkUCge8MPPj5TC6i8Z5lVAjIevCSVni0gpu-_jUzlI" });
+
+
 import {
   MDBBtn,
   MDBCard,
@@ -47,13 +51,38 @@ function Posts({ props }) {
 
   }
 
+  const getSourceimg = (item) => {
+    let x = ''
+    let i = item.lastIndexOf('.');
+    for (let index = i + 1; index < item.length; index++) {
+      x += item[index]
+    }
+    if (x === 'png' || x === 'jpg' || x === 'gif' || x === 'jpeg') {
+      return '/src/assests/image.png';
+    }
+    if (x === 'docx' || x === 'doc') {
+      return '/src/assests/docx.png';
+    }
+    if (x === 'pdf') {
+      return '/src/assests/pdf.png'
+    }
+    if (x === 'xlsx' || x === 'xls') {
+      return '/src/assests/excel.png'
+    }
+    if (x === 'pptx' || x === 'ppt') {
+      return '/src/assests/ppt.png'
+    }
+
+  }
+
+
   return (
     <>
       <Card className="m-3 backgroundcoloring PostBackground">
         <Card.Header className="PostTitle">
           <div className='PostHeader'>
             <div>
-              <label className='PostHeading'>Complaint</label>
+              <label className='PostHeading'>Complaint Type</label>
               <span className='PostsIssue'> {props.Issue}</span>
             </div>
             <div>
@@ -76,9 +105,55 @@ function Posts({ props }) {
             <form
               onSubmit={UpdateDescription}
             >
-              <p className='DescriptionTitle'>DESCRIPTION</p>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div contentEditable style={{ width: "100%" }} id={props._id}>{props.Description}</div>
+              <div style={{ display: "flex", }}>
+                <div style={{ width: "50%" }}>
+                  <p className='DescriptionTitle'>DESCRIPTION</p>
+                  <div contentEditable style={{ width: "100%" }} id={props._id}>{props.Description}</div>
+                </div>
+                <div style={{ width: "50%" }}>
+                  <p className='DescriptionTitle'>DOCUMENTS</p>
+
+                  {
+                    props.FileObjects.length ?
+                      <div className='documentDiv'>
+                        {
+                          props.FileObjects.map((item) => {
+                            return (
+                              <Card className="card CardDocument" style={{ width: "250px", margin: "10px", backgroundColor: "whitesmoke" }}>
+                                <Card.Body className='CardBodyDiv'>
+
+
+
+                                  {
+                                    item.endsWith('.png')
+                                      ?
+
+                                      <div>
+                                        <img src={"https://" + props.FileHashes + ".ipfs.w3s.link/" + item} width="150px" height="150px"></img>
+                                        <p style={{ marginLeft: "10px" }}> {item}</p>
+                                      </div>
+                                      :
+                                      <div style={{ display: "flex", }}>
+                                        <img src={getSourceimg(item)} width="50px" height="50px"></img>
+                                        <p style={{ marginLeft: "10px" }}> {item}</p>
+                                      </div>
+                                  }
+
+
+                                </Card.Body>
+                                <Button href={"https://" + props.FileHashes + ".ipfs.w3s.link/" + item} style={{ width: "100%", marginBottom: "0px" }} target="blank" variant="primary" >View document</Button>
+
+                              </Card>
+                            );
+                          })
+                        }
+                      </div>
+                      :
+                      <p>
+                        No Documents!
+                      </p>
+                  }
+                </div>
               </div>
               <div style={{ display: "flex", justifyContent: "center", marginTop: "50px" }}>
                 <Popconfirm
@@ -90,6 +165,8 @@ function Posts({ props }) {
                 </Popconfirm>
               </div>
             </form>
+
+
           </Card.Text>
         </Card.Body>
       </Card>

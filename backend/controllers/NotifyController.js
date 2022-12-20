@@ -27,7 +27,7 @@ exports.createNotification = catchAsyncErrors(async (req, res, next) => {
 
 // Get All Notifications
 exports.getAllNotifications = catchAsyncErrors(async (req, res) => {
-    const notifications = await Notification.find();
+    const notifications = await Notification.find().sort({"PostedDate" : -1});
     res.status(200).json({
         success: true,
         notifications

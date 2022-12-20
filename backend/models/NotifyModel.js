@@ -8,6 +8,9 @@ const NotifySchema = mongoose.Schema({
     Description: {
        type: String,
        required: [true, "Notification "]
+    },
+    PostedDate: { 
+        type: Date
     }
 })
 

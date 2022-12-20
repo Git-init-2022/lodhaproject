@@ -97,3 +97,30 @@ background-color: rgb(233, 222, 156);
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+
+
+.AnnouncementsButton{
+    border: 3px solid #675a0e;
+    color: #675a0e;
+    height: fit-content;
+    border-radius: 0px;
+    padding: 10px;
+    background-color: whitesmoke;
+    margin: 0 auto ;
+}
+
+.AnnouncementsButton:hover{
+    background-color: #675a0e !important;
+    color: white !important;
+    border: 3px solid #675a0e !important;
+
+}
+
+.announcement{
+    animation: slidefromleft 0.5s;
+}
+
+@keyframes slidefromleft {
+    0% { transform: translateX(-200px);}
+    100% { transform: translateX(0px);}
+}

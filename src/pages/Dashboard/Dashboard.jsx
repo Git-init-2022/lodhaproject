@@ -9,7 +9,7 @@ import GeneralNotifications from "../GeneralNotifications/GeneralNotifications";
 import Complaints from "../Complaints/Complaints";
 import Documents from "../Documents/Documents";
 import UserNotification from "../UserNotification/UserNotification";
-
+import {useGlobalContext} from "/src/context/StateContext";
 
 function Dashboard() {
     const [IsForms, setIsForms] = useState(false);
@@ -18,6 +18,7 @@ function Dashboard() {
     const [IsComplaints, setIsComplaints] = useState(false);
     const [IsDocuments, setIsDocuments] = useState(false);
     const [IsAnnoucements, setIsAnnoucements] = useState(true);
+    const {User} = useGlobalContext();
     const changeMenu = (e, tab) => {
         if (tab == "Forms") {
             setIsForms(true);
@@ -76,8 +77,8 @@ function Dashboard() {
 
             <div>
                 <div style={{ display: "flex", marginTop: "100px", justifyContent: "center", }}>
-                    <img src="/src/assests/dashboard.png" style={{ height: "55px", width: "50px", marginBottom: "0px", }}></img>
-                    <p id="userDashboardTitle">USER DASHBOARD</p>
+                    {/* <img src="/src/assests/dashboard.png" style={{ height: "55px", width: "50px", marginBottom: "0px", }}></img> */}
+                    <p id="userDashboardTitle">Hello, {JSON.parse(User).OwnerName}!</p>
                 </div>
                 
                     <div className="d-flex mb-3 FacilityNavBar">

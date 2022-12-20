@@ -19,48 +19,86 @@ function GeneralNotifications() {
         setGeneralNotifications(data.notifications);
     }
 
-    
+    const getFormattedTime = (DateOfMeeting) => {
+
+
+        let timeStamp = Date.parse(DateOfMeeting);
+        var date = new Date(timeStamp);
+        var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+        var day = date.getDate();
+        var month = date.getMonth();
+        var year = date.getFullYear();
+        return months[month] + " " + day + ", " + year;
+    }
+
+
     useEffect(() => {
         fetchNotifications();
         console.log(generalNotifications);
     }, [generalNotifications.length]);
     const handleHide = () => {
-    setDescVar('');
-    setTitleVar('');
+        setDescVar('');
+        setTitleVar('');
         setModalShow(false);
     }
     const handleShow = (Title, Description) => {
         setModalShow(true);
-        setTitleVar(Title); 
+        setTitleVar(Title);
         setDescVar(Description);
     }
     return (
         <>
             <div className="NotifyItems">
                 <p className='NotifyHeader' >COMMUNITY ANNOUNCEMENTS</p>
-                <p style={{ textAlign: "center", fontSize: "18px", letterSpacing: "1px", }}>Note - To View details click on MORE INFO</p>
+                <p style={{ textAlign: "center", fontSize: "18px", letterSpacing: "1px", }}>Note - To View details click on MORE</p>
                 <hr style={{ height: "1", backgroundColor: "black", width: "94%", marginLeft: "3%" }}></hr>
                 {
                     generalNotifications.map((item, index) => {
                         return (
-                            <div key={index}>
-                                <Button variant="primary" onClick={() => handleShow(item.Title, item.Description)} className="modalButton">
-                                    <div style={{ display: "flex", flexDirection: "row" }}>
-                                        <span className="NotifyHeading">
-                                            <div>
-                                                <p style={{ textDecorationLine: "underline",textUnderlineOffset:"10px" }}>TITLE</p>
-                                                <p>{item.Title}</p>
-                                            </div>
-                                        </span>
-                                        <span style={{ padding: "3px", borderRadius: "5px", marginTop: "20px", paddingLeft: "5%"}}>MORE INFO</span>
-                                        {/* <span className="NotifyView">
-                                            <button className="Viewbutton" style={{ padding: "3px", borderRadius: "5px", marginTop:"20px" }}>More &rarr;</button>
-                                        </span> */}
-                                    </div>
-                                </Button>
-                                <hr style={{ width: "94%", marginLeft: "3%" }}></hr>
+                            // <div key={index}>
+                            //     <Button variant="primary" onClick={() => handleShow(item.Title, item.Description)} className="modalButton">
+                            //         <div style={{ display: "flex", flexDirection: "row" }}>
+                            //             <span className="NotifyHeading">
+                            //                 <div>
+                            //                     <p style={{ textDecorationLine: "underline",textUnderlineOffset:"10px" }}>TITLE</p>
+                            //                     <p>{item.Title}</p>
+                            //                 </div>
+                            //             </span>
+                            //             <span style={{ padding: "3px", borderRadius: "5px", marginTop: "20px", paddingLeft: "5%"}}>MORE INFO</span>
+                            //             {/* <span className="NotifyView">
+                            //                 <button className="Viewbutton" style={{ padding: "3px", borderRadius: "5px", marginTop:"20px" }}>More &rarr;</button>
+                            //             </span> */}
+                            //         </div>
+                            //     </Button>
+                            //     <hr style={{ width: "94%", marginLeft: "3%" }}></hr>
 
-                            </div>
+                            // </div>
+                            <>
+                                <div className="announcement" style={{ width: "100%", display: "flex", justifyContent: "space-between" }}>
+                                    <div style={{ marginLeft: "30px", width: "70%" }}>
+                                        <div style={{ display: "flex" }}>
+                                            <img src="/src/assests/announcement.png" height="25px" width="25px"></img>
+                                            <p style={{ marginLeft: "20px", fontSize: "22px", textTransform: "capitalize", letterSpacing: "1px", textAlign: "left", textDecorationLine: "underline", textUnderlineOffset: "10px", textDecorationColor: "#675A0E", textDecorationThickness: "2px" }}>
+                                                {item.Title}
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p style={{ marginLeft: "45px", fontSize: "12px", textTransform: "capitalize", letterSpacing: "1px", textAlign: "left", }}>
+                                                {getFormattedTime(item.PostedDate)}
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p style={{ marginLeft: "45px", fontSize: "14px", textTransform: "capitalize", letterSpacing: "1px", textAlign: "left", }}>
+                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim illum iste maiores culpa impedit nam reiciendis nulla odio eos fuga.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <Button variant="primary" className="AnnouncementsButton" onClick={() => handleShow(item.Title, item.Description)} > More &rarr;
+                                    </Button>
+                                </div>
+                                <hr style={{ height: "1", backgroundColor: "black", width: "94%", marginLeft: "3%" }}></hr>
+                            </>
                         )
                     })
 
@@ -78,15 +116,22 @@ function GeneralNotifications() {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <p>
-                            Description : {DescVar}
-                        </p>
+                        <span style={{ fontSize: "16px", textTransform: "capitalize", letterSpacing: "1px", textAlign: "left", textDecorationLine: "underline", textUnderlineOffset: "10px", textDecorationColor: "#675A0E", textDecorationThickness: "2px" }}>
+                            Description - 
+                        </span>
+                        <span>{DescVar}</span>
+                        <div>
+                            <p style={{ fontSize: "16px", marginTop:"20px", textTransform: "capitalize", letterSpacing: "1px", textAlign: "left", textDecorationLine: "underline", textUnderlineOffset: "10px", textDecorationColor: "#675A0E", textDecorationThickness: "2px" }}>
+                                Documents
+                            </p>
+                        </div>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={handleHide}>Close</Button>
                     </Modal.Footer>
                 </Modal>
             </div>
+            
         </>
     );
 }

@@ -13,7 +13,8 @@ function CulturalSection() {
         setLoading(true);
         const { data } = await axios.post("http://localhost:4000/api/v1/notification/new", {
             Title: Title,
-            Description: Description
+            Description: Description, 
+            PostedDate: new Date()
         });
         if (data.success === false) {
             setDuplicateNotification(2);
